@@ -1,0 +1,29 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Fri Apr 20 08:24:30 2012
+;; Desktop file format version 206
+;; Emacs version 23.2.1
+
+;; Global section:
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring nil)
+(setq regexp-search-ring nil)
+(setq register-alist nil)
+(setq file-name-history '("/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContext.cc"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContext.cc"
+  "BgfContext.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1812
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
