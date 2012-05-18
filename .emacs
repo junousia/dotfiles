@@ -79,6 +79,12 @@
         (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 
     (add-to-list 'load-path "~/.elisp/")
+    (add-to-list 'load-path "~/.elisp/bookmarkplus/src/")
+
+    ;; ============================
+    ;; bookmark+
+    ;; ============================
+    (require 'bookmark+)
 
     ;; ============================
     ;; TTCN-3 mode
@@ -204,6 +210,10 @@
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
  '(auto-revert-check-vc-info t)
+ '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
+ '(bookmark-bmenu-toggle-filenames nil)
+ '(bookmark-save-flag 1)
+ '(bookmark-use-annotations nil)
  '(c-auto-align-backslashes t)
  '(c-basic-offset 4)
  '(c-block-comment-prefix (quote set-from-style))

@@ -1,0 +1,3 @@
+*.elc
+updates.log
+.emacs.desktop*
