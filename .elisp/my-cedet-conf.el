@@ -1,5 +1,5 @@
 ;; CEDET configuration
-(load-file "~/.elisp/cedet-1.1beta2/common/cedet.el")
+(load-file "~/.elisp/cedet-1.1/common/cedet.el")
 (global-ede-mode 1)      ; Enable the Project management system
 (setq ede-locate-setup-options '(ede-locate-global ede-locate-base)) 
  
@@ -23,7 +23,7 @@
 (require 'semanticdb-global)
 (require 'semanticdb)
 (global-semanticdb-minor-mode 1)
-(semanticdb-enable-gnu-global-databases 'c-mode)
+(semanticdb-enable-gnu-global-databases 'cc-mode)
 ;; (semanticdb-enable-gnu-global-databases 'c++-mode)
  
 ;; ctags
@@ -32,6 +32,16 @@
 
 ;;(semantic-complete-inline-analyzer-displayor-class 'semantic-displayor-tooltip)
 ;;(semantic-completion-displayor-format-tag-function 'semantic-format-tag-summarize)
+
+
+(setq cedet-cscope-command "/home/ejuknou/bin/cedet-cscope")
+(setq cedet-global-command "/home/ejuknou/bin/global")
+(setq cedet-global-gtags-command "/home/ejuknou/bin/gtags")
+
+(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-summarize-with-file))
+(setq semantic-idle-breadcrumbs-display-function (quote semantic-idle-breadcrumbs--display-in-mode-line))
+(setq semantic-idle-breadcrumbs-format-tag-function (quote semantic-format-tag-summarize))
+(setq semantic-idle-breadcrumbs-format-tag-list-function (quote semantic-idle-breadcrumbs--format-innermost-first))
  
 ;; customisation of modes
 (defun my-cedet-hook ()
@@ -58,18 +68,10 @@
 ;; (add-hook 'erlang-mode-hook 'my-cedet-hook)
  
 (defun my-c-mode-cedet-hook ()
- (local-set-key "\C-ca" 'semantic-complete-analyze-inline)
  (local-set-key "\C-ct" 'eassist-switch-h-cpp)
  (local-set-key "\C-ce" 'eassist-list-methods)
 )
  
 (add-hook 'c-mode-common-hook 'my-c-mode-cedet-hook)
 
-(ede-cpp-root-project "M-MGW"
-               :name "M-MGW Git"
-               :file "/proj/mgwrepos/user/ejuknou/mmgw/del_to_cc.tcsh"
-               :include-path '("/")
-               :system-include-path '("/usr/include/"
-                                      "/usr/include/c++/4.1.2"))
-
-
+(load-file "~/.elisp/projects.el")

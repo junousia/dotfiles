@@ -2,7 +2,7 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri Apr 20 08:24:30 2012
+;; Created Thu May 31 10:56:04 2012
 ;; Desktop file format version 206
 ;; Emacs version 23.2.1
 
@@ -10,18 +10,315 @@
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring nil)
+(setq search-ring '("warning" "debug" "CONTEXT" "mono" "gtags"))
 (setq regexp-search-ring nil)
-(setq register-alist nil)
-(setq file-name-history '("/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContext.cc"))
+(setq register-alist '((97 "setSupervisionTimer" function (:parent "BgfContextControllerImpl" :arguments (("command" variable (:pointer 1 :type ("BgfH248CommandD" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [86060 86085]) ("ti" variable (:type ("TraceInfo" type (:type "class") nil nil)) (reparse-symbol arg-sub-list) [86086 86099])) :type "void") (:foreign-flag t :mode c++-mode :filename "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContextControllerImpl.cc") [86009 87648]) (48 . "        command->")))
+(setq file-name-history '("/home/ejuknou/.emacs" "/home/ejuknou/.elisp/my-cedet-conf.el" "/home/ejuknou/.emacs" "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContext.cc"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/ejuknou/.elisp/my-cedet-conf.el"
+  "my-cedet-conf.el"
+  'emacs-lisp-mode
+  '(semantic-stickyfunc-mode semantic-highlight-func-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1146
+  '(2962 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContextControllerImpl.cc"
+  "BgfContextControllerImpl.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  86733
+  '(86504 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfContextControllerImpl.hh"
+  "BgfContextControllerImpl.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1635
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/home/ejuknou/.emacs"
+  ".emacs"
+  'emacs-lisp-mode
+  '(semantic-stickyfunc-mode semantic-highlight-func-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  7202
+  '(7020 nil)
+  nil
+  nil
+  '((tab-width . 4) (buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/framework_common/h248_parser/inc/H248_Command.hh"
+  "H248_Command.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  3732
+  '(3552 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
 (desktop-create-buffer 206
   "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfContext.cc"
   "BgfContext.cc"
   'c++-mode
-  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
-  1812
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  52600
+  '(5492 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfH248CommandD.cc"
+  "BgfH248CommandD.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  246
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/vobs/cello/cade_A_tools_gcc/Linux/i686/include/c++/4.4.3/bits/stl_raw_storage_iter.h"
+  "stl_raw_storage_iter.h"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1
+  '(nil nil)
+  t
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfH248CommandD.hh"
+  "BgfH248CommandD.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  2211
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_common/dpci_if/inc/DpciMessage.hh"
+  "DpciMessage.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  241
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_common/dpci_if/inc/DpciLocalHeader.hh"
+  "DpciLocalHeader.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  296
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfContext.hh"
+  "BgfContext.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  3492
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfNetworkResource.cc"
+  "BgfNetworkResource.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  23475
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/bgf_context_controller_test/BgfContextControllerTest.cc"
+  "BgfContextControllerTest.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  11407
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfContextController.hh"
+  "BgfContextController.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  645
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfiChProxyImpl.cc"
+  "BgfiChProxyImpl.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  29746
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/mocks/MockBgfContextController.hh"
+  "MockBgfContextController.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  531
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/bgf_context_test/BgfContextTest.cc"
+  "BgfContextTest.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  76854
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfH248HandlerImpl.hh"
+  "BgfH248HandlerImpl.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1956
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfStreamSegment.hh"
+  "BgfStreamSegment.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  4407
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/inc/BgfTermination.hh"
+  "BgfTermination.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  8161
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfH248HandlerImpl.cc"
+  "BgfH248HandlerImpl.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  13483
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfStreamSegment.cc"
+  "BgfStreamSegment.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  29706
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/BgfTermination.cc"
+  "BgfTermination.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  46167
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/src/NullContext.cc"
+  "NullContext.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  37168
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/bgf_context_controller_test/BgfContextControllerTest.hh"
+  "BgfContextControllerTest.hh"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  10067
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/h248_handler_test/H248HandlerTest.cc"
+  "H248HandlerTest.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  7913
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+
+(desktop-create-buffer 206
+  "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/dev/test/unit/null_context_test/NullContextTest.cc"
+  "NullContextTest.cc"
+  'c++-mode
+  '(abbrev-mode semantic-stickyfunc-mode semantic-highlight-func-mode ede-minor-mode senator-minor-mode semantic-idle-scheduler-mode semantic-idle-summary-mode semantic-idle-local-symbol-highlight-mode semantic-idle-completions-mode semantic-idle-breadcrumbs-mode semantic-mru-bookmark-mode semantic-decoration-mode srecode-minor-mode global-auto-revert-mode)
+  1
   '(nil nil)
   nil
   nil

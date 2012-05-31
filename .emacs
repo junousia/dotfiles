@@ -37,17 +37,6 @@
     (global-set-key [f12] 'goto-match-paren) 
 
     (setq load-path (cons "/proj/mgwrepos/user/ejuknou/mmgw" load-path))
-    (autoload 'gtags-mode "gtags" "" t)
-
-    (setq c-mode-hook
-        '(lambda ()
-            (gtags-mode 1)
-    ))
-
-    (setq c++-mode-hook
-        '(lambda ()
-            (gtags-mode 1)
-    ))
 
     ;; ============================
     ;; IBuffer filter groups
@@ -99,7 +88,7 @@
     ;; ============================
     ;; Set default font
     ;; ============================
-    (set-face-attribute 'default nil :font "DejaVu Sans Mono-14")
+    (set-face-attribute 'default nil :font "Bitstream Vera Sans Mono-12")
 
     ;; ============================
     ;; Hide stuff
@@ -163,7 +152,9 @@
     (global-set-key [f8] 'cscope-find-files-including-file)
     (global-set-key [f9] 'cscope-find-egrep-pattern)
 
-    ;; ido mode
+    ;; =========================
+    ;; IDO mode
+    ;; =========================
     (ido-mode)
 
     ;;  Display the time on the status bar
@@ -176,7 +167,9 @@
     ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
     (require 'xcscope)
 
-    ;; color
+    ;; ============================
+    ;; Color theme
+    ;; ============================
     (require 'color-theme)
     (color-theme-initialize)
     (color-theme-dark-laptop)
@@ -192,14 +185,14 @@
     (desktop-save-mode 1)
 
     ;; disable startup message
-    ;;  (setq inhibit-startup-message t)
+    (setq inhibit-startup-message t)
 
     ;; always truncate
     (setq-default truncate-partial-width-windows t)
 
     (setq kill-whole-line t)
     ;;(setq c-auto-newline 1)
-    ;;(setq c-hungry-delete-key t)
+    (setq c-hungry-delete-key t)
 ;;;; Wrapper to make .emacs self-compiling end
     )
   )
@@ -220,8 +213,6 @@
  '(c-indent-comments-syntactically-p t)
  '(c-syntactic-indentation t)
  '(c-tab-always-indent (quote other))
- '(cedet-global-command "/home/ejuknou/bin/global")
- '(cedet-global-gtags-command "/home/ejuknou/bin/gtags")
  '(column-number-mode t)
  '(cscope-allow-arrow-overlays t)
  '(cscope-display-cscope-buffer t)
@@ -236,6 +227,7 @@
  '(cua-mode t nil (cua-base))
  '(global-auto-revert-mode t)
  '(global-auto-revert-non-file-buffers t)
+ '(global-semantic-idle-breadcrumbs-mode t nil (semantic-idle))
  '(ibuffer-always-compile-formats t)
  '(ibuffer-always-show-last-buffer t)
  '(ibuffer-display-summary nil)
@@ -250,13 +242,17 @@
  '(menu-bar-mode 0)
  '(mouse-wheel-progressive-speed t)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
+ '(semantic-idle-scheduler-idle-time 1)
+ '(semantic-idle-scheduler-max-buffer-size 1000)
+ '(semantic-idle-scheduler-mode-hook nil)
+ '(semantic-idle-scheduler-work-idle-time 5)
+ '(semantic-idle-scheduler-working-in-modeline-flag t)
+ '(semantic-imenu-auto-rebuild-directory-indexes t)
+ '(semantic-imenu-index-directory t)
+ '(semantic-lex-debug-analyzers nil)
+ '(semantic-lex-spp-use-headers-flag t)
+ '(semantic-which-function-use-color t)
+ '(senator-completion-menu-summary-function (quote semantic-format-tag-concise-prototype))
  '(show-paren-mode t)
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))))
 
-(custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
- '(cscope-line-number-face ((((class color) (background dark)) (:foreground "red" :height 0.9))))
- '(semantic-tag-boundary-face ((((class color) (background dark)) nil))))
