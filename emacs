@@ -88,7 +88,7 @@
     ;; ============================
     ;; Set default font
     ;; ============================
-    (set-face-attribute 'default nil :font "Bitstream Vera Sans Mono-12")
+    (set-face-attribute 'default nil :font "DejaVu Sans Mono-12")
 
     ;; ============================
     ;; Hide stuff
