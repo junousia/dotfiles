@@ -5,8 +5,8 @@
  
 ;; uncomment out one of the following 3 lines for more or less semantic features
 ;;(semantic-load-enable-minimum-features)
-;;(semantic-load-enable-code-helpers) 
-(semantic-load-enable-excessive-code-helpers) 
+(semantic-load-enable-code-helpers) 
+;;(semantic-load-enable-excessive-code-helpers) 
 
 ;;enable folding mode to collapse a definition into a single line
 ;; (global-semantic-tag-folding-mode)
@@ -14,9 +14,9 @@
 ;; SRecode minor mode.
 (global-srecode-minor-mode 1)
  
-;; (semantic-idle-completions-mode 1)
+;;(semantic-idle-completions-mode 1)
 (setq semantic-imenu-auto-rebuild-directory-indexes nil)
-(ede-enable-generic-projects)
+;;(ede-enable-generic-projects)
 (require 'semantic-ia)
 (require 'semantic-gcc)
 ;; gnu global support
@@ -24,15 +24,12 @@
 (require 'semanticdb)
 (global-semanticdb-minor-mode 1)
 (semanticdb-enable-gnu-global-databases 'cc-mode)
-;; (semanticdb-enable-gnu-global-databases 'c++-mode)
  
 ;; ctags
 ;;(require 'semanticdb-ectag)
 ;;(semantic-load-enable-primary-exuberent-ctags-support)
 
-;;(semantic-complete-inline-analyzer-displayor-class 'semantic-displayor-tooltip)
-;;(semantic-completion-displayor-format-tag-function 'semantic-format-tag-summarize)
-
+;;(semantic-complete-inline-analyzer-idle-displayor-class 'semantic-displayor-tooltip)
 
 (setq cedet-cscope-command "/home/ejuknou/bin/cedet-cscope")
 (setq cedet-global-command "/home/ejuknou/bin/global")
@@ -42,7 +39,8 @@
 (setq semantic-idle-breadcrumbs-display-function (quote semantic-idle-breadcrumbs--display-in-mode-line))
 (setq semantic-idle-breadcrumbs-format-tag-function (quote semantic-format-tag-summarize))
 (setq semantic-idle-breadcrumbs-format-tag-list-function (quote semantic-idle-breadcrumbs--format-innermost-first))
- 
+(setq semantic-idle-work-parse-neighboring-files-flag nil)
+
 ;; customisation of modes
 (defun my-cedet-hook ()
  (local-set-key [(control shift return)] 'semantic-ia-complete-symbol-menu)
@@ -55,6 +53,7 @@
  (local-set-key [(control ,)] 'semantic-ia-show-summary)
  (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
  (local-set-key "\C-cr" 'semantic-symref)
+ (local-set-key [(C-S-mouse-1)] 'semantic-ia-fast-mouse-jump)
  ;; for senator
  ;;(local-set-key "\C-c\-" 'senator-fold-tag)
  ;;(local-set-key "\C-c\+" 'senator-unfold-tag)

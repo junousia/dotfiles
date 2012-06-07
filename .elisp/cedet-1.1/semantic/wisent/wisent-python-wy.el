@@ -2,8 +2,8 @@
 
 ;; Copyright (C) 2002, 2003, 2004, 2007, 2012 Richard Kim
 
-;; Author: Eric M. Ludlam <eric@siege-engine.com>
-;; Created: 2012-02-11 09:18:41-0500
+;; Author: Jukka Nousiainen <ejuknou@esekilxxen971.rnd.ericsson.se>
+;; Created: 2012-05-31 11:50:30+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

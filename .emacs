@@ -22,7 +22,7 @@
 	(current-buffer)))
 	;;Then bind it to some key - I use the Pause key:
 	(global-set-key [pause] 'toggle-window-dedicated)
-   
+
 (defun goto-match-paren (arg)
   "Go to the matching  if on (){}[], similar to vi style of % "
   (interactive "p")
@@ -68,12 +68,12 @@
         (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 
     (add-to-list 'load-path "~/.elisp/")
-    (add-to-list 'load-path "~/.elisp/bookmarkplus/src/")
+    ;;(add-to-list 'load-path "~/.elisp/bookmarkplus/src/")
 
     ;; ============================
     ;; bookmark+
     ;; ============================
-    (require 'bookmark+)
+    ;;(require 'bookmark+)
 
     ;; ============================
     ;; TTCN-3 mode
@@ -127,12 +127,18 @@
     (defun my-c-mode-common-hook ()
       (turn-on-font-lock)
       (c-set-offset 'substatement-open 0)
-      (c-set-offset 'case-label '+))
+      (c-set-offset 'case-label '+)
+      (c-set-style "stroustrup"))
 
     ;; =========================
     ;; IBuffer
     ;; =========================
     (global-set-key (kbd "C-x C-b") 'ibuffer)
+
+    ;; =========================
+    ;; Add temporary mark to region (C-space)
+    ;; =========================
+    (transient-mark-mode t)
 
     ;;; =========================
     ;; Code completion
@@ -143,14 +149,21 @@
     ;; Global key shortcuts
     ;; =========================
     (global-set-key [f1] 'manual-entry)
-    (global-set-key [f2] 'save-buffer)
-    (global-set-key [f3] 'search-word-under-cursor)
-    (global-set-key [f4] 'find-file)
+    (global-set-key [f2] 'cscope-pop-mark)
+    (global-set-key [f3] 'cscope-find-this-text-string)
+    (global-set-key [f4] 'cscope-find-called-functions)
     (global-set-key [f5] 'cscope-find-global-definition-no-prompting)
     (global-set-key [f6] 'cscope-find-this-symbol)
     (global-set-key [f7] 'cscope-find-functions-calling-this-function)
     (global-set-key [f8] 'cscope-find-files-including-file)
     (global-set-key [f9] 'cscope-find-egrep-pattern)
+
+    ;; =========================
+    ;; Move text 
+    ;; =========================
+    (require 'move-text)
+    (global-set-key [M-up] 'move-text-up)
+    (global-set-key [M-down] 'move-text-down)
 
     ;; =========================
     ;; IDO mode
@@ -189,9 +202,10 @@
 
     ;; always truncate
     (setq-default truncate-partial-width-windows t)
-
+    (setq-default truncate-lines t)
     (setq kill-whole-line t)
-    ;;(setq c-auto-newline 1)
+    (setq query-replace-highlight t)
+    ;; (setq c-auto-newline 1)
     (setq c-hungry-delete-key t)
 ;;;; Wrapper to make .emacs self-compiling end
     )
@@ -205,14 +219,13 @@
  '(auto-revert-check-vc-info t)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
  '(bookmark-bmenu-toggle-filenames nil)
- '(bookmark-save-flag 1)
- '(bookmark-use-annotations nil)
  '(c-auto-align-backslashes t)
  '(c-basic-offset 4)
  '(c-block-comment-prefix (quote set-from-style))
  '(c-indent-comments-syntactically-p t)
  '(c-syntactic-indentation t)
  '(c-tab-always-indent (quote other))
+ '(cc-search-directories (quote ("." "/usr/include" "/usr/local/include/*" "../inc" "../include" "../src")))
  '(column-number-mode t)
  '(cscope-allow-arrow-overlays t)
  '(cscope-display-cscope-buffer t)
@@ -227,7 +240,10 @@
  '(cua-mode t nil (cua-base))
  '(global-auto-revert-mode t)
  '(global-auto-revert-non-file-buffers t)
+ '(global-semantic-decoration-mode nil nil (semantic-decorate-mode))
+ '(global-semantic-highlight-func-mode nil nil (semantic-util-modes))
  '(global-semantic-idle-breadcrumbs-mode t nil (semantic-idle))
+ '(global-semantic-show-unmatched-syntax-mode t nil (semantic-util-modes))
  '(ibuffer-always-compile-formats t)
  '(ibuffer-always-show-last-buffer t)
  '(ibuffer-display-summary nil)
@@ -243,7 +259,7 @@
  '(mouse-wheel-progressive-speed t)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
  '(semantic-idle-scheduler-idle-time 1)
- '(semantic-idle-scheduler-max-buffer-size 1000)
+ '(semantic-idle-scheduler-max-buffer-size 10000)
  '(semantic-idle-scheduler-mode-hook nil)
  '(semantic-idle-scheduler-work-idle-time 5)
  '(semantic-idle-scheduler-working-in-modeline-flag t)
@@ -256,3 +272,9 @@
  '(show-paren-mode t)
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))))
 
+(custom-set-faces
+  ;; custom-set-faces was added by Custom.
+  ;; If you edit it by hand, you could mess it up, so be careful.
+  ;; Your init file should contain only one such instance.
+  ;; If there is more than one, they won't work right.
+ )
