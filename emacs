@@ -9,30 +9,27 @@
             )
         (load "~/.emacs.elc")))
   (progn
-    
     ;; Toggle window dedication
     (defun toggle-window-dedicated ()
-    (interactive)
-    (message
-    (if (let (window (get-buffer-window (current-buffer)))
-      (set-window-dedicated-p window 
-        (not (window-dedicated-p window))))
-	"Window '%s' is dedicated"
-	"Window '%s' is normal")
-	(current-buffer)))
-	;;Then bind it to some key - I use the Pause key:
-	(global-set-key [pause] 'toggle-window-dedicated)
-
-(defun goto-match-paren (arg)
-  "Go to the matching  if on (){}[], similar to vi style of % "
-  (interactive "p")
-  ;; first, check for "outside of bracket" positions expected by forward-sexp, etc.
-  (cond ((looking-at "[\[\(\{]") (forward-sexp))
-        ((looking-back "[\]\)\}]" 1) (backward-sexp))
-        ;; now, try to succeed from inside of a bracket
-        ((looking-at "[\]\)\}]") (forward-char) (backward-sexp))
-        ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
-        (t nil)))
+      (interactive)
+      (message
+       (if (let (window (get-buffer-window (current-buffer)))
+             (set-window-dedicated-p window (not (window-dedicated-p window))))
+           "Window '%s' is dedicated" "Window '%s' is normal")
+       (current-buffer)))
+    ;;Then bind it to some key - I use the Pause key:
+    (global-set-key [pause] 'toggle-window-dedicated)
+    
+    (defun goto-match-paren (arg)
+      "Go to the matching  if on (){}[], similar to vi style of % "
+      (interactive "p")
+      ;; first, check for "outside of bracket" positions expected by forward-sexp, etc.
+      (cond ((looking-at "[\[\(\{]") (forward-sexp))
+            ((looking-back "[\]\)\}]" 1) (backward-sexp))
+            ;; now, try to succeed from inside of a bracket
+            ((looking-at "[\]\)\}]") (forward-char) (backward-sexp))
+            ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
+            (t nil)))
 
     (global-set-key [f12] 'goto-match-paren) 
 
@@ -64,16 +61,10 @@
     ;; Switch between header and implementation
     ;; ============================
     (add-hook 'c-mode-common-hook
-        (lambda() 
-        (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
+              (lambda() 
+                (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 
     (add-to-list 'load-path "~/.elisp/")
-    ;;(add-to-list 'load-path "~/.elisp/bookmarkplus/src/")
-
-    ;; ============================
-    ;; bookmark+
-    ;; ============================
-    ;;(require 'bookmark+)
 
     ;; ============================
     ;; TTCN-3 mode
@@ -101,7 +92,6 @@
     ;; Display
     ;; ============================
     (setq column-number-mode t)
-    (setq tool-bar-mode 0) 
 
     ;; ============================
     ;; Meta key
@@ -128,22 +118,24 @@
       (turn-on-font-lock)
       (c-set-offset 'substatement-open 0)
       (c-set-offset 'case-label '+)
-      (c-set-style "stroustrup"))
+      (c-set-style "stroustrup")
+      (c-auto-align-backslashes t)
+      (c-basic-offset 4)
+      (c-block-comment-prefix (quote set-from-style))
+      (c-indent-comments-syntactically-p t)
+      (c-syntactic-indentation t)
+      (c-tab-always-indent (quote other))
+      )
 
     ;; =========================
     ;; IBuffer
     ;; =========================
     (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-    ;; =========================
-    ;; Add temporary mark to region (C-space)
-    ;; =========================
-    (transient-mark-mode t)
-
     ;;; =========================
     ;; Code completion
     ;; =========================
-    (load-file "~/.elisp/my-cedet-conf.el")
+    (load-file "~/.elisp/cedet-configuration.el")
 
     ;; =========================
     ;; Global key shortcuts
@@ -177,7 +169,6 @@
     ;; ============================
     ;; cscope
     ;; ============================
-    ;; (add-to-list 'load-path "/usr/share/emacs/site-lisp/")
     (require 'xcscope)
 
     ;; ============================
@@ -186,6 +177,9 @@
     (require 'color-theme)
     (color-theme-initialize)
     (color-theme-dark-laptop)
+
+    ;; follow cursor in shell mode
+    (auto-show-make-point-visible)
 
     ;; server
     (server-start)
@@ -219,31 +213,19 @@
  '(auto-revert-check-vc-info t)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
  '(bookmark-bmenu-toggle-filenames nil)
- '(c-auto-align-backslashes t)
- '(c-basic-offset 4)
- '(c-block-comment-prefix (quote set-from-style))
- '(c-indent-comments-syntactically-p t)
- '(c-syntactic-indentation t)
- '(c-tab-always-indent (quote other))
  '(cc-search-directories (quote ("." "/usr/include" "/usr/local/include/*" "../inc" "../include" "../src")))
- '(column-number-mode t)
+ '(column-number-mode nil)
  '(cscope-allow-arrow-overlays t)
  '(cscope-display-cscope-buffer t)
  '(cscope-display-times nil)
  '(cscope-edit-single-match t)
- '(cscope-indexing-script "source ~/.bash_profile && ~/Applications/tags.sh")
  '(cscope-name-line-width -20)
  '(cscope-no-mouse-prompts t)
- '(cscope-overlay-arrow-string ">")
  '(cscope-truncate-lines t)
  '(cscope-use-face t)
  '(cua-mode t nil (cua-base))
  '(global-auto-revert-mode t)
  '(global-auto-revert-non-file-buffers t)
- '(global-semantic-decoration-mode nil nil (semantic-decorate-mode))
- '(global-semantic-highlight-func-mode nil nil (semantic-util-modes))
- '(global-semantic-idle-breadcrumbs-mode t nil (semantic-idle))
- '(global-semantic-show-unmatched-syntax-mode t nil (semantic-util-modes))
  '(ibuffer-always-compile-formats t)
  '(ibuffer-always-show-last-buffer t)
  '(ibuffer-display-summary nil)
@@ -258,17 +240,6 @@
  '(menu-bar-mode 0)
  '(mouse-wheel-progressive-speed t)
  '(mouse-wheel-scroll-amount (quote (1 ((shift) . 1) ((control)))))
- '(semantic-idle-scheduler-idle-time 1)
- '(semantic-idle-scheduler-max-buffer-size 10000)
- '(semantic-idle-scheduler-mode-hook nil)
- '(semantic-idle-scheduler-work-idle-time 5)
- '(semantic-idle-scheduler-working-in-modeline-flag t)
- '(semantic-imenu-auto-rebuild-directory-indexes t)
- '(semantic-imenu-index-directory t)
- '(semantic-lex-debug-analyzers nil)
- '(semantic-lex-spp-use-headers-flag t)
- '(semantic-which-function-use-color t)
- '(senator-completion-menu-summary-function (quote semantic-format-tag-concise-prototype))
  '(show-paren-mode t)
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))))
 
