@@ -1,7 +1,12 @@
 ;; CEDET configuration
-(load-file "~/.elisp/cedet-1.1/common/cedet.el")
+(add-to-list 'load-path "~/.elisp/cedet-1.1/common/")
+(require 'cedet)
+
+;;(setq semantic-load-turn-useful-things-on t)
 (global-ede-mode 1)      ; Enable the Project management system
-(setq ede-locate-setup-options '(ede-locate-global ede-locate-base)) 
+(setq ede-locate-setup-options '(ede-locate-global ede-locate-base))
+
+
  
 ;; uncomment out one of the following 3 lines for more or less semantic features
 ;;(semantic-load-enable-minimum-features)
@@ -9,74 +14,54 @@
 (semantic-load-enable-excessive-code-helpers) 
 
 ;;enable folding mode to collapse a definition into a single line
-;; (global-semantic-tag-folding-mode)
+;;(global-semantic-tag-folding-mode)
  
 ;; SRecode minor mode.
 (global-srecode-minor-mode 1)
- 
-;;(semantic-idle-completions-mode 1)
-(setq semantic-imenu-auto-rebuild-directory-indexes nil)
-;;(ede-enable-generic-projects)
+(ede-enable-generic-projects)
+
 (require 'semantic-ia)
 (require 'semantic-gcc)
 ;; gnu global support
-(require 'semanticdb-global)
 (require 'semanticdb)
 (global-semanticdb-minor-mode 1)
-(semanticdb-enable-gnu-global-databases 'cc-mode)
- 
-;; ctags
-;;(require 'semanticdb-ectag)
-;;(semantic-load-enable-primary-exuberent-ctags-support)
 
-;;(semantic-complete-inline-analyzer-idle-displayor-class 'semantic-displayor-tooltip)
+(require 'semanticdb-ectag)
+(semantic-load-enable-all-exuberent-ctags-support)
+(semanticdb-enable-exuberent-ctags 'c-mode)
+(semanticdb-enable-exuberent-ctags 'c++-mode)
+(setq-mode-local cpp-mode semanticdb-find-default-throttle 
+                 '(project local unloaded system recursive))
+
 
 (setq cedet-cscope-command "/home/ejuknou/bin/cedet-cscope")
 (setq cedet-global-command "/home/ejuknou/bin/global")
 (setq cedet-global-gtags-command "/home/ejuknou/bin/gtags")
 
-(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-summarize-with-file))
-(setq semantic-idle-breadcrumbs-display-function (quote semantic-idle-breadcrumbs--display-in-mode-line))
-(setq semantic-idle-breadcrumbs-format-tag-function (quote semantic-format-tag-summarize))
-(setq semantic-idle-breadcrumbs-format-tag-list-function (quote semantic-idle-breadcrumbs--format-innermost-first))
-(setq semantic-idle-work-parse-neighboring-files-flag nil)
-
-(setq semantic-idle-scheduler-idle-time 1)
-(setq semantic-idle-scheduler-max-buffer-size 10000)
-(setq semantic-idle-scheduler-mode-hook nil)
-(setq semantic-idle-scheduler-work-idle-time 5)
-(setq semantic-idle-scheduler-working-in-modeline-flag t)
-(setq semantic-imenu-auto-rebuild-directory-indexes t)
-(setq semantic-imenu-index-directory t)
-(setq semantic-lex-debug-analyzers nil)
-(setq semantic-lex-spp-use-headers-flag t)
+(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-concise-prototype))
+(setq semantic-idle-summary-function (quote semantic-format-tag-prototype))
 (setq semantic-which-function-use-color t)
-(setq senator-completion-menu-summary-function (quote semantic-format-tag-concise-prototype))
+(setq semantic-decoration-mode nil)
 
 ;; customisation of modes
 (defun my-cedet-hook ()
   (local-set-key [(control shift return)] 'semantic-ia-complete-symbol-menu)
-  (local-set-key "\C-c?" 'semantic-ia-complete-symbol)
-  (local-set-key [(control .)] 'semantic-complete-analyze-inline)
-  (local-set-key "\C-c=" 'semantic-decoration-include-visit)
+  (local-set-key [(control .)] 'semantic-ia-complete-symbol-menu)
   (local-set-key "\C-cj" 'semantic-ia-fast-jump)
   (local-set-key "\C-cb" 'semantic-mrub-switch-tags)
   (local-set-key "\C-cq" 'semantic-ia-show-doc)
-  (local-set-key [(control ,)] 'semantic-ia-show-summary)
+  (local-set-key [(control -)] 'semantic-ia-show-summary)
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
   (local-set-key "\C-cr" 'semantic-symref)
   (local-set-key [(C-S-mouse-1)] 'semantic-ia-fast-mouse-jump)
-  ;; for senator
-  ;;(local-set-key "\C-c\-" 'senator-fold-tag)
-  ;;(local-set-key "\C-c\+" 'senator-unfold-tag)
-  )
+)
  
-(add-hook 'semantic-init-hooks 'my-cedet-hook)
+;;(add-hook 'semantic-init-hooks 'my-cedet-hook)
 (add-hook 'c-mode-common-hook 'my-cedet-hook)
 (add-hook 'cpp-mode-common-hook 'my-cedet-hook)
-;;(add-hook 'lisp-mode-hook 'my-cedet-hook)
-;;(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
-;;(add-hook 'erlang-mode-hook 'my-cedet-hook)
+(add-hook 'lisp-mode-hook 'my-cedet-hook)
+(add-hook 'emacs-lisp-mode-hook 'my-cedet-hook)
+(add-hook 'erlang-mode-hook 'my-cedet-hook)
  
 (defun my-c-mode-cedet-hook ()
  (local-set-key "\C-ct" 'eassist-switch-h-cpp)

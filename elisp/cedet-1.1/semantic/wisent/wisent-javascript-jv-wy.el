@@ -3,7 +3,7 @@
 ;; Copyright (C) 2005-2011 Free Software Foundation, Inc.
 
 ;; Author: Jukka Nousiainen <ejuknou@esekilxxen971.rnd.ericsson.se>
-;; Created: 2012-05-31 11:50:33+0200
+;; Created: 2012-06-07 14:19:32+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 

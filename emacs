@@ -1,13 +1,6 @@
 ;;; Wrapper to make .emacs self-compiling.
 (defvar init-top-level t)
 (if init-top-level
-    (let ((init-top-level nil))
-      (if (file-newer-than-file-p "~/.emacs" "~/.emacs.elc")
-          (progn
-            (load "~/.emacs")
-            (byte-compile-file "~/.emacs")
-            )
-        (load "~/.emacs.elc")))
   (progn
     ;; Toggle window dedication
     (defun toggle-window-dedicated ()
@@ -33,7 +26,7 @@
 
     (global-set-key [f12] 'goto-match-paren) 
 
-    (setq load-path (cons "/proj/mgwrepos/user/ejuknou/mmgw" load-path))
+    (setq warning-suppress-types nil)
 
     ;; ============================
     ;; IBuffer filter groups
@@ -43,7 +36,9 @@
       (quote (("default"      
             ("MGW"
               (filename . "/proj/mgwrepos/user/ejuknou/mmgw/"))
-            ("Programming" ;; stuff not already in "MGW" 
+            ("Others users"
+              (filename . "/proj/mgwrepos/user/"))
+            ("General" ;; stuff not already in "MGW" 
               (or
                 (mode . c-mode)
                 (mode . c++-mode)
@@ -61,7 +56,7 @@
     ;; Switch between header and implementation
     ;; ============================
     (add-hook 'c-mode-common-hook
-              (lambda() 
+              (lambda()
                 (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 
     (add-to-list 'load-path "~/.elisp/")
@@ -110,32 +105,21 @@
     ;; Note! intend for modes have to be set seperately
     (setq tab-width 4)
     (setq-default indent-tabs-mode nil)
-    
+    (setq c-hungry-delete-key t)
+
     ;; ==========================
     ;; C/C++ indentation
     ;; ==========================
     (defun my-c-mode-common-hook ()
       (turn-on-font-lock)
-      (c-set-offset 'substatement-open 0)
-      (c-set-offset 'case-label '+)
-      (c-set-style "stroustrup")
-      (c-auto-align-backslashes t)
-      (c-basic-offset 4)
-      (c-block-comment-prefix (quote set-from-style))
-      (c-indent-comments-syntactically-p t)
-      (c-syntactic-indentation t)
-      (c-tab-always-indent (quote other))
-      )
+      (c-set-style "stroustrup"))
+
+    (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
     ;; =========================
     ;; IBuffer
     ;; =========================
     (global-set-key (kbd "C-x C-b") 'ibuffer)
-
-    ;;; =========================
-    ;; Code completion
-    ;; =========================
-    (load-file "~/.elisp/cedet-configuration.el")
 
     ;; =========================
     ;; Global key shortcuts
@@ -179,7 +163,7 @@
     (color-theme-dark-laptop)
 
     ;; follow cursor in shell mode
-    (auto-show-make-point-visible)
+    ;;(auto-show-make-point-visible t)
 
     ;; server
     (server-start)
@@ -199,8 +183,18 @@
     (setq-default truncate-lines t)
     (setq kill-whole-line t)
     (setq query-replace-highlight t)
-    ;; (setq c-auto-newline 1)
-    (setq c-hungry-delete-key t)
+
+    ;disable backup
+    (setq backup-inhibited t)
+
+    ;disable auto save
+    (setq auto-save-default nil)
+
+    ;;; =========================
+    ;; Code completion
+    ;; =========================
+    (load-file "~/.elisp/cedet-configuration.el")
+
 ;;;; Wrapper to make .emacs self-compiling end
     )
   )
@@ -213,7 +207,7 @@
  '(auto-revert-check-vc-info t)
  '(bmkp-last-as-first-bookmark-file "~/.emacs.bmk")
  '(bookmark-bmenu-toggle-filenames nil)
- '(cc-search-directories (quote ("." "/usr/include" "/usr/local/include/*" "../inc" "../include" "../src")))
+ '(cc-search-directories (quote ("." "/usr/include" "/usr/local/include/*" "../inc" "../include" "../src" "../../inc" "../../src")))
  '(column-number-mode nil)
  '(cscope-allow-arrow-overlays t)
  '(cscope-display-cscope-buffer t)

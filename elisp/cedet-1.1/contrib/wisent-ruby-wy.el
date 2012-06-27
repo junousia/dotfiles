@@ -3,7 +3,7 @@
 ;;; Copyright (C) 2007 Daniel Debertin (debertin@gmail.com)
 
 ;; Author: Jukka Nousiainen <ejuknou@esekilxxen971.rnd.ericsson.se>
-;; Created: 2012-05-31 11:50:57+0200
+;; Created: 2012-06-07 14:20:22+0200
 ;; Keywords: syntax
 ;; X-RCS: $Id$
 
