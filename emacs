@@ -34,11 +34,18 @@
     (require 'ibuffer) 
     (setq ibuffer-saved-filter-groups
       (quote (("default"      
+            ("BGF"
+             (or
+              (filename . "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/")
+              (filename . "/proj/mgwrepos/user/ejuknou/mmgw/bgf_common/")
+              ))
+            ("Framework common"
+             (filename . "/proj/mgwrepos/user/ejuknou/mmgw/framework_common/"))
             ("MGW"
-              (filename . "/proj/mgwrepos/user/ejuknou/mmgw/"))
+             (filename . "/proj/mgwrepos/user/ejuknou/mmgw/"))
             ("Others users"
               (filename . "/proj/mgwrepos/user/"))
-            ("General" ;; stuff not already in "MGW" 
+            ("General"
               (or
                 (mode . c-mode)
                 (mode . c++-mode)
@@ -190,10 +197,19 @@
     ;disable auto save
     (setq auto-save-default nil)
 
-    ;;; =========================
+    ;; =========================
     ;; Code completion
     ;; =========================
     (load-file "~/.elisp/cedet-configuration.el")
+
+    ;; =========================
+    ;; yasnippet
+    ;; =========================
+    (add-to-list 'load-path "~/.elisp/yasnippet-0.7.0")
+    (require 'yasnippet)
+    (yas/initialize)
+    (yas/load-directory "~/.elisp/yasnippet-0.7.0/snippets")
+    (global-set-key [f11] 'yas/insert-snippet)
 
 ;;;; Wrapper to make .emacs self-compiling end
     )

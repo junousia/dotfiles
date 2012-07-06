@@ -3,8 +3,13 @@
                :file "/proj/mgwrepos/user/ejuknou/mmgw/del_to_cc.tcsh"
                :include-path '("/bgf_appl/dev/inc/"
                                "/framework_common/h248_parser/inc"
+                               "/framework_common/h248_parser/inc/sdp"
                                "/framework_common/h248_transaction/inc"
-                               "/framework_common/h248_stat/inc")
+                               "/framework_common/h248_stat/inc"
+                               "/bgf_common/dpci_if/inc"
+                               "/bgf_common/bgfi_if/inc"
+                               "/bgf_common/bgri_if/inc"
+                               "/bgf_common/timer_if/inc")
                :system-include-path '("/usr/include/"
                                       "/usr/include/c++/4.1.2"
                                       "/usr/include/boost/"))

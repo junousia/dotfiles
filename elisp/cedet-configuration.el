@@ -31,6 +31,7 @@
 (semanticdb-enable-exuberent-ctags 'c-mode)
 (semanticdb-enable-exuberent-ctags 'c++-mode)
 (setq-mode-local cpp-mode semanticdb-find-default-throttle 
+
                  '(project local unloaded system recursive))
 
 
@@ -38,10 +39,12 @@
 (setq cedet-global-command "/home/ejuknou/bin/global")
 (setq cedet-global-gtags-command "/home/ejuknou/bin/gtags")
 
+(setq semantic-idle-work-parse-neighboring-files-flag nil)
+(setq global-semantic-idle-completions-mode nil)
 (setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-concise-prototype))
 (setq semantic-idle-summary-function (quote semantic-format-tag-prototype))
 (setq semantic-which-function-use-color t)
-(setq semantic-decoration-mode nil)
+(global-semantic-decoration-mode nil)
 
 ;; customisation of modes
 (defun my-cedet-hook ()
@@ -54,6 +57,8 @@
   (local-set-key "\C-cp" 'semantic-analyze-proto-impl-toggle)
   (local-set-key "\C-cr" 'semantic-symref)
   (local-set-key [(C-S-mouse-1)] 'semantic-ia-fast-mouse-jump)
+  (local-set-key [(C-M-mouse-1)] 'find-tag)
+  (local-set-key [(C-M-mouse-3)] 'pop-tag-mark)
 )
  
 ;;(add-hook 'semantic-init-hooks 'my-cedet-hook)
