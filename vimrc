@@ -3,8 +3,10 @@ colorscheme desert
 set nowrap
 set nocompatible    " use vim defaults
 set ls=2            " allways show status line
+set smartindent
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4    " numbers of spaces to (auto)indent
+set expandtab
 set scrolloff=3     " keep 3 lines when scrolling
 set showcmd         " display incomplete commands
 set hlsearch        " highlight searches
@@ -26,3 +28,13 @@ set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 "set lines=50 columns=130"
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+
+syntax on
+
+filetype plugin on
+
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+imap <expr> <Tab> pumvisible() ? "<Tab>" : "<Tab><Down>"
+let g:NERDTreeDirArrows=0
+
+
