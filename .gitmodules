@@ -13,3 +13,6 @@
 [submodule "vim/nerdtree"]
 	path = vim/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+[submodule "zsh/zsh-git-prompt"]
+	path = zsh/zsh-git-prompt
+	url = git://github.com/olivierverdier/zsh-git-prompt.git
