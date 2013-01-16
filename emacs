@@ -12,7 +12,7 @@
        (current-buffer)))
     ;;Then bind it to some key - I use the Pause key:
     (global-set-key [pause] 'toggle-window-dedicated)
-    
+
     (defun goto-match-paren (arg)
       "Go to the matching  if on (){}[], similar to vi style of % "
       (interactive "p")
@@ -24,16 +24,16 @@
             ((looking-back "[\[\(\{]" 1) (backward-char) (forward-sexp))
             (t nil)))
 
-    (global-set-key [f12] 'goto-match-paren) 
+    (global-set-key [f12] 'goto-match-paren)
 
     (setq warning-suppress-types nil)
 
     ;; ============================
     ;; IBuffer filter groups
     ;; ============================
-    (require 'ibuffer) 
+    (require 'ibuffer)
     (setq ibuffer-saved-filter-groups
-      (quote (("default"      
+      (quote (("default"
             ("BGF"
              (or
               (filename . "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/")
@@ -59,6 +59,25 @@
       (lambda ()
         (ibuffer-switch-to-saved-filter-groups "default")))
 
+    (add-to-list 'load-path "~/.elisp/")
+    (when (load "flymake" t)
+        (require 'flymake-cursor)
+        (defun flymake-cppcheck-init ()
+        (list "cppcheck" (list "--enable=all" "--quiet" "--template={file}:{line}:{severity}:{message}" (flymake-init-create-temp-buffer-copy 'flymake-create-temp-inplace))))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.c\\'" flymake-cppcheck-init))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.cc\\'" flymake-cppcheck-init))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.cpp\\'" flymake-cppcheck-init))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.h\\'" flymake-cppcheck-init))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.hpp\\'" flymake-cppcheck-init))
+        (add-to-list 'flymake-allowed-file-name-masks
+            '("\\.hh\\'" flymake-cppcheck-init))
+    )
+
     ;; ============================
     ;; Switch between header and implementation
     ;; ============================
@@ -66,13 +85,17 @@
               (lambda()
                 (local-set-key  (kbd "C-c o") 'ff-find-other-file)))
 
-    (add-to-list 'load-path "~/.elisp/")
 
     ;; ===========================
 	;; Sr-Speedbar
     ;; ===========================
     (require 'sr-speedbar)
 
+    ;; ============================
+    ;; Show trailing whitespace
+    ;; ============================
+    (setq-default show-trailing-whitespace t)
+    
     ;; ============================
     ;; TTCN-3 mode
     ;; ============================
@@ -263,4 +286,6 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+
+
  )

@@ -26,8 +26,11 @@ set modelines=3     " number lines checked for modelines
 set shortmess=atI   " Abbreviate messages
 set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
+set backspace=indent,eol,start
+
 "set lines=50 columns=130"
 set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+set tags=./tags,tags;/
 
 syntax on
 
