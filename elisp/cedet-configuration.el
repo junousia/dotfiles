@@ -3,48 +3,45 @@
 (require 'cedet)
 
 ;;(setq semantic-load-turn-useful-things-on t)
-(global-ede-mode 1)      ; Enable the Project management system
-(setq ede-locate-setup-options '(ede-locate-global ede-locate-base))
+;;(global-ede-mode 1)      ; Enable the Project management system
+;;(setq ede-locate-setup-options '(ede-locate-global ede-locate-base))
 
-
- 
 ;; uncomment out one of the following 3 lines for more or less semantic features
-;;(semantic-load-enable-minimum-features)
-;;(semantic-load-enable-code-helpers) 
-(semantic-load-enable-excessive-code-helpers) 
+(semantic-load-enable-minimum-features)
+;;(semantic-load-enable-code-helpers)
+;;(semantic-load-enable-excessive-code-helpers)
 
 ;;enable folding mode to collapse a definition into a single line
 ;;(global-semantic-tag-folding-mode)
- 
+
 ;; SRecode minor mode.
-(global-srecode-minor-mode 1)
-(ede-enable-generic-projects)
+;;(global-srecode-minor-mode 1)
+;;(ede-enable-generic-projects)
 
-(require 'semantic-ia)
-(require 'semantic-gcc)
+;;(require 'semantic-ia)
+;;(require 'semantic-gcc)
 ;; gnu global support
-(require 'semanticdb)
-(global-semanticdb-minor-mode 1)
+;;(require 'semanticdb)
+;;(global-semanticdb-minor-mode 1)
 
-(require 'semanticdb-ectag)
-(semantic-load-enable-all-exuberent-ctags-support)
-(semanticdb-enable-exuberent-ctags 'c-mode)
-(semanticdb-enable-exuberent-ctags 'c++-mode)
-(setq-mode-local cpp-mode semanticdb-find-default-throttle 
-
-                 '(project local unloaded system recursive))
+;;(require 'semanticdb-ectag)
+;;(semantic-load-enable-all-exuberent-ctags-support)
+;;(semanticdb-enable-exuberent-ctags 'c-mode)
+;;(semanticdb-enable-exuberent-ctags 'c++-mode)
+;;(setq-mode-local cpp-mode semanticdb-find-default-throttle
+;;                 '(project local unloaded system recursive))
 
 
 (setq cedet-cscope-command "/home/ejuknou/bin/cedet-cscope")
 (setq cedet-global-command "/home/ejuknou/bin/global")
 (setq cedet-global-gtags-command "/home/ejuknou/bin/gtags")
 
-(setq semantic-idle-work-parse-neighboring-files-flag nil)
-(setq global-semantic-idle-completions-mode nil)
-(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-concise-prototype))
-(setq semantic-idle-summary-function (quote semantic-format-tag-prototype))
+;;(setq semantic-idle-work-parse-neighboring-files-flag nil)
+;;(setq global-semantic-idle-completions-mode nil)
+;;(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-concise-prototype))
+;;(setq semantic-idle-summary-function (quote semantic-format-tag-prototype))
 (setq semantic-which-function-use-color t)
-(global-semantic-decoration-mode nil)
+;;(global-semantic-decoration-mode nil)
 
 ;; customisation of modes
 (defun my-cedet-hook ()

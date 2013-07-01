@@ -16,3 +16,9 @@
 [submodule "zsh/zsh-git-prompt"]
 	path = zsh/zsh-git-prompt
 	url = git://github.com/olivierverdier/zsh-git-prompt.git
+[submodule "elisp/emacs-clang-complete-async"]
+	path = elisp/emacs-clang-complete-async
+	url = git://github.com/Golevka/emacs-clang-complete-async.git
+[submodule "elisp/auto-complete"]
+	path = elisp/auto-complete
+	url = git://github.com/auto-complete/auto-complete.git

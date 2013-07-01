@@ -34,17 +34,27 @@
     (require 'ibuffer)
     (setq ibuffer-saved-filter-groups
       (quote (("default"
-            ("BGF"
+            ("BGF APPL"
              (or
-              (filename . "/proj/mgwrepos/user/ejuknou/mmgw/bgf_appl/")
-              (filename . "/proj/mgwrepos/user/ejuknou/mmgw/bgf_common/")
+              (filename . "/repo/ejuknou/mmgw/bgf_appl/")
+              (filename . "/repo/ejuknou/mmgw/bgf_common/")
               ))
             ("Framework common"
-             (filename . "/proj/mgwrepos/user/ejuknou/mmgw/framework_common/"))
+             (filename . "/repo/ejuknou/mmgw/framework_common/"))
+            ("VPP DP"
+             (filename . "/repo/ejuknou/mmgw/bgf_vpp/blocks/vpi/"))
+            ("VPP NP FPL"
+             (filename . "/repo/ejuknou/mmgw/bgf_vpp/blocks/vpfp/src/fpl/"))
+            ("VPP NP"
+             (filename . "/repo/ejuknou/mmgw/bgf_vpp/blocks/vpfp/"))
+            ("VPP DPCI"
+             (filename . "/repo/ejuknou/mmgw/bgf_vpp/blocks/vpch/"))
+            ("VPP General"
+             (filename . "/repo/ejuknou/mmgw/bgf_vpp/"))
             ("MGW"
-             (filename . "/proj/mgwrepos/user/ejuknou/mmgw/"))
+             (filename . "/repo/ejuknou/mmgw/"))
             ("Others users"
-              (filename . "/proj/mgwrepos/user/"))
+              (filename . "/repo/"))
             ("General"
               (or
                 (mode . c-mode)
@@ -52,7 +62,7 @@
                 (mode . perl-mode)
                 (mode . python-mode)
                 (mode . emacs-lisp-mode)
-                )) 
+                ))
             ))))
 
     (add-hook 'ibuffer-mode-hook
@@ -95,7 +105,7 @@
     ;; Show trailing whitespace
     ;; ============================
     (setq-default show-trailing-whitespace t)
-    
+
     ;; ============================
     ;; TTCN-3 mode
     ;; ============================
@@ -228,7 +238,27 @@
     ;; =========================
     ;; Code completion
     ;; =========================
-    (load-file "~/.elisp/cedet-configuration.el")
+    ;;(load-file "~/.elisp/cedet-configuration.el")
+;;    (add-to-list 'load-path "~/.elisp/auto-complete")
+;;    (add-to-list 'load-path "~/.elisp/auto-complete-clang-async")
+;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/fuzzy")
+;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/popup")
+;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/ert")
+;;    (require 'auto-complete-clang-async)
+
+;;    (defun ac-cc-mode-setup ()
+;;        (setq ac-clang-complete-executable "~/.emacs.d/clang-complete")
+;;        (setq ac-sources '(ac-source-clang-async))
+;;        (ac-clang-launch-completion-process)
+;;    )
+
+;;    (defun my-ac-config ()
+;;        (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+;;        (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+;;        (global-auto-complete-mode t)
+;;    )
+
+;;    (my-ac-config)
 
     ;; =========================
     ;; yasnippet
