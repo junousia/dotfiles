@@ -1,21 +1,22 @@
 ;; CEDET configuration
 (add-to-list 'load-path "~/.elisp/cedet-1.1/common/")
+;;(load-file "~/.elisp/cedet/cedet-devel-load.el")
 (require 'cedet)
 
-;;(setq semantic-load-turn-useful-things-on t)
-;;(global-ede-mode 1)      ; Enable the Project management system
+(setq semantic-load-turn-useful-things-on t)
+(global-ede-mode 1)      ; Enable the Project management system
 ;;(setq ede-locate-setup-options '(ede-locate-global ede-locate-base))
 
 ;; uncomment out one of the following 3 lines for more or less semantic features
-(semantic-load-enable-minimum-features)
-;;(semantic-load-enable-code-helpers)
+;;(semantic-load-enable-minimum-features)
+(semantic-load-enable-code-helpers)
 ;;(semantic-load-enable-excessive-code-helpers)
 
 ;;enable folding mode to collapse a definition into a single line
-;;(global-semantic-tag-folding-mode)
+(global-semantic-tag-folding-mode)
 
 ;; SRecode minor mode.
-;;(global-srecode-minor-mode 1)
+(global-srecode-minor-mode 1)
 ;;(ede-enable-generic-projects)
 
 ;;(require 'semantic-ia)
@@ -40,7 +41,7 @@
 ;;(setq global-semantic-idle-completions-mode nil)
 ;;(setq semantic-ia-completion-menu-format-tag-function (quote semantic-format-tag-concise-prototype))
 ;;(setq semantic-idle-summary-function (quote semantic-format-tag-prototype))
-(setq semantic-which-function-use-color t)
+;;(setq semantic-which-function-use-color t)
 ;;(global-semantic-decoration-mode nil)
 
 ;; customisation of modes

@@ -29,10 +29,12 @@
     (setq warning-suppress-types nil)
 
     ;; ============================
-    ;; Diff mode enhancements
+    ;; List methods
     ;; ============================
-    (add-hook 'diff-mode-hook
-              (lambda () (diff-auto-refine-mode 1)))
+    ;;(defun my-c-mode-common-hook ()
+    ;;  (define-key c-mode-base-map (kbd "M-o") 'eassist-switch-h-cpp)
+    ;;  (define-key c-mode-base-map (kbd "M-m") 'eassist-list-methods))
+    ;;(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
 
     ;; ============================
     ;; IBuffer filter groups
@@ -201,7 +203,7 @@ and overlay is highlighted between MK and END-MK."
     ;; ===========================
 	;; Sr-Speedbar
     ;; ===========================
-    (require 'sr-speedbar)
+    ;;(require 'sr-speedbar)
 
     ;; ============================
     ;; Show trailing whitespace
@@ -337,38 +339,72 @@ and overlay is highlighted between MK and END-MK."
     ;disable auto save
     (setq auto-save-default nil)
 
+    (global-set-key (kbd "C-z") 'undo)
+
     ;; =========================
     ;; Code completion
     ;; =========================
-    ;;(load-file "~/.elisp/cedet-configuration.el")
-;;    (add-to-list 'load-path "~/.elisp/auto-complete")
-;;    (add-to-list 'load-path "~/.elisp/auto-complete-clang-async")
-;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/fuzzy")
-;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/popup")
-;;    (add-to-list 'load-path "~/.elisp/auto-complete/lib/ert")
-;;    (require 'auto-complete-clang-async)
+    ;; (load-file "~/.elisp/cedet-configuration.el")
+    (add-to-list 'load-path "~/.elisp/auto-complete")
+    (add-to-list 'load-path "~/.elisp/auto-complete-clang")
+    (add-to-list 'load-path "~/.elisp/auto-complete-clang/ac-dict")
+    (add-to-list 'load-path "~/.elisp/auto-complete-clang-async")
+    (add-to-list 'load-path "~/.elisp/auto-complete/lib/fuzzy")
+    (add-to-list 'load-path "~/.elisp/auto-complete/lib/popup")
+    (add-to-list 'load-path "~/.elisp/auto-complete/lib/ert")
+    ;;(require 'auto-complete-config)
+    ;;(require 'auto-complete-clang-async)
+    ;;(require 'auto-complete-clang)
 
-;;    (defun ac-cc-mode-setup ()
-;;        (setq ac-clang-complete-executable "~/.emacs.d/clang-complete")
-;;        (setq ac-sources '(ac-source-clang-async))
-;;        (ac-clang-launch-completion-process)
-;;    )
+    (require 'auto-complete-config)
+    (require 'auto-complete-clang)
 
-;;    (defun my-ac-config ()
-;;        (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
-;;        (add-hook 'auto-complete-mode-hook 'ac-common-setup)
-;;        (global-auto-complete-mode t)
-;;    )
+    (setq ac-auto-start nil)
+    (setq ac-quick-help-delay 0.5)
+    ;; (ac-set-trigger-key "TAB")
+    ;; (define-key ac-mode-map  [(control tab)] 'auto-complete)
+    (define-key ac-mode-map  [(control tab)] 'auto-complete)
 
-;;    (my-ac-config)
+    (defun my-ac-config ()
+      (setq-default ac-sources '(ac-source-abbrev ac-source-dictionary ac-source-words-in-same-mode-buffers))
+      (add-hook 'emacs-lisp-mode-hook 'ac-emacs-lisp-mode-setup)
+      ;; (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+      (add-hook 'ruby-mode-hook 'ac-ruby-mode-setup)
+      (add-hook 'css-mode-hook 'ac-css-mode-setup)
+      (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+      (global-auto-complete-mode t))
+
+    (defun my-ac-cc-mode-setup ()
+      (setq ac-sources (append '(ac-source-clang ac-source-yasnippet) ac-sources)))
+    (add-hook 'c-mode-common-hook 'my-ac-cc-mode-setup)
+    ;; ac-source-gtags
+
+    ;;(my-ac-config)
+
+
+    ;;(global-set-key (kbd "C--") 'ac-complete-clang-async)
+
+    ;;(defun ac-cc-mode-setup ()
+    ;;  (setq ac-clang-complete-executable "~/.emacs.d/clang-complete")
+    ;;  (setq ac-sources '(ac-source-clang-async))
+    ;;  (ac-clang-launch-completion-process)
+    ;;)
+
+    ;;(defun my-ac-config ()
+    ;;    (add-hook 'c-mode-common-hook 'ac-cc-mode-setup)
+    ;;    (add-hook 'auto-complete-mode-hook 'ac-common-setup)
+    ;;    (global-auto-complete-mode t)
+    ;;)
+
+    ;;(my-ac-config)
 
     ;; =========================
     ;; yasnippet
     ;; =========================
-    (add-to-list 'load-path "~/.elisp/yasnippet-0.7.0")
+    (add-to-list 'load-path "~/.elisp/yasnippet")
     (require 'yasnippet)
-    (yas/initialize)
-    (yas/load-directory "~/.elisp/yasnippet-0.7.0/snippets")
+    (yas-global-mode 1)
+    (setq yas-snippet-dirs '("~/.dotfiles/elisp/yasnippet/snippets"))
     (global-set-key [f11] 'yas/insert-snippet)
 
     ;; ========================
@@ -378,10 +414,10 @@ and overlay is highlighted between MK and END-MK."
     (add-hook 'c++-mode-hook 'turn-on-fic-mode)
     (add-hook 'c-mode-common-hook 'turn-on-fic-mode)
 
-    (add-to-list 'load-path "~/.elisp/vc-clearcase-3.7")
-    (require 'vc-clearcase)
+    ;;(add-to-list 'load-path "~/.elisp/vc-clearcase-3.7")
+    ;;(require 'vc-clearcase)
 
-    (byte-recompile-directory (expand-file-name "~/.dotfiles") 0)
+    ;;(byte-recompile-directory (expand-file-name "~/.dotfiles") 0)
 
 ;;;; Wrapper to make .emacs self-compiling end
     )
