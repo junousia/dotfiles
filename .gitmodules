@@ -1,17 +1,14 @@
-[submodule "vim/clang_complete"]
-	path = vim/clang_complete
-	url = git://github.com/Rip-Rip/clang_complete.git
-[submodule "vim/supertab"]
-	path = vim/supertab
+[submodule "vim_modules/supertab"]
+	path = vim_modules/supertab
 	url = git://github.com/ervandew/supertab.git
-[submodule "vim/snipmate"]
-	path = vim/snipmate
+[submodule "vim_modules/snipmate"]
+	path = vim_modules/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
-[submodule "vim/delimitMate"]
-	path = vim/delimitMate
+[submodule "vim_modules/delimitMate"]
+	path = vim_modules/delimitMate
 	url = git://github.com/Raimondi/delimitMate.git
-[submodule "vim/nerdtree"]
-	path = vim/nerdtree
+[submodule "vim_modules/nerdtree"]
+	path = vim_modules/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
 [submodule "zsh/zsh-git-prompt"]
 	path = zsh/zsh-git-prompt

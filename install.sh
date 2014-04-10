@@ -11,8 +11,13 @@ if [ -e "${HOME}/.elisp" ]; then
     rm -rf "${HOME}/.elisp"
 fi
 
+for f in ./vim_modules/*
+do
+    cp -r $f/* ./vim
+done
+
 ln -fs "${PWD}/elisp" "${HOME}/.elisp"
 
 mkdir -p ~/.zsh/git-prompt
-ln -s ${PWD}/zsh/zsh-git-prompt/gitstatus.py ${HOME}/.zsh/git-prompt/gitstatus.py
-ln -s ${PWD}/zshrc ${HOME}/.zshrc
+ln -fs ${PWD}/zsh/zsh-git-prompt/gitstatus.py ${HOME}/.zsh/git-prompt/gitstatus.py
+ln -fs ${PWD}/zshrc ${HOME}/.zshrc
