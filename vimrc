@@ -57,6 +57,5 @@ map <C-n> :NERDTreeToggle<CR>
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 imap <expr> <Tab> pumvisible() ? "<Tab>" : "<Tab><Down>"
 let g:NERDTreeDirArrows=0
-
 map <C-o> <C-T>
 map <C-p> <C-]>

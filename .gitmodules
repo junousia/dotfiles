@@ -43,3 +43,12 @@
 [submodule "vim_modules/vim-addon-mw-utils"]
 	path = vim_modules/vim-addon-mw-utils
 	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
+[submodule "vim_modules/alternate"]
+	path = vim_modules/alternate
+	url = https://github.com/vim-scripts/a.vim
+[submodule "vim_modules/fugitive"]
+	path = vim_modules/fugitive
+	url = https://github.com/tpope/vim-fugitive
+[submodule "vim_modules/up-and-down"]
+	path = vim_modules/up-and-down
+	url = https://github.com/vim-scripts/upAndDown
