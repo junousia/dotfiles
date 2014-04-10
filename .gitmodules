@@ -34,3 +34,12 @@
 [submodule "elisp/ttcn"]
 	path = elisp/ttcn
 	url = https://github.com/dholm/ttcn-el.git
+[submodule "vim_modules/vim-snippets"]
+	path = vim_modules/vim-snippets
+	url = https://github.com/honza/vim-snippets.git
+[submodule "vim_modules/tlib_vim"]
+	path = vim_modules/tlib_vim
+	url = https://github.com/tomtom/tlib_vim.git
+[submodule "vim_modules/vim-addon-mw-utils"]
+	path = vim_modules/vim-addon-mw-utils
+	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
