@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# Init submodules
 git submodule init
 git submodule update
 
-# Link in files, replacing whatever's already there.
 ln -fs "${PWD}/vimrc" "${HOME}/.vimrc"
 ln -fs "${PWD}/emacs" "${HOME}/.emacs"
+ln -fs "${PWD}/vim" "${HOME}/.vim"
 
-# Link in directories, removing whatever's already there first.
 if [ -e "${HOME}/.elisp" ]; then
     rm -rf "${HOME}/.elisp"
 fi
+
 ln -fs "${PWD}/elisp" "${HOME}/.elisp"
 
 mkdir -p ~/.zsh/git-prompt

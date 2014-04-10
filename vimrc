@@ -17,10 +17,9 @@ set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
 set number          " show line numbers
 set ignorecase      " ignore case when searching 
-"set noignorecase   " don't ignore case
+set noignorecase   " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
-"set ttyscroll=0        " turn off scrolling, didn't work well with PuTTY
 set modeline        " last lines in document sets vim mode
 set modelines=3     " number lines checked for modelines
 set shortmess=atI   " Abbreviate messages
@@ -28,16 +27,36 @@ set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 set backspace=indent,eol,start
 
-"set lines=50 columns=130"
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
 set tags=./tags,tags;/
+
+highlight ExtraWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+
+highlight Tabs ctermbg=darkgreen guibg=darkgreen
+autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
+2match Tabs /\t/
+
+:nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+if has("unix")
+    let s:uname = system("uname -s")
+    if s:uname == "Darwin\n"
+        set guifont=Andale\ Mono:h18
+    else
+        set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+  endif
+endif
 
 syntax on
 
 filetype plugin on
 
+map <C-n> :NERDTreeToggle<CR>
+
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 imap <expr> <Tab> pumvisible() ? "<Tab>" : "<Tab><Down>"
 let g:NERDTreeDirArrows=0
 
-
+map <C-o> <C-T>
+map <C-p> <C-]>
