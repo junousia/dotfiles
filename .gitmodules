@@ -52,3 +52,4 @@
 [submodule "vim_modules/up-and-down"]
 	path = vim_modules/up-and-down
 	url = https://github.com/vim-scripts/upAndDown
+
