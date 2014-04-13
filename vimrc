@@ -16,7 +16,7 @@ set visualbell t_vb=    " turn off error beep/flash
 set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
 set number          " show line numbers
-set ignorecase      " ignore case when searching 
+set ignorecase      " ignore case when searching
 set noignorecase   " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
@@ -38,6 +38,8 @@ autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 2match Tabs /\t/
 
 :nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+:nnoremap <C-x> :bnext<CR>
+:nnoremap <C-z> :bprevious<CR>
 
 if has("unix")
     let s:uname = system("uname -s")
