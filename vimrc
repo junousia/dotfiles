@@ -39,8 +39,8 @@ autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 
 " Remove extra whitespace
 :nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-:nnoremap <C-x> :bnext<CR>
-:nnoremap <C-z> :bprevious<CR>
+:nnoremap <silent ><C-x> :bnext<CR>
+:nnoremap <silent> <C-z> :bprevious<CR>
 
 if has("unix")
     let s:uname = system("uname -s")
