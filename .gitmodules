@@ -44,3 +44,6 @@
 [submodule "vim_modules/vim-colorschemes"]
 	path = vim_modules/vim-colorschemes
 	url = https://github.com/flazz/vim-colorschemes
+[submodule "vim_modules/clang_complete"]
+	path = vim_modules/clang_complete
+	url = https://github.com/Rip-Rip/clang_complete

@@ -3,3 +3,4 @@ PROMPT='%B%m%~%b$(git_super_status) %# '
 
 export PATH=/usr/local/bin:$PATH
 
+alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+q"

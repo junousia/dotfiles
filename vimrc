@@ -3,10 +3,13 @@ colorscheme twilight
 set nowrap
 set nocompatible    " use vim defaults
 set ls=2            " allways show status line
-set smartindent
+set autoindent
+set cindent
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4    " numbers of spaces to (auto)indent
 set expandtab
+set smarttab
+set copyindent
 set scrolloff=3     " keep 3 lines when scrolling
 set showcmd         " display incomplete commands
 set hlsearch        " highlight searches
@@ -43,17 +46,29 @@ autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 :nnoremap <silent> <C-z> :bprevious<CR>
 
 if has("unix")
-    let s:uname = system("uname -s")
-    if s:uname == "Darwin\n"
-        set guifont=Andale\ Mono:h18
-    else
-        set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+  let s:uname = system("uname -s")
+  if s:uname == "Darwin\n"
+    set guifont=Andale\ Mono:h18
+
+    let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
+    if isdirectory(s:clang_library_path)
+      let g:clang_library_path=s:clang_library_path
+    endif
+  else
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
   endif
 endif
 
 syntax on
 
 filetype plugin on
+filetype indent on
+autocmd FileType c,cpp,java set formatoptions+=ro
+autocmd FileType c,cpp set omnifunc=ccomplete#Complete
+autocmd FileType vim,lua,nginx set shiftwidth=2 softtabstop=2
+autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
