@@ -1,5 +1,5 @@
-:set nocompatible
-colorscheme desert
+colorscheme twilight
+
 set nowrap
 set nocompatible    " use vim defaults
 set ls=2            " allways show status line
@@ -17,7 +17,7 @@ set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
 set number          " show line numbers
 set ignorecase      " ignore case when searching
-set noignorecase   " don't ignore case
+set noignorecase    " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
 set modeline        " last lines in document sets vim mode
@@ -37,6 +37,7 @@ highlight Tabs ctermbg=darkgreen guibg=darkgreen
 autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 2match Tabs /\t/
 
+" Remove extra whitespace
 :nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 :nnoremap <C-x> :bnext<CR>
 :nnoremap <C-z> :bprevious<CR>
@@ -54,10 +55,11 @@ syntax on
 
 filetype plugin on
 
+" Nerdtree
 map <C-n> :NERDTreeToggle<CR>
-
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-imap <expr> <Tab> pumvisible() ? "<Tab>" : "<Tab><Down>"
+let NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=0
+
+" Map keys for TAGS
 map <C-o> <C-T>
 map <C-p> <C-]>
