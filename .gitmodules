@@ -13,24 +13,12 @@
 [submodule "zsh/zsh-git-prompt"]
 	path = zsh/zsh-git-prompt
 	url = git://github.com/olivierverdier/zsh-git-prompt.git
-[submodule "elisp/emacs-clang-complete-async"]
-	path = elisp/emacs-clang-complete-async
-	url = git://github.com/Golevka/emacs-clang-complete-async.git
-[submodule "elisp/auto-complete"]
-	path = elisp/auto-complete
-	url = git://github.com/auto-complete/auto-complete.git
 [submodule "elisp/yasnippet"]
 	path = elisp/yasnippet
 	url = git://github.com/capitaomorte/yasnippet
-[submodule "elisp/cedet"]
-	path = elisp/cedet
-	url = git://github.com/emacsmirror/cedet.git
 [submodule "elisp/cmake-mode"]
 	path = elisp/cmake-mode
 	url = git://github.com/alamaison/emacs-cmake-project.git
-[submodule "elisp/auto-complete-clang"]
-	path = elisp/auto-complete-clang
-	url = https://github.com/brianjcj/auto-complete-clang.git
 [submodule "elisp/ttcn"]
 	path = elisp/ttcn
 	url = https://github.com/dholm/ttcn-el.git
