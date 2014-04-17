@@ -1,4 +1,4 @@
-colorscheme twilight
+colorscheme desert
 
 set nowrap
 set nocompatible    " use vim defaults
@@ -30,26 +30,36 @@ set nostartofline   " don't jump to first character when paging
 set whichwrap=b,s,h,l,<,>,[,]   " move freely between files
 set backspace=indent,eol,start
 
-set tags=./tags,tags;/
+set guioptions-=m  "remove menu bar
+set guioptions-=T  "remove toolbar
+set guioptions-=r  "remove right-hand scroll bar
+set guioptions-=L  "remove left-hand scroll bar
 
+set tags=tags;
+
+" Highlight extra whitespace
 highlight ExtraWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
+" Highlight tabs
 highlight Tabs ctermbg=darkgreen guibg=darkgreen
 autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 2match Tabs /\t/
 
 " Remove extra whitespace
 :nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
-:nnoremap <silent ><C-x> :bnext<CR>
+
+" Cycle buffers
+:nnoremap <silent> <C-x> :bnext<CR>
 :nnoremap <silent> <C-z> :bprevious<CR>
 
 if has("unix")
   let s:uname = system("uname -s")
   if s:uname == "Darwin\n"
-    set guifont=Andale\ Mono:h18
+    set guifont=Andale\ Mono:h12
 
+    " Fix for libclang path on OSX
     let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
     if isdirectory(s:clang_library_path)
       let g:clang_library_path=s:clang_library_path
@@ -63,18 +73,22 @@ syntax on
 
 filetype plugin on
 filetype indent on
+
 autocmd FileType c,cpp,java set formatoptions+=ro
 autocmd FileType c,cpp set omnifunc=ccomplete#Complete
 autocmd FileType vim,lua,nginx set shiftwidth=2 softtabstop=2
 autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 let NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=0
 
+nnoremap <leader>. :CtrlPTag<cr>
+nnoremap <silent> <leader>b :TagbarToggle<CR>
+
 " Map keys for TAGS
 map <C-o> <C-T>
-map <C-p> <C-]>
+map <C-i> g<C-]>
