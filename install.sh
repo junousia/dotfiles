@@ -5,16 +5,13 @@ git submodule update
 
 ln -fs "${PWD}/vimrc" "${HOME}/.vimrc"
 ln -fs "${PWD}/emacs" "${HOME}/.emacs"
-ln -fs "${PWD}/vim" "${HOME}/.vim"
 
 if [ -e "${HOME}/.elisp" ]; then
     rm -rf "${HOME}/.elisp"
 fi
 
-for f in ./vim_modules/*
-do
-    cp -r $f/* ./vim
-done
+mkdir -p ~/.vim/bundle
+git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 ln -fs "${PWD}/elisp" "${HOME}/.elisp"
 

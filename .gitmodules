@@ -1,15 +1,3 @@
-[submodule "vim_modules/supertab"]
-	path = vim_modules/supertab
-	url = git://github.com/ervandew/supertab.git
-[submodule "vim_modules/snipmate"]
-	path = vim_modules/snipmate
-	url = git://github.com/msanders/snipmate.vim.git
-[submodule "vim_modules/delimitMate"]
-	path = vim_modules/delimitMate
-	url = git://github.com/Raimondi/delimitMate.git
-[submodule "vim_modules/nerdtree"]
-	path = vim_modules/nerdtree
-	url = git://github.com/scrooloose/nerdtree.git
 [submodule "zsh/zsh-git-prompt"]
 	path = zsh/zsh-git-prompt
 	url = git://github.com/olivierverdier/zsh-git-prompt.git
@@ -22,37 +10,3 @@
 [submodule "elisp/ttcn"]
 	path = elisp/ttcn
 	url = https://github.com/dholm/ttcn-el.git
-[submodule "vim_modules/vim-snippets"]
-	path = vim_modules/vim-snippets
-	url = https://github.com/honza/vim-snippets.git
-[submodule "vim_modules/tlib_vim"]
-	path = vim_modules/tlib_vim
-	url = https://github.com/tomtom/tlib_vim.git
-[submodule "vim_modules/vim-addon-mw-utils"]
-	path = vim_modules/vim-addon-mw-utils
-	url = https://github.com/MarcWeber/vim-addon-mw-utils.git
-[submodule "vim_modules/alternate"]
-	path = vim_modules/alternate
-	url = https://github.com/vim-scripts/a.vim
-[submodule "vim_modules/fugitive"]
-	path = vim_modules/fugitive
-	url = https://github.com/tpope/vim-fugitive
-[submodule "vim_modules/up-and-down"]
-	path = vim_modules/up-and-down
-	url = https://github.com/vim-scripts/upAndDown
-
-[submodule "vim_modules/vim-colorschemes"]
-	path = vim_modules/vim-colorschemes
-	url = https://github.com/flazz/vim-colorschemes
-[submodule "vim_modules/clang_complete"]
-	path = vim_modules/clang_complete
-	url = https://github.com/Rip-Rip/clang_complete
-[submodule "vim_modules/tagbar"]
-	path = vim_modules/tagbar
-	url = https://github.com/majutsushi/tagbar
-[submodule "vim_modules/ctrlp"]
-	path = vim_modules/ctrlp
-	url = https://github.com/kien/ctrlp.vim
-[submodule "vim_modules/doxygentoolkit"]
-	path = vim_modules/doxygentoolkit
-	url = https://github.com/vim-scripts/DoxygenToolkit.vim
