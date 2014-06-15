@@ -65,14 +65,25 @@ NeoBundle 'vim-scripts/cmake'
 NeoBundle 'vim-scripts/vim-bookmarks'
 NeoBundle 'SirVer/ultisnips'
 NeoBundle 'Rip-Rip/clang_complete'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'sjl/gundo.vim'
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'scrooloose/syntastic'
+NeoBundle 'edkolev/tmuxline.vim'
 call neobundle#end()
+
+" GitGutter
+let g:gitgutter_sign_column_always = 1
+
+" Syntastic
+let g:syntastic_python_checkers = ['pylint']
 
 "Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
-let g:UltiSnipsJumpForwardTrigger="<c-s>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
 
-" If you want :UltiSnipsEdit to split your window.
+" If you want UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 NeoBundleCheck " prompt to install new packages
 
@@ -118,8 +129,9 @@ autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
-let NERDTreeQuitOnOpen = 1
-let g:NERDTreeDirArrows=0
+let g:NERDTreeQuitOnOpen = 1
+let g:NERDTreeDirArrows=1
+let g:NERDTreeMinimalUI = 1
 
 " CtrlP
 nnoremap <C-b> :CtrlPBuffer<cr>
@@ -144,4 +156,4 @@ let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
 " Colorscheme
-colorscheme freya
+colorscheme Tomorrow-Night
