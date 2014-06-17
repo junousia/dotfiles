@@ -113,9 +113,11 @@ if has("unix")
     if isdirectory(s:clang_library_path)
       let g:clang_library_path=s:clang_library_path
     endif
+  elseif s:uname == "Linux\n"
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+    let g:clang_library_path='/usr/lib/llvm-3.2/lib'
+    let g:clang_use_library=1
   endif
-  else
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
 endif
 
 " Filetypes
