@@ -129,6 +129,8 @@ autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 
+au BufReadPost *.re set syntax=c
+
 " Nerdtree
 map <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeQuitOnOpen = 1
