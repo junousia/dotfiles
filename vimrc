@@ -71,21 +71,29 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'edkolev/tmuxline.vim'
 call neobundle#end()
+NeoBundleCheck " prompt to install new packages
+
+" Tags
+set tags=./tags;/
+map <C-o> <C-T>
+map <C-i> g<C-]>
 
 " GitGutter
 let g:gitgutter_sign_column_always = 1
 
 " Syntastic
 let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_c_checkers = ['gcc', 'splint', 'cppcheck']
+let g:syntastic_cpp_checkers = ['cppcheck']
+let g:syntastic_sh_checkers = ['shellcheck']
+let g:syntastic_check_on_open = 1
+let g:syntastic_c_remove_include_errors = 1
 
 "Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
-
-" If you want UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-NeoBundleCheck " prompt to install new packages
 
 " Highlight trailing whitespace
 highlight TrailingWhitespace ctermbg=red guibg=red
@@ -98,11 +106,11 @@ autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 2match Tabs /\t/
 
 " Remove trailing whitespace
-:nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Cycle buffers
-:nnoremap <silent> <C-x> :bnext<CR>
-:nnoremap <silent> <C-z> :bprevious<CR>
+nnoremap <silent> <C-x> :bnext<CR>
+nnoremap <silent> <C-z> :bprevious<CR>
 
 if has("unix")
   let s:uname = system("uname -s")
@@ -128,7 +136,6 @@ autocmd FileType vim,lua,nginx set shiftwidth=2 softtabstop=2
 autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-
 au BufReadPost *.re set syntax=c
 
 " Nerdtree
@@ -145,11 +152,6 @@ nnoremap <silent> § :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
-
-" Tags
-set tags=tags;
-map <C-o> <C-T>
-map <C-i> g<C-]>
 
 " Set syntax highlighting on
 syntax on
