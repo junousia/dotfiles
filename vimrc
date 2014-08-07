@@ -59,6 +59,7 @@ NeoBundle 'vim-scripts/upAndDown'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'klen/python-mode'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 NeoBundle 'vim-scripts/ScrollColors'
 NeoBundle 'vim-scripts/cmake'
@@ -70,8 +71,19 @@ NeoBundle 'sjl/gundo.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'edkolev/tmuxline.vim'
+NeoBundle 'heavenshell/vim-pydocstring'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
+
+" Pymode
+let g:pymode_folding = 0
+let g:pymode_rope_completion = 1
+let g:pymode_rope_completion_bind = '<C-Space>'
+let g:pymode_rope_goto_definition_bind = '<C-c>g'
+let g:pymode_warnings = 0
+let g:pymode_lint_message = 0
+let g:pymode_lint_checkers = []
+let g:pymode_lint_cwindow = 0
 
 " Tags
 set tags=./tags;/
@@ -82,7 +94,8 @@ map <C-i> g<C-]>
 let g:gitgutter_sign_column_always = 1
 
 " Syntastic
-let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_python_checkers = ['pylint', 'flake8']
+let g:syntastic_python_checker_args='--max-complexity=10'
 let g:syntastic_c_checkers = ['gcc', 'splint', 'cppcheck']
 let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_sh_checkers = ['shellcheck']
@@ -109,8 +122,8 @@ autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Cycle buffers
-nnoremap <silent> <C-x> :bnext<CR>
-nnoremap <silent> <C-z> :bprevious<CR>
+nnoremap <silent> <C-\<> :bnext<CR>
+nnoremap <silent> <C-S-\<> :bprevious<CR>
 
 if has("unix")
   let s:uname = system("uname -s")
