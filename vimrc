@@ -72,8 +72,30 @@ NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'heavenshell/vim-pydocstring'
+NeoBundle 'airblade/vim-rooter'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
+
+" Ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+" bind K to grep word under cursor
+nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <silent> . :cp<CR>
+nnoremap <silent> . :cn<CR>
+nnoremap <silent> <C-k> :ccl<CR>
 
 " Pymode
 let g:pymode_folding = 0
