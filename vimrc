@@ -73,6 +73,7 @@ NeoBundle 'scrooloose/syntastic'
 NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
+NeoBundle 'vim-scripts/YankRing.vim'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
