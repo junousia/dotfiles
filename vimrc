@@ -125,7 +125,7 @@ let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_remove_include_errors = 1
 
-"Ultisnips
+" Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
@@ -175,7 +175,7 @@ autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 au BufReadPost *.re set syntax=c
 
 " Nerdtree
-map <C-n> :NERDTreeToggle<CR>
+nnoremap <silent> § :NERDTreeToggle<CR>
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI = 1
@@ -184,7 +184,7 @@ let g:NERDTreeMinimalUI = 1
 nnoremap <C-b> :CtrlPBuffer<cr>
 
 "Tagbar
-nnoremap <silent> § :TagbarToggle<CR>
+nnoremap <silent> ' :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
