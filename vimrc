@@ -166,13 +166,13 @@ endif
 
 " Filetypes
 filetype plugin on
-autocmd FileType c,cpp,java set formatoptions+=ro
-autocmd FileType c,cpp set omnifunc=ccomplete#Complete
-autocmd FileType vim,lua,nginx set shiftwidth=2 softtabstop=2
-autocmd FileType xhtml,html set omnifunc=htmlcomplete#CompleteTags
-autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType c,cpp,java set expandtab formatoptions+=ro
+autocmd FileType c,cpp set expandtab omnifunc=ccomplete#Complete
+autocmd FileType vim,lua,nginx set expandtab shiftwidth=2 softtabstop=2
+autocmd FileType xhtml,html set expandtab omnifunc=htmlcomplete#CompleteTags
+autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
-au BufReadPost *.re set syntax=c
+au BufRead,BufNewFile *.re set filetype=c
 
 " Nerdtree
 nnoremap <silent> § :NERDTreeToggle<CR>
