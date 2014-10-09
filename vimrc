@@ -93,9 +93,10 @@ if executable('ag')
 endif
 
 " bind K to grep word under cursor
+nnoremap <silent> L :CtrlP<CR>
 nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <silent> . :cp<CR>
-nnoremap <silent> . :cn<CR>
+nnoremap <silent> , :cn<CR>
 nnoremap <silent> <C-k> :ccl<CR>
 
 " Pymode
@@ -115,6 +116,9 @@ map <C-i> g<C-]>
 
 " GitGutter
 let g:gitgutter_sign_column_always = 1
+nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
+nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
+nnoremap <silent> <C-S-l> :GitGutterRevertHunk<CR>
 
 " Syntastic
 let g:syntastic_python_checkers = ['pylint', 'flake8']
@@ -124,6 +128,7 @@ let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_remove_include_errors = 1
+
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -198,4 +203,4 @@ let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
 " Colorscheme
-colorscheme Tomorrow-Night
+colorscheme hybrid
