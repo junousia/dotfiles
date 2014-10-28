@@ -9,14 +9,14 @@ set expandtab
 set smarttab
 set copyindent
 set scrolloff=3     " keep 3 lines when scrolling
-set showcmd         " display incomplete commands
+set noshowcmd       " do not display incomplete commands
 set hlsearch        " highlight searches
 set incsearch       " do incremental searching
 set ruler           " show the cursor position all the time
-set visualbell t_vb=    " turn off error beep/flash
+set visualbell t_vb= " turn off error beep/flash
 set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
-set number          " show line numbers
+set nonumber        " do not show line numbers
 set ignorecase      " ignore case when searching
 set noignorecase    " don't ignore case
 set title           " show title in console title bar
@@ -30,6 +30,7 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set showmatch
 set showmode
 set wildmenu
+set encoding=utf-8
 
 set guioptions-=m  "remove menu bar
 set guioptions-=T  "remove toolbar
@@ -74,6 +75,7 @@ NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
+NeoBundle 'chriskempson/base16-vim'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -101,7 +103,7 @@ nnoremap <silent> <C-k> :ccl<CR>
 
 " Pymode
 let g:pymode_folding = 0
-let g:pymode_rope_completion = 1
+let g:pymode_rope_completion = 0
 let g:pymode_rope_completion_bind = '<C-Space>'
 let g:pymode_rope_goto_definition_bind = '<C-c>g'
 let g:pymode_warnings = 0
@@ -121,14 +123,13 @@ nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-l> :GitGutterRevertHunk<CR>
 
 " Syntastic
-let g:syntastic_python_checkers = ['pylint', 'flake8']
-let g:syntastic_python_checker_args='--max-complexity=10'
+let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checker_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['gcc', 'splint', 'cppcheck']
 let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_remove_include_errors = 1
-
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -140,11 +141,6 @@ let g:UltiSnipsEditSplit="vertical"
 highlight TrailingWhitespace ctermbg=red guibg=red
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=red guibg=red
 match TrailingWhitespace /\s\+$/
-
-" Highlight tabs
-highlight Tabs ctermbg=darkgreen guibg=darkgreen
-autocmd ColorScheme * highlight Tabs ctermbg=darkgreen guibg=darkgreen
-2match Tabs /\t/
 
 " Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -203,4 +199,5 @@ let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
 " Colorscheme
-colorscheme hybrid
+colorscheme freya
+au VimEnter * exec 'AirlineTheme lucius'
