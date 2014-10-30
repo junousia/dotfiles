@@ -39,8 +39,8 @@ set guioptions-=L  "remove left-hand scroll bar
 
 " NeoBundle
 if has('vim_starting')
-   set nocompatible
-   set runtimepath+=~/.vim/bundle/neobundle.vim/
+  set nocompatible
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 filetype plugin indent on
@@ -76,6 +76,7 @@ NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'Valloric/YouCompleteMe'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -124,8 +125,8 @@ nnoremap <silent> <C-S-l> :GitGutterRevertHunk<CR>
 
 " Syntastic
 let g:syntastic_python_checkers = ['flake8']
-let g:syntastic_python_checker_args='--ignore=E501 --max-complexity=10'
-let g:syntastic_c_checkers = ['gcc', 'splint', 'cppcheck']
+let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
+let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']
 let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
