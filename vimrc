@@ -32,11 +32,6 @@ set showmode
 set wildmenu
 set encoding=utf-8
 
-set guioptions-=m  "remove menu bar
-set guioptions-=T  "remove toolbar
-set guioptions-=r  "remove right-hand scroll bar
-set guioptions-=L  "remove left-hand scroll bar
-
 " NeoBundle
 if has('vim_starting')
   set nocompatible
@@ -65,8 +60,6 @@ NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 NeoBundle 'vim-scripts/ScrollColors'
 NeoBundle 'vim-scripts/cmake'
 NeoBundle 'vim-scripts/vim-bookmarks'
-NeoBundle 'SirVer/ultisnips'
-NeoBundle 'Rip-Rip/clang_complete'
 NeoBundle 'bling/vim-airline'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'airblade/vim-gitgutter'
@@ -76,7 +69,6 @@ NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'Valloric/YouCompleteMe'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -131,17 +123,15 @@ let g:syntastic_cpp_checkers = ['cppcheck']
 let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_remove_include_errors = 1
+let g:syntastic_mode_map = { "mode": "passive",
+            \ "active_filetypes": ["python"],
+            \ "passive_filetypes": [] }
 
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<c-a>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsEditSplit="vertical"
-
-" Highlight trailing whitespace
-highlight TrailingWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight TrailingWhitespace ctermbg=red guibg=red
-match TrailingWhitespace /\s\+$/
 
 " Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
@@ -150,21 +140,6 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <silent> <C-\<> :bnext<CR>
 nnoremap <silent> <C-S-\<> :bprevious<CR>
 
-if has("unix")
-  let s:uname = system("uname -s")
-  if s:uname == "Darwin\n"
-    set guifont=Andale\ Mono:h14
-    " Fix for libclang path on OSX
-    let s:clang_library_path='/Library/Developer/CommandLineTools/usr/lib'
-    if isdirectory(s:clang_library_path)
-      let g:clang_library_path=s:clang_library_path
-    endif
-  elseif s:uname == "Linux\n"
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
-    let g:clang_library_path='/usr/lib/llvm-3.2/lib'
-    let g:clang_use_library=1
-  endif
-endif
 
 " Filetypes
 filetype plugin on
@@ -199,6 +174,33 @@ let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
-" Colorscheme
-colorscheme freya
-au VimEnter * exec 'AirlineTheme lucius'
+if has('gui_running')
+    " Theme
+    colorscheme freya
+    au VimEnter * exec 'AirlineTheme lucius'
+
+    " Remove toolbars etc.
+    set guioptions-=m  "remove menu bar
+    set guioptions-=T  "remove toolbar
+    set guioptions-=r  "remove right-hand scroll bar
+    set guioptions-=L  "remove left-hand scroll bar
+
+    " Font
+    if has("unix")
+        let s:uname = system("uname -s")
+        if s:uname == "Darwin\n"
+            set guifont=Andale\ Mono:h14
+        elseif s:uname == "Linux\n"
+            set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+        endif
+    endif
+else
+    " Hide tilde in the end of the file
+    highlight SignColumn guibg=NONE ctermbg=NONE
+    highlight Normal guibg=NONE ctermbg=NONE
+endif
+
+" Highlight trailing whitespace
+highlight TrailingWhitespace ctermbg=red guibg=red
+autocmd ColorScheme * highlight TrailingWhitespace ctermbg=red guibg=red
+match TrailingWhitespace /\s\+$/
