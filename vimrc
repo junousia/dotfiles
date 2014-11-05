@@ -87,6 +87,9 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" map X to search selected text on visual mode
+xnoremap <silent> X y/<C-R>"<CR>"
+
 " bind K to grep word under cursor
 nnoremap <silent> L :CtrlP<CR>
 nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
