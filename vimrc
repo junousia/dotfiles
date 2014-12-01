@@ -69,6 +69,7 @@ NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'chriskempson/base16-vim'
+NeoBundle 'junousia/vim-babeltrace'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -153,6 +154,7 @@ autocmd FileType xhtml,html set expandtab omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 au BufRead,BufNewFile *.re set filetype=c
+au BufRead,BufNewFile *.lttng set filetype=babeltrace
 
 " Nerdtree
 nnoremap <silent> § :NERDTreeToggle<CR>
