@@ -155,6 +155,8 @@ autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 au BufRead,BufNewFile *.re set filetype=c
 au BufRead,BufNewFile *.lttng set filetype=babeltrace
+au BufRead,BufNewFile *.bb set filetype=cmake
+au BufRead,BufNewFile *.inc set filetype=cmake
 
 " Nerdtree
 nnoremap <silent> § :NERDTreeToggle<CR>

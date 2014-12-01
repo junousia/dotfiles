@@ -1,5 +1,5 @@
 source ${HOME}/.dotfiles/zsh/zsh-git-prompt/zshrc.sh
-PROMPT='%B%m%~%b$(git_super_status) %# '
+PROMPT='%B%m:%~%b$(git_super_status) %# '
 
 setopt NOTIFY
 setopt APPEND_HISTORY
@@ -29,6 +29,7 @@ SAVEHIST=1000
 setopt share_history
 
 alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+q"
+export LESS=-XRMSI
 
 if [ -e ~/.local_profile ]
 then
