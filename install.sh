@@ -12,7 +12,7 @@ if [ -e "${HOME}/.elisp" ]; then
 fi
 
 mkdir -p ~/.vim/bundle
-git clone https://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
+git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
 ln -fs "${PWD}/elisp" "${HOME}/.elisp"
 

@@ -41,7 +41,7 @@ endif
 filetype plugin indent on
 
 call neobundle#begin(expand('~/.vim/bundle/'))
-
+let g:neobundle#types#git#default_protocol = 'git'
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'Raimondi/delimitMate'
@@ -70,6 +70,7 @@ NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'junousia/vim-babeltrace'
+NeoBundle 'ntpeters/vim-better-whitespace'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -182,32 +183,27 @@ let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
 if has('gui_running')
-    " Theme
-    colorscheme freya
-    au VimEnter * exec 'AirlineTheme lucius'
+  " Theme
+  colorscheme freya
+  au VimEnter * exec 'AirlineTheme lucius'
 
-    " Remove toolbars etc.
-    set guioptions-=m  "remove menu bar
-    set guioptions-=T  "remove toolbar
-    set guioptions-=r  "remove right-hand scroll bar
-    set guioptions-=L  "remove left-hand scroll bar
+  " Remove toolbars etc.
+  set guioptions-=m  "remove menu bar
+  set guioptions-=T  "remove toolbar
+  set guioptions-=r  "remove right-hand scroll bar
+  set guioptions-=L  "remove left-hand scroll bar
 
-    " Font
-    if has("unix")
-        let s:uname = system("uname -s")
-        if s:uname == "Darwin\n"
-            set guifont=Andale\ Mono:h14
-        elseif s:uname == "Linux\n"
-            set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-        endif
+  " Font
+  if has("unix")
+    let s:uname = system("uname -s")
+    if s:uname == "Darwin\n"
+      set guifont=Andale\ Mono:h14
+    elseif s:uname == "Linux\n"
+      set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
     endif
+  endif
 else
-    " Hide tilde in the end of the file
-    highlight SignColumn guibg=NONE ctermbg=NONE
-    highlight Normal guibg=NONE ctermbg=NONE
+  " Hide tilde in the end of the file
+  highlight SignColumn guibg=NONE ctermbg=NONE
+  highlight Normal guibg=NONE ctermbg=NONE
 endif
-
-" Highlight trailing whitespace
-highlight TrailingWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight TrailingWhitespace ctermbg=red guibg=red
-match TrailingWhitespace /\s\+$/
