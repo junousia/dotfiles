@@ -185,7 +185,7 @@ let g:bookmark_auto_close = 1
 if has('gui_running')
   " Theme
   colorscheme freya
-  au VimEnter * exec 'AirlineTheme lucius'
+  au VimEnter * exec 'AirlineTheme ubaryd'
 
   " Remove toolbars etc.
   set guioptions-=m  "remove menu bar
@@ -204,6 +204,7 @@ if has('gui_running')
   endif
 else
   " Hide tilde in the end of the file
+  au VimEnter * exec 'AirlineTheme ubaryd'
   highlight SignColumn guibg=NONE ctermbg=NONE
   highlight Normal guibg=NONE ctermbg=NONE
 endif
