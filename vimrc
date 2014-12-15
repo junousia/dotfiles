@@ -95,8 +95,8 @@ xnoremap <silent> X y/<C-R>"<CR>"
 " bind K to grep word under cursor
 nnoremap <silent> L :CtrlP<CR>
 nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <silent> . :cp<CR>
-nnoremap <silent> , :cn<CR>
+nnoremap <silent> <C-S-z> :cp<CR>
+nnoremap <silent> <C-S-x> :cn<CR>
 nnoremap <silent> <C-k> :ccl<CR>
 
 " Pymode
