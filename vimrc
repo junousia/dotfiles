@@ -64,7 +64,6 @@ NeoBundle 'bling/vim-airline'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
-NeoBundle 'edkolev/tmuxline.vim'
 NeoBundle 'heavenshell/vim-pydocstring'
 NeoBundle 'airblade/vim-rooter'
 NeoBundle 'vim-scripts/YankRing.vim'
@@ -93,7 +92,6 @@ endif
 xnoremap <silent> X y/<C-R>"<CR>"
 
 " bind K to grep word under cursor
-nnoremap <silent> L :CtrlP<CR>
 nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <silent> <C-S-z> :cp<CR>
 nnoremap <silent> <C-S-x> :cn<CR>
@@ -166,9 +164,10 @@ let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI = 1
 
 " CtrlP
-nnoremap <C-b> :CtrlPBuffer<cr>
+nnoremap <silent> <C-b> :CtrlPBuffer<cr>
+nnoremap <silent> L :CtrlP<CR>
 
-"Tagbar
+" Tagbar
 nnoremap <silent> ' :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
@@ -178,14 +177,18 @@ let g:tagbar_compact = 1
 syntax on
 
 " Bookmarks
+highlight BookmarkSign ctermbg=NONE ctermfg=red
+highlight BookmarkLine ctermbg=NONE ctermfg=NONE
 let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 1
 let g:bookmark_auto_close = 1
 
+" Airline
+au VimEnter * exec 'AirlineTheme ubaryd'
+
 if has('gui_running')
-  " Theme
+  " Colorscheme
   colorscheme freya
-  au VimEnter * exec 'AirlineTheme ubaryd'
 
   " Remove toolbars etc.
   set guioptions-=m  "remove menu bar
@@ -203,8 +206,9 @@ if has('gui_running')
     endif
   endif
 else
-  " Hide tilde in the end of the file
-  au VimEnter * exec 'AirlineTheme ubaryd'
+  " Signcolumn color fix
   highlight SignColumn guibg=NONE ctermbg=NONE
+
+  " Hide tilde in the end of the file
   highlight Normal guibg=NONE ctermbg=NONE
 endif
