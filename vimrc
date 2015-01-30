@@ -119,6 +119,7 @@ nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-l> :GitGutterRevertHunk<CR>
 
 " Syntastic
+unmap <C-x>
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']
