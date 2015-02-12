@@ -1,4 +1,0 @@
-repo: 59efc982a5cd2e49bd845c51995f83b842318adf
-node: 4f679db0ee2d6fe562f59b2292652fa67c0bb95a
-branch: default
-tag: vc-clearcase-3-7

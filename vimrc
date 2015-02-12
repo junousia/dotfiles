@@ -70,6 +70,7 @@ NeoBundle 'vim-scripts/YankRing.vim'
 NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'junousia/vim-babeltrace'
 NeoBundle 'ntpeters/vim-better-whitespace'
+NeoBundle 'triglav/vim-visual-increment'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 

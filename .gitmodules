@@ -1,12 +1,6 @@
-[submodule "zsh/zsh-git-prompt"]
-	path = zsh/zsh-git-prompt
-	url = git://github.com/olivierverdier/zsh-git-prompt.git
-[submodule "elisp/yasnippet"]
-	path = elisp/yasnippet
-	url = git://github.com/capitaomorte/yasnippet
-[submodule "elisp/cmake-mode"]
-	path = elisp/cmake-mode
-	url = git://github.com/alamaison/emacs-cmake-project.git
-[submodule "elisp/ttcn"]
-	path = elisp/ttcn
-	url = https://github.com/dholm/ttcn-el.git
+[submodule "zsh/zshmarks"]
+	path = zsh/zshmarks
+	url = git://github.com/jocelynmallon/zshmarks.git
+[submodule "zsh/git-prompt"]
+	path = zsh/git-prompt
+	url = https://github.com/olivierverdier/git-prompt.git

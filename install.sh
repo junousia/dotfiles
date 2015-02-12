@@ -14,8 +14,5 @@ fi
 mkdir -p ~/.vim/bundle
 git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
-ln -fs "${PWD}/elisp" "${HOME}/.elisp"
-
-mkdir -p ~/.zsh/git-prompt
-ln -fs ${PWD}/zsh/zsh-git-prompt/gitstatus.py ${HOME}/.zsh/git-prompt/gitstatus.py
+ln -fs ${PWD}/zsh ${HOME}/.zsh
 ln -fs ${PWD}/zshrc ${HOME}/.zshrc
