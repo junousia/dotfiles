@@ -14,5 +14,5 @@ fi
 mkdir -p ~/.vim/bundle
 git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
 
-ln -fs ${PWD}/zsh ${HOME}/.zsh
+ln -fs ${PWD}/zsh/ ${HOME}/.zsh
 ln -fs ${PWD}/zshrc ${HOME}/.zshrc
