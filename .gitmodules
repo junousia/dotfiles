@@ -3,4 +3,4 @@
 	url = git://github.com/jocelynmallon/zshmarks.git
 [submodule "zsh/git-prompt"]
 	path = zsh/git-prompt
-	url = https://github.com/olivierverdier/git-prompt.git
+	url = git://github.com/olivierverdier/zsh-git-prompt.git
