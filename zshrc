@@ -1,7 +1,7 @@
 export ZSH=$HOME/.oh-my-zsh
 source ~/.dotfiles/zsh/git-prompt/zshrc.sh
 
-plugins=(zsh_reload vim-interaction tmux jump gitfast)
+plugins=(zsh_reload vim-interaction tmux jump)
 
 PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 

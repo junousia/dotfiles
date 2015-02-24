@@ -31,6 +31,7 @@ set showmatch
 set showmode
 set wildmenu
 set encoding=utf-8
+set mouse=a         " enable mouse
 
 " NeoBundle
 if has('vim_starting')
@@ -73,6 +74,12 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
+
+" Resize window
+if bufwinnr(1)
+  map + 5<C-W>>
+  map - 5<C-W><
+endif
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
