@@ -72,6 +72,7 @@ NeoBundle 'chriskempson/base16-vim'
 NeoBundle 'junousia/vim-babeltrace'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
+NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
