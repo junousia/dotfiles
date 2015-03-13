@@ -73,6 +73,7 @@ NeoBundle 'junousia/vim-babeltrace'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
+NeoBundle 'gustafj/vim-ttcn'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -166,6 +167,7 @@ au BufRead,BufNewFile *.re set filetype=c
 au BufRead,BufNewFile *.lttng set filetype=babeltrace
 au BufRead,BufNewFile *.bb set filetype=cmake
 au BufRead,BufNewFile *.inc set filetype=cmake
+au BufRead,BufNewFile *.ttcn set filetype=ttcn
 
 " Nerdtree
 nnoremap <silent> § :NERDTreeToggle<CR>
@@ -185,6 +187,9 @@ let g:tagbar_compact = 1
 
 " Set syntax highlighting on
 syntax on
+
+" TTCN-3 folding
+let g:ttcn_fold = 1
 
 " Bookmarks
 highlight BookmarkSign ctermbg=NONE ctermfg=red

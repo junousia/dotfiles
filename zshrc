@@ -1,11 +1,13 @@
 export ZSH=$HOME/.oh-my-zsh
 source ~/.dotfiles/zsh/git-prompt/zshrc.sh
 
-plugins=(zsh_reload vim-interaction tmux jump)
+plugins=(vim-interaction tmux jump)
 
 PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 
 alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+q"
+alias gg="git grep"
+
 export LESS=-XRMSI
 
 if [ -e ~/.local_profile ]
