@@ -1,7 +1,7 @@
 export ZSH=$HOME/.zsh/oh-my-zsh
 source ~/.zsh/git-prompt/zshrc.sh
 
-plugins=(vim-interaction tmux jump)
+plugins=(vim-interaction jump)
 
 PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 
