@@ -1,5 +1,5 @@
-export ZSH=$HOME/.oh-my-zsh
-source ~/.dotfiles/zsh/git-prompt/zshrc.sh
+export ZSH=$HOME/.zsh/oh-my-zsh
+source ~/.zsh/git-prompt/zshrc.sh
 
 plugins=(vim-interaction tmux jump)
 
@@ -15,7 +15,7 @@ then
     source ~/.local_profile
 fi
 
-source ${HOME}/.oh-my-zsh/oh-my-zsh.sh
+source ${HOME}/.zsh/oh-my-zsh/oh-my-zsh.sh
 
 ZSH_THEME_GIT_PROMPT_PREFIX="("
 ZSH_THEME_GIT_PROMPT_SUFFIX=")"
