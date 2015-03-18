@@ -32,6 +32,9 @@ set showmode
 set wildmenu
 set encoding=utf-8
 set mouse=a         " enable mouse
+set showcmd
+
+let mapleader = ","
 
 " NeoBundle
 if has('vim_starting')
@@ -74,6 +77,9 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'gustafj/vim-ttcn'
+NeoBundle 'brookhong/cscope.vim'
+NeoBundle 'steffanc/cscopemaps.vim'
+NeoBundle 'vim-scripts/Mark--Karkat'
 call neobundle#end()
 NeoBundleCheck " prompt to install new packages
 
@@ -83,8 +89,15 @@ if bufwinnr(1)
   map - 5<C-W><
 endif
 
+nmap <C-f> :cs find g <c-r>=expand("<cword>")<cr><cr>
+nmap <C-c> :cs find c <c-r>=expand("<cword>")<cr><cr>
+
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <C-b> :CtrlPBuffer<cr>
+nnoremap <silent> <S-f> :CtrlP<CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
 " The Silver Searcher
 if executable('ag')
@@ -175,10 +188,6 @@ let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI = 1
 
-" CtrlP
-nnoremap <silent> <C-b> :CtrlPBuffer<cr>
-nnoremap <silent> L :CtrlP<CR>
-
 " Tagbar
 nnoremap <silent> ' :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
@@ -195,7 +204,7 @@ let g:ttcn_fold = 1
 highlight BookmarkSign ctermbg=NONE ctermfg=red
 highlight BookmarkLine ctermbg=NONE ctermfg=NONE
 let g:bookmark_sign = '♥'
-let g:bookmark_highlight_lines = 1
+let g:bookmark_highlight_lines = 0
 let g:bookmark_auto_close = 1
 
 " Airline

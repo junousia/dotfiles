@@ -1,11 +1,11 @@
 export ZSH=$HOME/.zsh/oh-my-zsh
 source ~/.zsh/git-prompt/zshrc.sh
 
-plugins=(vim-interaction jump)
+plugins=(jump git git-extras)
 
 PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 
-alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+q"
+alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+qf"
 alias gg="git grep"
 
 export LESS=-XRMSI
