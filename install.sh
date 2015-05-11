@@ -14,6 +14,8 @@ if [ -e "${HOME}/.elisp" ]; then
     rm -rf "${HOME}/.elisp"
 fi
 
-mkdir -p ~/.vim/bundle
-git clone git://github.com/Shougo/neobundle.vim ~/.vim/bundle/neobundle.vim
-
+if [ ! -d "${HOME}/.vim/bundle" ]; then
+    echo "exists"
+    mkdir -p $HOME/.vim/bundle
+    git clone git://github.com/Shougo/neobundle.vim $HOME/.vim/bundle/neobundle.vim
+fi
