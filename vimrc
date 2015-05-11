@@ -1,13 +1,11 @@
 set nowrap
 set nocompatible    " use vim defaults
 set ls=2            " allways show status line
-set autoindent
 set cindent
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4    " numbers of spaces to (auto)indent
 set expandtab
 set smarttab
-set copyindent
 set scrolloff=3     " keep 3 lines when scrolling
 set noshowcmd       " do not display incomplete commands
 set hlsearch        " highlight searches
@@ -53,7 +51,7 @@ NeoBundle 'scrooloose/nerdtree'
 NeoBundle 'honza/vim-snippets'
 NeoBundle 'tomtom/tlib_vim'
 NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'vim-scripts/a.vim'
+NeoBundle 'junousia/a.vim'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'vim-scripts/upAndDown'
 NeoBundle 'flazz/vim-colorschemes'
@@ -81,7 +79,7 @@ NeoBundle 'brookhong/cscope.vim'
 NeoBundle 'steffanc/cscopemaps.vim'
 NeoBundle 'vim-scripts/Mark--Karkat'
 call neobundle#end()
-NeoBundleCheck " prompt to install new packages
+NeoBundleCheck
 
 " Resize window
 if bufwinnr(1)
@@ -89,8 +87,11 @@ if bufwinnr(1)
   map - 5<C-W><
 endif
 
-nmap <C-f> :cs find g <c-r>=expand("<cword>")<cr><cr>
-nmap <C-c> :cs find c <c-r>=expand("<cword>")<cr><cr>
+" Auto-reload vimrc
+augroup reload_vimrc " {
+  autocmd!
+  autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }"
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
@@ -122,7 +123,9 @@ nnoremap <silent> <C-k> :ccl<CR>
 
 " Pymode
 let g:pymode_folding = 0
-let g:pymode_rope_completion = 0
+let g:pymode_rope_lookup_project = 0
+let g:pymode_rope = 0
+let g:pymode_rope_completion = 1
 let g:pymode_rope_completion_bind = '<C-Space>'
 let g:pymode_rope_goto_definition_bind = '<C-c>g'
 let g:pymode_warnings = 0
@@ -139,7 +142,7 @@ map <C-i> g<C-]>
 let g:gitgutter_sign_column_always = 1
 nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
 nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
-nnoremap <silent> <C-S-l> :GitGutterRevertHunk<CR>
+nnoremap <silent> <C-S-r> :GitGutterRevertHunk<CR>
 
 " Syntastic
 unmap <C-x>
@@ -167,11 +170,9 @@ nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 nnoremap <silent> <C-\<> :bnext<CR>
 nnoremap <silent> <C-S-\<> :bprevious<CR>
 
-
 " Filetypes
 filetype plugin on
-autocmd FileType c,cpp,java set expandtab formatoptions+=ro
-autocmd FileType c,cpp set expandtab omnifunc=ccomplete#Complete
+autocmd FileType c,cpp set shiftwidth=4 expandtab omnifunc=ccomplete#Complete
 autocmd FileType vim,lua,nginx set expandtab shiftwidth=2 softtabstop=2
 autocmd FileType xhtml,html set expandtab omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
@@ -198,7 +199,7 @@ let g:tagbar_compact = 1
 syntax on
 
 " TTCN-3 folding
-let g:ttcn_fold = 1
+let g:ttcn_fold = 0
 
 " Bookmarks
 highlight BookmarkSign ctermbg=NONE ctermfg=red

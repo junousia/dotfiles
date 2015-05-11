@@ -8,7 +8,7 @@ PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 alias tags="ctags -R --c++-kinds=+p --fields=+iaS --extra=+qf"
 alias gg="git grep"
 
-export LESS=-XRMSI
+#export LESS=-XRMSI
 
 if [ -e ~/.local_profile ]
 then

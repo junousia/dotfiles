@@ -8,6 +8,7 @@ ln -fs "${PWD}/emacs" "${HOME}/.emacs"
 ln -fs "${PWD}/tmux.conf" "${HOME}/.tmux.conf"
 ln -fs "${PWD}/zshrc" "${HOME}/.zshrc"
 ln -fs "${PWD}/zsh" "${HOME}/.zsh"
+ln -fs "${PWD}/gitconfig" "${HOME}/.gitconfig"
 
 if [ -e "${HOME}/.elisp" ]; then
     rm -rf "${HOME}/.elisp"
