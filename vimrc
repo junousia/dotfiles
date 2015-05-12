@@ -75,8 +75,6 @@ NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'gustafj/vim-ttcn'
-NeoBundle 'brookhong/cscope.vim'
-NeoBundle 'steffanc/cscopemaps.vim'
 NeoBundle 'vim-scripts/Mark--Karkat'
 call neobundle#end()
 NeoBundleCheck
@@ -165,6 +163,9 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+
+" Gundo
+nnoremap <silent> <F6> :GundoToggle<CR>
 
 " Cycle buffers
 nnoremap <silent> <C-\<> :bnext<CR>
