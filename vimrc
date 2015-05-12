@@ -76,8 +76,13 @@ NeoBundle 'triglav/vim-visual-increment'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
 NeoBundle 'gustafj/vim-ttcn'
 NeoBundle 'vim-scripts/Mark--Karkat'
+NeoBundle 'junousia/cscope-quickfix'
+NeoBundle 'milkypostman/vim-togglelist'
 call neobundle#end()
 NeoBundleCheck
+
+" Cscope
+map <leader> <C-\>
 
 " Resize window
 if bufwinnr(1)
@@ -93,6 +98,7 @@ augroup END " }"
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <C-f> :CtrlPQuickfix<cr>
 nnoremap <silent> <C-b> :CtrlPBuffer<cr>
 nnoremap <silent> <S-f> :CtrlP<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
@@ -114,10 +120,9 @@ endif
 xnoremap <silent> X y/<C-R>"<CR>"
 
 " bind K to grep word under cursor
-nnoremap <silent> K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
-nnoremap <silent> <C-S-z> :cp<CR>
-nnoremap <silent> <C-S-x> :cn<CR>
-nnoremap <silent> <C-k> :ccl<CR>
+nnoremap <silent> K :Ggrep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap <silent> <leader>z :cp<CR>
+nnoremap <silent> <leader>x :cn<CR>
 
 " Pymode
 let g:pymode_folding = 0
@@ -133,8 +138,8 @@ let g:pymode_lint_cwindow = 0
 
 " Tags
 set tags=./tags;/
-map <C-o> <C-T>
-map <C-i> g<C-]>
+map <leader>o <C-T>
+map <leader>i g<C-]>
 
 " GitGutter
 let g:gitgutter_sign_column_always = 1
@@ -143,7 +148,6 @@ nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-r> :GitGutterRevertHunk<CR>
 
 " Syntastic
-unmap <C-x>
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']
