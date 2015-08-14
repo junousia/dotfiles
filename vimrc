@@ -43,7 +43,17 @@ endif
 filetype plugin indent on
 
 call neobundle#begin(expand('~/.vim/bundle/'))
+
 let g:neobundle#types#git#default_protocol = 'git'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
 NeoBundleFetch 'Shougo/neobundle.vim'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'Raimondi/delimitMate'
