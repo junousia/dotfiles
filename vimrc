@@ -88,6 +88,8 @@ NeoBundle 'gustafj/vim-ttcn'
 NeoBundle 'vim-scripts/Mark--Karkat'
 NeoBundle 'junousia/cscope-quickfix'
 NeoBundle 'milkypostman/vim-togglelist'
+NeoBundle 'chase/vim-ansible-yaml'
+NeoBundle 'mfukar/robotframework-vim'
 call neobundle#end()
 NeoBundleCheck
 
