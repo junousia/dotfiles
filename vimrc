@@ -90,6 +90,8 @@ NeoBundle 'junousia/cscope-quickfix'
 NeoBundle 'milkypostman/vim-togglelist'
 NeoBundle 'chase/vim-ansible-yaml'
 NeoBundle 'mfukar/robotframework-vim'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'vim-scripts/iptables'
 call neobundle#end()
 NeoBundleCheck
 
@@ -110,8 +112,9 @@ augroup END " }"
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
-nnoremap <silent> <C-f> :CtrlPQuickfix<cr>
-nnoremap <silent> <C-b> :CtrlPBuffer<cr>
+nnoremap <silent> <C-f> :CtrlPQuickfix<CR>
+nnoremap <silent> <C-l> :CtrlPLine<CR>
+nnoremap <silent> <C-b> :CtrlPBuffer<CR>
 nnoremap <silent> <S-f> :CtrlP<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
@@ -199,6 +202,7 @@ au BufRead,BufNewFile *.lttng set filetype=babeltrace
 au BufRead,BufNewFile *.bb set filetype=cmake
 au BufRead,BufNewFile *.inc set filetype=cmake
 au BufRead,BufNewFile *.ttcn set filetype=ttcn
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Nerdtree
 nnoremap <silent> § :NERDTreeToggle<CR>
@@ -228,10 +232,10 @@ let g:bookmark_auto_close = 1
 " Airline
 au VimEnter * exec 'AirlineTheme ubaryd'
 
-if has('gui_running')
-  " Colorscheme
-  colorscheme freya
+" Colorscheme
+colorscheme sorcerer
 
+if has('gui_running')
   " Remove toolbars etc.
   set guioptions-=m  "remove menu bar
   set guioptions-=T  "remove toolbar
