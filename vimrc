@@ -44,7 +44,7 @@ filetype plugin indent on
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 
-let g:neobundle#types#git#default_protocol = 'git'
+let g:neobundle#types#git#default_protocol = 'https'
 NeoBundle 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
@@ -92,6 +92,7 @@ NeoBundle 'chase/vim-ansible-yaml'
 NeoBundle 'mfukar/robotframework-vim'
 NeoBundle 'tpope/vim-markdown'
 NeoBundle 'vim-scripts/iptables'
+NeoBundle 'vim-scripts/Conque-Shell'
 call neobundle#end()
 NeoBundleCheck
 
@@ -163,6 +164,7 @@ nnoremap <silent> <C-S-k> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-r> :GitGutterRevertHunk<CR>
 
 " Syntastic
+let g:syntastic_shell = "bash"
 let g:syntastic_python_checkers = ['flake8']
 let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']

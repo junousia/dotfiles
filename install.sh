@@ -18,7 +18,7 @@ ln -fs "${PWD}/gitconfig" "${INSTALLDIR}/.gitconfig"
 if [ ! -d "${INSTALLDIR}/.vim/bundle" ]; then
     echo "exists"
     mkdir -p $INSTALLDIR/.vim/bundle
-    git clone git://github.com/Shougo/neobundle.vim $INSTALLDIR/.vim/bundle/neobundle.vim
+    git clone https://github.com/Shougo/neobundle.vim $INSTALLDIR/.vim/bundle/neobundle.vim
 fi
 
 $INSTALLDIR/.vim/bundle/neobundle.vim/bin/neoinstall
