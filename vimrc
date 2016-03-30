@@ -157,6 +157,9 @@ set tags=./tags;/
 map <leader>o <C-T>
 map <leader>i g<C-]>
 
+" Splitfix
+set fillchars+=vert:\ 
+
 " GitGutter
 let g:gitgutter_sign_column_always = 1
 nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
@@ -231,11 +234,15 @@ let g:bookmark_sign = '♥'
 let g:bookmark_highlight_lines = 0
 let g:bookmark_auto_close = 1
 
+" Quote a word
+nnoremap sq :silent! normal mpea'<Esc>bi'<Esc>`pl`
+nnoremap dq :silent! normal mpea"<Esc>bi"<Esc>`pl`
+
 " Airline
 au VimEnter * exec 'AirlineTheme ubaryd'
 
 " Colorscheme
-colorscheme sorcerer
+colorscheme desert
 
 if has('gui_running')
   " Remove toolbars etc.
@@ -256,7 +263,4 @@ if has('gui_running')
 else
   " Signcolumn color fix
   highlight SignColumn guibg=NONE ctermbg=NONE
-
-  " Hide tilde in the end of the file
-  highlight Normal guibg=NONE ctermbg=NONE
 endif

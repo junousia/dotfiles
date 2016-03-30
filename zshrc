@@ -3,6 +3,8 @@ source ~/.zsh/git-prompt/zshrc.sh
 
 plugins=(jump git git-extras)
 
+export TERM="xterm-256color"
+
 PATH="/opt/local/bin:/opt/local/sbin:/usr/local/bin:/usr/local/sbin/:$PATH"
 
 if [ -e ~/.local_profile ]
