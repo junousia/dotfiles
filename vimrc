@@ -99,6 +99,9 @@ NeoBundleCheck
 " Cscope
 map <leader> <C-\>
 
+" Paste mode toggle
+set pastetoggle=<F12>
+
 " Resize window
 if bufwinnr(1)
   map + 5<C-W>>
