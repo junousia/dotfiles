@@ -10,3 +10,6 @@
 [submodule "tmux/tmux-gitbar"]
 	path = tmux/tmux-gitbar
 	url = https://github.com/aurelien-rainone/tmux-gitbar.git
+[submodule "bundle/neobundle.vim"]
+	path = bundle/neobundle.vim
+	url = https://github.com/Shougo/neobundle.vim
