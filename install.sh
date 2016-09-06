@@ -8,7 +8,7 @@ if [ ! -d "${HOME}/.vim/bundle" ]; then
 fi
 
 ln -fs "${PWD}/vimrc" "${HOME}/.vimrc"
-ln -fs "${PWD}/tmux.conf" "${HOME}/.tmux.conf"
+#ln -fs "${PWD}/tmux.conf" "${HOME}/.tmux.conf"
 ln -fs "${PWD}/zshrc" "${HOME}/.zshrc"
 ln -fs "${PWD}/zsh" "${HOME}/.zsh"
 ln -fs "${PWD}/gitconfig" "${HOME}/.gitconfig"
