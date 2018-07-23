@@ -1,0 +1,32 @@
+[core]
+    editor = vim
+    pager = less -X
+
+[merge]
+    tool = vimdiff
+
+[color]
+    diff = yes
+    status = yes
+    branch = yes
+    interactive = yes
+    grep = yes
+    hist = yes
+
+[status]
+    showuntrackedfiles = no
+
+[push]
+    default = current
+
+[alias]
+    co = checkout
+    ci = commit
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%Cred%h %C(yellow)%ad%Creset %s%Cred%d %Cblue(%an)\" --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[user]
+	email = jukka.nousiainen@gmail.com
+	name = Jukka Nousiainen
