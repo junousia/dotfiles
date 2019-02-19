@@ -24,9 +24,12 @@
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%Cred%h %C(yellow)%ad%Creset %s%Cred%d %Cblue(%an)\" --date=short
+    hist = log --pretty=format:\"%Cred%h %C(yellow)%ar%Creset %s%Cred%d %Cblue(%an)\"
     type = cat-file -t
     dump = cat-file -p
+    ss = show --stat
+    s = show
+    f = fetch
 [user]
 	email = jukka.nousiainen@gmail.com
 	name = Jukka Nousiainen

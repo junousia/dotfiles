@@ -15,7 +15,6 @@ set visualbell t_vb= " turn off error beep/flash
 set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
 set nonumber        " do not show line numbers
-set ignorecase      " ignore case when searching
 set noignorecase    " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
@@ -31,6 +30,7 @@ set wildmenu
 set encoding=utf-8
 set mouse=a         " enable mouse
 set showcmd
+set noswapfile
 
 let mapleader = ","
 
@@ -72,7 +72,7 @@ NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 NeoBundle 'vim-scripts/ScrollColors'
 NeoBundle 'vim-scripts/cmake'
 NeoBundle 'vim-scripts/vim-bookmarks'
-NeoBundle 'bling/vim-airline'
+NeoBundle 'vim-airline/vim-airline'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
@@ -94,6 +94,8 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'vim-scripts/iptables'
 NeoBundle 'vim-scripts/Conque-Shell'
 NeoBundle 'vim-erlang/vim-erlang-runtime'
+NeoBundle 'dhruvasagar/vim-zoom'
+NeoBundle 'vim-scripts/checksum.vim'
 call neobundle#end()
 NeoBundleCheck
 
@@ -186,14 +188,12 @@ set tags=./tags;/
 map <leader>o <C-T>
 map <leader>i g<C-]>
 
-" Splitfix
-set fillchars+=vert:\|
-
 " GitGutter
 " set signcolumn=yes
 nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
 nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
+autocmd BufWritePost * GitGutter
 
 " Syntastic
 let g:syntastic_shell = "bash"
@@ -227,7 +227,7 @@ autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
 au BufRead,BufNewFile *.re set filetype=c
 au BufRead,BufNewFile *.lttng set filetype=babeltrace
-au BufRead,BufNewFile *.bb set filetype=cmake
+au BufRead,BufNewFile *.bb set filetype=bitbake
 au BufRead,BufNewFile *.inc set filetype=cmake
 au BufRead,BufNewFile *.ttcn set filetype=ttcn
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
@@ -281,10 +281,13 @@ if has('gui_running')
     if s:uname == "Darwin\n"
       set guifont=Andale\ Mono:h14
     elseif s:uname == "Linux\n"
-      set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+      set guifont=Hack 12
     endif
   endif
 else
   " Signcolumn color fix
-  highlight SignColumn guibg=NONE ctermbg=NONE
+  hi SignColumn guibg=NONE ctermbg=NONE
+  " vertsplit tweaks
+  set fillchars=vert:\┃
+  hi VertSplit cterm=NONE
 endif
