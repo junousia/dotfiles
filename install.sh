@@ -15,6 +15,8 @@ ln -fs "${PWD}/bundle/neobundle.vim" "${HOME}/.vim/bundle/neobundle.vim"
 ln -fs "${PWD}/bundle/vimproc.vim" "${HOME}/.vim/bundle/vimproc.vim"
 ln -fs "${PWD}/tmux/tpm" "${HOME}/.tmux/plugins/tpm"
 
+# ${HOME}/tmux/tpm/bin/install_plugins
+
 pushd ${PWD}/bundle/vimproc.vim
 make
-$HOME/.vim/bundle/neobundle.vim/bin/neoinstall
+${HOME}/.vim/bundle/neobundle.vim/bin/neoinstall

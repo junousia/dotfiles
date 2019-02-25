@@ -73,6 +73,7 @@ NeoBundle 'vim-scripts/ScrollColors'
 NeoBundle 'vim-scripts/cmake'
 NeoBundle 'vim-scripts/vim-bookmarks'
 NeoBundle 'vim-airline/vim-airline'
+NeoBundle 'vim-airline/vim-airline-themes'
 NeoBundle 'sjl/gundo.vim'
 NeoBundle 'airblade/vim-gitgutter'
 NeoBundle 'scrooloose/syntastic'
@@ -263,7 +264,7 @@ nnoremap sq :silent! normal mpea'<Esc>bi'<Esc>`pl`
 nnoremap dq :silent! normal mpea"<Esc>bi"<Esc>`pl`
 
 " Airline
-au VimEnter * exec 'AirlineTheme ubaryd'
+au VimEnter * exec 'AirlineTheme minimalist'
 
 " Colorscheme
 colorscheme desert
