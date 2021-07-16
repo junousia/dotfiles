@@ -1,6 +1,8 @@
 [core]
     editor = vim
     pager = less -X
+	autocrlf = input
+	safecrlf = true
 
 [merge]
     tool = vimdiff
@@ -17,19 +19,27 @@
     showuntrackedfiles = no
 
 [push]
-    default = current
+	default = current
 
 [alias]
     co = checkout
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%Cred%h %C(yellow)%ar%Creset %s%Cred%d %Cblue(%an)\"
+    hist = log --pretty=format:\"%Cred%h %C(yellow)%cr%Creset %s%Cred%d %Cblue(%an)\"
     type = cat-file -t
     dump = cat-file -p
     ss = show --stat
     s = show
     f = fetch
+    g = grep
 [user]
 	email = jukka.nousiainen@gmail.com
 	name = Jukka Nousiainen
+[credential]
+	helper = store
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

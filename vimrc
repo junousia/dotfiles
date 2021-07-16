@@ -28,9 +28,13 @@ set showmatch
 set showmode
 set wildmenu
 set encoding=utf-8
-set mouse=a         " enable mouse
+set mouse=a
 set showcmd
 set noswapfile
+set virtualedit=block
+filetype plugin on
+filetype indent on
+
 
 let mapleader = ","
 
@@ -39,8 +43,6 @@ if has('vim_starting')
   set nocompatible
   set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
-
-filetype plugin indent on
 
 call neobundle#begin(expand('~/.vim/bundle/'))
 
@@ -55,6 +57,8 @@ NeoBundle 'Shougo/vimproc.vim', {
 \    },
 \ }
 NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'sheerun/vim-polyglot'
+NeoBundle 'vim-scripts/Toggle'
 NeoBundle 'kergoth/vim-bitbake'
 NeoBundle 'ervandew/supertab'
 NeoBundle 'Raimondi/delimitMate'
@@ -67,7 +71,7 @@ NeoBundle 'vim-scripts/upAndDown'
 NeoBundle 'flazz/vim-colorschemes'
 NeoBundle 'majutsushi/tagbar'
 NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'klen/python-mode'
+NeoBundle 'python-mode/python-mode'
 NeoBundle 'vim-scripts/DoxygenToolkit.vim'
 NeoBundle 'vim-scripts/ScrollColors'
 NeoBundle 'vim-scripts/cmake'
@@ -85,7 +89,6 @@ NeoBundle 'junousia/vim-babeltrace'
 NeoBundle 'ntpeters/vim-better-whitespace'
 NeoBundle 'triglav/vim-visual-increment'
 NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-NeoBundle 'gustafj/vim-ttcn'
 NeoBundle 'vim-scripts/Mark--Karkat'
 NeoBundle 'junousia/cscope-quickfix'
 NeoBundle 'milkypostman/vim-togglelist'
@@ -129,8 +132,8 @@ let g:rooter_silent_chdir = 1
 
 " Resize window
 if bufwinnr(1)
-  map + 5<C-W>>
-  map - 5<C-W><
+  nnoremap + 5<C-W>>
+  nnoremap - 5<C-W><
 endif
 
 " Show signcolumn
@@ -153,9 +156,9 @@ let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
 " The Silver Searcher
-if executable('ag')
+if executable('rg')
   " Use ag over grep
-  set grepprg=ag\ --nogroup\ --nocolor
+  set grepprg=rg\ --vimgrep
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
   let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -173,16 +176,19 @@ nnoremap <silent> <leader>z :cp<CR>
 nnoremap <silent> <leader>x :cn<CR>
 
 " Pymode
+let g:pymode_python = "python3"
+let g:pymode_options = 0
 let g:pymode_folding = 0
 let g:pymode_rope_lookup_project = 0
 let g:pymode_rope = 0
-let g:pymode_rope_completion = 1
+let g:pymode_rope_completion = 0
 let g:pymode_rope_completion_bind = '<C-Space>'
 let g:pymode_rope_goto_definition_bind = '<C-c>g'
 let g:pymode_warnings = 0
 let g:pymode_lint_message = 0
 let g:pymode_lint_checkers = []
 let g:pymode_lint_cwindow = 0
+let g:autopep8_indent_size=4
 
 " Tags
 set tags=./tags;/
@@ -191,6 +197,7 @@ map <leader>i g<C-]>
 
 " GitGutter
 " set signcolumn=yes
+nnoremap <silent> <C-S-e> :GitGutterStageHunk<CR>
 nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
 nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
@@ -198,7 +205,7 @@ autocmd BufWritePost * GitGutter
 
 " Syntastic
 let g:syntastic_shell = "bash"
-let g:syntastic_python_checkers = ['flake8']
+let g:syntastic_python_checkers = ['flake8', 'pylint']
 let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']
 let g:syntastic_cpp_checkers = ['cppcheck']
@@ -226,11 +233,11 @@ autocmd FileType vim,lua,nginx set expandtab shiftwidth=2 softtabstop=2
 autocmd FileType xhtml,html set expandtab omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
+autocmd FileType python set expandtab shiftwidth=4 softtabstop=4
 au BufRead,BufNewFile *.re set filetype=c
 au BufRead,BufNewFile *.lttng set filetype=babeltrace
 au BufRead,BufNewFile *.bb set filetype=bitbake
 au BufRead,BufNewFile *.inc set filetype=cmake
-au BufRead,BufNewFile *.ttcn set filetype=ttcn
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Nerdtree
@@ -239,6 +246,7 @@ nnoremap <leader> f :NERDTreeFind<CR>
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=1
 let g:NERDTreeMinimalUI = 1
+let g:NERDTreeIgnore = ['\.pyc$', '__pycache__']
 
 " Tagbar
 nnoremap <silent> ' :TagbarToggle<CR>
@@ -248,9 +256,6 @@ let g:tagbar_compact = 1
 
 " Set syntax highlighting on
 syntax on
-
-" TTCN-3 folding
-let g:ttcn_fold = 0
 
 " Bookmarks
 highlight BookmarkSign ctermbg=NONE ctermfg=red
@@ -263,11 +268,18 @@ let g:bookmark_auto_close = 1
 nnoremap sq :silent! normal mpea'<Esc>bi'<Esc>`pl`
 nnoremap dq :silent! normal mpea"<Esc>bi"<Esc>`pl`
 
+" Python-mode
+let g:pymode_python = 'python3'
+let g:pymode_indent = 1
+let g:pymode_options_max_line_length = 100
+let g:pymode_virtualenv = 1
+let g:pymode_virtualenv_path = $VIRTUAL_ENV
+
 " Airline
 au VimEnter * exec 'AirlineTheme minimalist'
 
 " Colorscheme
-colorscheme desert
+colorscheme desertedocean
 
 if has('gui_running')
   " Remove toolbars etc.
@@ -287,7 +299,7 @@ if has('gui_running')
   endif
 else
   " Signcolumn color fix
-  hi SignColumn guibg=NONE ctermbg=NONE
+  "hi SignColumn guibg=NONE ctermbg=NONE
   " vertsplit tweaks
   set fillchars=vert:\┃
   hi VertSplit cterm=NONE
