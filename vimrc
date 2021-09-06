@@ -116,6 +116,7 @@ let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'un
 
 " Ripgrep
 if executable('rg')
+  let g:gitgutter_grep = 'rg'
   set grepprg=rg\ --vimgrep
   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
@@ -226,7 +227,6 @@ nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
 nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
 nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
 autocmd BufWritePost * GitGutter
-let g:gitgutter_grep = 'rg'
 let g:gitgutter_set_sign_backgrounds = 0
 highlight SignColumn guibg=NONE ctermbg=NONE
 
