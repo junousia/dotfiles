@@ -35,94 +35,56 @@ set virtualedit=block
 filetype plugin on
 filetype indent on
 
-
 let mapleader = ","
 
-" NeoBundle
-if has('vim_starting')
-  set nocompatible
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
+call plug#begin(expand('~/.vim/bundle/'))
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'tpope/vim-sensible'
+Plug 'sheerun/vim-polyglot'
+Plug 'kergoth/vim-bitbake'
+Plug 'Raimondi/delimitMate'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'tomtom/tlib_vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'junousia/a.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/upAndDown'
+Plug 'flazz/vim-colorschemes'
+Plug 'majutsushi/tagbar'
+Plug 'kien/ctrlp.vim'
+Plug 'python-mode/python-mode'
+Plug 'vim-scripts/DoxygenToolkit.vim'
+Plug 'vim-scripts/ScrollColors'
+Plug 'vim-scripts/cmake'
+Plug 'vim-scripts/vim-bookmarks'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'sjl/gundo.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'scrooloose/syntastic'
+Plug 'heavenshell/vim-pydocstring'
+Plug 'airblade/vim-rooter'
+Plug 'vim-scripts/YankRing.vim'
+Plug 'junousia/vim-babeltrace'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'triglav/vim-visual-increment'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'vim-scripts/Mark--Karkat'
+Plug 'milkypostman/vim-togglelist'
+Plug 'chase/vim-ansible-yaml'
+Plug 'mfukar/robotframework-vim'
+Plug 'tpope/vim-markdown'
+Plug 'vim-scripts/iptables'
+Plug 'vim-scripts/Conque-Shell'
+Plug 'vim-erlang/vim-erlang-runtime'
+Plug 'dhruvasagar/vim-zoom'
+Plug 'vim-scripts/checksum.vim'
+call plug#end()
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-
-let g:neobundle#types#git#default_protocol = 'https'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
-NeoBundleFetch 'Shougo/neobundle.vim'
-NeoBundle 'sheerun/vim-polyglot'
-NeoBundle 'vim-scripts/Toggle'
-NeoBundle 'kergoth/vim-bitbake'
-NeoBundle 'ervandew/supertab'
-NeoBundle 'Raimondi/delimitMate'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'tomtom/tlib_vim'
-NeoBundle 'MarcWeber/vim-addon-mw-utils'
-NeoBundle 'junousia/a.vim'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'vim-scripts/upAndDown'
-NeoBundle 'flazz/vim-colorschemes'
-NeoBundle 'majutsushi/tagbar'
-NeoBundle 'kien/ctrlp.vim'
-NeoBundle 'python-mode/python-mode'
-NeoBundle 'vim-scripts/DoxygenToolkit.vim'
-NeoBundle 'vim-scripts/ScrollColors'
-NeoBundle 'vim-scripts/cmake'
-NeoBundle 'vim-scripts/vim-bookmarks'
-NeoBundle 'vim-airline/vim-airline'
-NeoBundle 'vim-airline/vim-airline-themes'
-NeoBundle 'sjl/gundo.vim'
-NeoBundle 'airblade/vim-gitgutter'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'heavenshell/vim-pydocstring'
-NeoBundle 'airblade/vim-rooter'
-NeoBundle 'vim-scripts/YankRing.vim'
-NeoBundle 'chriskempson/base16-vim'
-NeoBundle 'junousia/vim-babeltrace'
-NeoBundle 'ntpeters/vim-better-whitespace'
-NeoBundle 'triglav/vim-visual-increment'
-NeoBundle 'Xuyuanp/nerdtree-git-plugin'
-NeoBundle 'vim-scripts/Mark--Karkat'
-NeoBundle 'junousia/cscope-quickfix'
-NeoBundle 'milkypostman/vim-togglelist'
-NeoBundle 'chase/vim-ansible-yaml'
-NeoBundle 'mfukar/robotframework-vim'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'vim-scripts/iptables'
-NeoBundle 'vim-scripts/Conque-Shell'
-NeoBundle 'vim-erlang/vim-erlang-runtime'
-NeoBundle 'dhruvasagar/vim-zoom'
-NeoBundle 'vim-scripts/checksum.vim'
-call neobundle#end()
-NeoBundleCheck
+" Colorscheme
+colorscheme desert
 
 nnoremap <silent> <leader>c :noh<return><esc>
-
-" mkdir
-function! s:MkNonExDir(file, buf)
-    if empty(getbufvar(a:buf, '&buftype')) && a:file!~#'\v^\w+\:\/'
-        let dir=fnamemodify(a:file, ':h')
-        if !isdirectory(dir)
-            call mkdir(dir, 'p')
-        endif
-    endif
-endfunction
-augroup BWCCreateDir
-    autocmd!
-    autocmd BufWritePre * :call s:MkNonExDir(expand('<afile>'), +expand('<abuf>'))
-augroup END
-
-" <Cscope
-map <leader> c :Cscope
-nnoremap <leader>fa :call CscopeFindInteractive(expand('<cword>'))<CR>
-nnoremap <leader>l :call ToggleLocationList()<CR>
 
 " Paste mode toggle
 set pastetoggle=<F12>
@@ -140,11 +102,8 @@ endif
 autocmd BufRead,BufNewFile * setlocal signcolumn=yes
 autocmd FileType tagbar,nerdtree setlocal signcolumn=no
 
-" Auto-reload vimrc
-augroup reload_vimrc " {
-  autocmd!
-  autocmd BufWritePost $MYVIMRC source $MYVIMRC
-augroup END " }"
+" YankRing
+nnoremap <silent> <C-Y> :YRShow<CR>
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
@@ -155,15 +114,10 @@ nnoremap <silent> <S-f> :CtrlP<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
-" The Silver Searcher
+" Ripgrep
 if executable('rg')
-  " Use ag over grep
   set grepprg=rg\ --vimgrep
-
-  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-
-  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
   let g:ctrlp_use_caching = 0
 endif
 
@@ -189,19 +143,6 @@ let g:pymode_lint_message = 0
 let g:pymode_lint_checkers = []
 let g:pymode_lint_cwindow = 0
 let g:autopep8_indent_size=4
-
-" Tags
-set tags=./tags;/
-map <leader>o <C-T>
-map <leader>i g<C-]>
-
-" GitGutter
-" set signcolumn=yes
-nnoremap <silent> <C-S-e> :GitGutterStageHunk<CR>
-nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
-nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
-nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
-autocmd BufWritePost * GitGutter
 
 " Syntastic
 let g:syntastic_shell = "bash"
@@ -278,8 +219,16 @@ let g:pymode_virtualenv_path = $VIRTUAL_ENV
 " Airline
 au VimEnter * exec 'AirlineTheme minimalist'
 
-" Colorscheme
-colorscheme desertedocean
+" GitGutter
+set signcolumn=yes
+nnoremap <silent> <C-S-e> :GitGutterStageHunk<CR>
+nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
+nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
+nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
+autocmd BufWritePost * GitGutter
+let g:gitgutter_grep = 'rg'
+let g:gitgutter_set_sign_backgrounds = 0
+highlight SignColumn guibg=NONE ctermbg=NONE
 
 if has('gui_running')
   " Remove toolbars etc.
@@ -298,9 +247,6 @@ if has('gui_running')
     endif
   endif
 else
-  " Signcolumn color fix
-  "hi SignColumn guibg=NONE ctermbg=NONE
-  " vertsplit tweaks
   set fillchars=vert:\┃
   hi VertSplit cterm=NONE
 endif
