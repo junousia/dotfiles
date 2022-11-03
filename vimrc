@@ -39,6 +39,7 @@ let mapleader = ","
 
 call plug#begin(expand('~/.vim/bundle/'))
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
+Plug 'heavenshell/vim-pydocstring', { 'do': 'make install', 'for': 'python' }
 Plug 'tpope/vim-sensible'
 Plug 'sheerun/vim-polyglot'
 Plug 'kergoth/vim-bitbake'
@@ -46,13 +47,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'tomtom/tlib_vim'
 Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'junousia/a.vim'
 Plug 'tpope/vim-fugitive'
-Plug 'vim-scripts/upAndDown'
 Plug 'flazz/vim-colorschemes'
 Plug 'majutsushi/tagbar'
 Plug 'kien/ctrlp.vim'
-Plug 'python-mode/python-mode'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/ScrollColors'
 Plug 'vim-scripts/cmake'
@@ -62,10 +60,8 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
-Plug 'heavenshell/vim-pydocstring'
 Plug 'airblade/vim-rooter'
 Plug 'vim-scripts/YankRing.vim'
-Plug 'junousia/vim-babeltrace'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'triglav/vim-visual-increment'
 Plug 'Xuyuanp/nerdtree-git-plugin'
@@ -75,11 +71,13 @@ Plug 'chase/vim-ansible-yaml'
 Plug 'mfukar/robotframework-vim'
 Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/iptables'
-Plug 'vim-scripts/Conque-Shell'
-Plug 'vim-erlang/vim-erlang-runtime'
 Plug 'dhruvasagar/vim-zoom'
-Plug 'vim-scripts/checksum.vim'
+Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 call plug#end()
+
+" autoreload file
+set autoread
+au CursorHold * checktime
 
 " Colorscheme
 colorscheme desert
@@ -107,12 +105,10 @@ nnoremap <silent> <C-Y> :YRShow<CR>
 
 " Ctrlp
 let g:ctrlp_working_path_mode = 'ra'
-nnoremap <silent> <C-f> :CtrlPQuickfix<CR>
 nnoremap <silent> <C-l> :CtrlPLine<CR>
 nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-nnoremap <silent> <S-f> :CtrlP<CR>
+nnoremap <silent> <C-f> :CtrlP<CR>
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-let g:ctrlp_extensions = ['tag', 'buffertag', 'quickfix', 'dir', 'rtscript', 'undo', 'line', 'changes', 'mixed', 'bookmarkdir']
 
 " Ripgrep
 if executable('rg')
@@ -126,28 +122,28 @@ endif
 xnoremap <silent> X y/<C-R>"<CR>"
 
 " bind K to grep word under cursor
-nnoremap <silent> K :Ggrep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nnoremap <silent> <leader>z :cp<CR>
 nnoremap <silent> <leader>x :cn<CR>
 
 " Pymode
+let g:pymode = 1
 let g:pymode_python = "python3"
 let g:pymode_options = 0
 let g:pymode_folding = 0
-let g:pymode_rope_lookup_project = 0
-let g:pymode_rope = 0
+let g:pymode_rope_lookup_project = 1
+let g:pymode_rope = 1
 let g:pymode_rope_completion = 0
 let g:pymode_rope_completion_bind = '<C-Space>'
 let g:pymode_rope_goto_definition_bind = '<C-c>g'
-let g:pymode_warnings = 0
-let g:pymode_lint_message = 0
-let g:pymode_lint_checkers = []
+let g:pymode_warnings = 1
+let g:pymode_lint_message = 1
+let g:pymode_lint_checker = "pylint,pep8,pyflakes,flake8"
 let g:pymode_lint_cwindow = 0
 let g:autopep8_indent_size=4
 
 " Syntastic
 let g:syntastic_shell = "bash"
-let g:syntastic_python_checkers = ['flake8', 'pylint']
+let g:syntastic_python_checkers = []
 let g:syntastic_python_flake8_args='--ignore=E501 --max-complexity=10'
 let g:syntastic_c_checkers = ['cppcheck', 'splint', 'gcc']
 let g:syntastic_cpp_checkers = ['cppcheck']
@@ -171,7 +167,7 @@ nnoremap <silent> <C-S-\<> :bprevious<CR>
 " Filetypes
 filetype plugin on
 autocmd FileType c,cpp set shiftwidth=4 expandtab omnifunc=ccomplete#Complete
-autocmd FileType vim,lua,nginx set expandtab shiftwidth=2 softtabstop=2
+autocmd FileType vim,lua,nginx set expandtab shiftwidth=4 softtabstop=4
 autocmd FileType xhtml,html set expandtab omnifunc=htmlcomplete#CompleteTags
 autocmd FileType xml set expandtab omnifunc=xmlcomplete#CompleteTags
 autocmd FileType make set noexpandtab shiftwidth=4 softtabstop=0
@@ -247,6 +243,9 @@ if has('gui_running')
     endif
   endif
 else
-  set fillchars=vert:\┃
+  if has('nvim')
+    set fillchars+=eob:\ 
+  endif
+  set fillchars+=vert:│
   hi VertSplit cterm=NONE
 endif
