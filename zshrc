@@ -27,3 +27,4 @@ source ${HOME}/.oh-my-zsh/oh-my-zsh.sh
 unsetopt nomatch
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+alias vim=nvim

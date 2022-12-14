@@ -1,6 +1,6 @@
 set nowrap
 set nocompatible    " use vim defaults
-set ls=2            " allways show status line
+"set ls=2            " allways show status line
 set cindent
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4    " numbers of spaces to (auto)indent
@@ -14,7 +14,7 @@ set ruler           " show the cursor position all the time
 set visualbell t_vb= " turn off error beep/flash
 set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
-set nonumber        " do not show line numbers
+set number          " show line number
 set noignorecase    " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
@@ -73,14 +73,76 @@ Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/iptables'
 Plug 'dhruvasagar/vim-zoom'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
+Plug 'vim-scripts/scratch-utility'
+Plug 'ryanoasis/vim-devicons'
+" Plug 'Yggdroot/indentLine'
+Plug 'metakirby5/codi.vim'
+Plug 'puremourning/vimspector'
+Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
 call plug#end()
+
+" Vimspector
+let g:vimspectorpy#cmd_prefix = "VS"
+let g:vimspector_enable_mappings = 'HUMAN'
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+
+let g:vimspector_adapters = #{
+      \   test_debugpy: #{ extends: 'debugpy' }
+      \ }
+
+let g:vimspector_configurations = {
+      \ "Attach to port": {
+      \   "adapter": "multi-session",
+      \   "variables": {
+      \     "host": "localhost"
+      \   },
+      \   "configuration": {
+      \     "request": "attach",
+      \   },
+      \   "filetypes": [ "python" ],
+      \   "breakpoints": {
+      \     "exception": {
+      \       "raised": "N",
+      \       "uncaught": "Y",
+      \       "userUnhandled": "N"
+      \     }
+      \   }
+      \ }
+      \ }
+
+" Codi
+let g:codi#interpreters = {
+      \ 'python': {
+          \ 'bin': 'python',
+          \ 'prompt': '^\(>>>\|\.\.\.\) ',
+          \ },
+      \ }
+
+" airline
+let g:airline_powerline_fonts = 0
 
 " autoreload file
 set autoread
 au CursorHold * checktime
 
 " Colorscheme
-colorscheme desert
+if has('nvim')
+  set termguicolors
+endif
+
+let ayucolor="dark"
+"let g:indentLine_setColors = 1
+let g:indentLine_char = '│'
+let g:indentLine_first_char = '│'
+let g:indentLine_showFirstIndentLevel = 1
+colorscheme happy_hacking
+highlight Normal guibg=NONE ctermbg=NONE
+highlight clear SignColumn
+highlight SignColumn guibg=NONE ctermbg=NONE
+highlight VertSplit guibg=NONE ctermbg=NONE
 
 nnoremap <silent> <leader>c :noh<return><esc>
 
@@ -155,7 +217,7 @@ let g:syntastic_mode_map = { "mode": "passive",
             \ "passive_filetypes": [] }
 
 " Remove trailing whitespace
-nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+" nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Gundo
 nnoremap <silent> <leader>u :GundoToggle<CR>
@@ -218,34 +280,14 @@ au VimEnter * exec 'AirlineTheme minimalist'
 
 " GitGutter
 set signcolumn=yes
-nnoremap <silent> <C-S-e> :GitGutterStageHunk<CR>
-nnoremap <silent> <C-S-j> :GitGutterNextHunk<CR>
-nnoremap <silent> <C-S-h> :GitGutterPrevHunk<CR>
-nnoremap <silent> <C-S-r> :GitGutterUndoHunk<CR>
+nnoremap <silent> <C-e> :GitGutterStageHunk<CR>
+nnoremap <silent> <C-j> :GitGutterNextHunk<CR>
+nnoremap <silent> <C-k> :GitGutterPrevHunk<CR>
+nnoremap <silent> <C-r> :GitGutterUndoHunk<CR>
 autocmd BufWritePost * GitGutter
-let g:gitgutter_set_sign_backgrounds = 0
-highlight SignColumn guibg=NONE ctermbg=NONE
+let g:gitgutter_set_sign_backgrounds = 1
 
-if has('gui_running')
-  " Remove toolbars etc.
-  set guioptions-=m  "remove menu bar
-  set guioptions-=T  "remove toolbar
-  set guioptions-=r  "remove right-hand scroll bar
-  set guioptions-=L  "remove left-hand scroll bar
-
-  " Font
-  if has("unix")
-    let s:uname = system("uname -s")
-    if s:uname == "Darwin\n"
-      set guifont=Andale\ Mono:h14
-    elseif s:uname == "Linux\n"
-      set guifont=Hack 12
-    endif
-  endif
-else
-  if has('nvim')
-    set fillchars+=eob:\ 
-  endif
-  set fillchars+=vert:│
-  hi VertSplit cterm=NONE
+if has('nvim')
+  set fillchars+=eob:\ 
 endif
+set fillchars+=vert:│
