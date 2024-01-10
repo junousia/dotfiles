@@ -1,12 +1,8 @@
 export ZSH=$HOME/.oh-my-zsh
 export LANG=en_US.UTF-8
 export TZ="/usr/share/zoneinfo/Europe/Helsinki"
-export PYENV_ROOT="$HOME/.pyenv"
-path=("$PYENV_ROOT/bin" "${HOME}/.local/bin" $path)
-export PATH
-eval "$(pyenv init -)"
 
-plugins=(common-aliases last-working-dir zsh-navigation-tools fasd helm wd direnv virtualenv ripgrep)
+plugins=(common-aliases last-working-dir zsh-navigation-tools fasd helm wd direnv virtualenv ripgrep kubectl kubectx kube-ps1)
 
 autoload znt-history-widget
 zle -N znt-history-widget

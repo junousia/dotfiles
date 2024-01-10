@@ -1,6 +1,5 @@
 set nowrap
 set nocompatible    " use vim defaults
-"set ls=2            " allways show status line
 set cindent
 set tabstop=4       " numbers of spaces of tab character
 set shiftwidth=4    " numbers of spaces to (auto)indent
@@ -14,7 +13,7 @@ set ruler           " show the cursor position all the time
 set visualbell t_vb= " turn off error beep/flash
 set novisualbell    " turn off visual bell
 set nobackup        " do not keep a backup file
-set number          " show line number
+set nonumber        " do not show line number
 set noignorecase    " don't ignore case
 set title           " show title in console title bar
 set ttyfast         " smoother changes
@@ -27,11 +26,13 @@ set backspace=indent,eol,start " allow backspacing over everything in insert mod
 set showmatch
 set showmode
 set wildmenu
+set wildmode=longest:full,full
 set encoding=utf-8
 set mouse=a
 set showcmd
 set noswapfile
 set virtualedit=block
+set iskeyword+=-
 filetype plugin on
 filetype indent on
 
@@ -89,29 +90,29 @@ nmap <Leader>di <Plug>VimspectorBalloonEval
 " for visual mode, the visually selected text
 xmap <Leader>di <Plug>VimspectorBalloonEval
 
-let g:vimspector_adapters = #{
-      \   test_debugpy: #{ extends: 'debugpy' }
-      \ }
-
-let g:vimspector_configurations = {
-      \ "Attach to port": {
-      \   "adapter": "multi-session",
-      \   "variables": {
-      \     "host": "localhost"
-      \   },
-      \   "configuration": {
-      \     "request": "attach",
-      \   },
-      \   "filetypes": [ "python" ],
-      \   "breakpoints": {
-      \     "exception": {
-      \       "raised": "N",
-      \       "uncaught": "Y",
-      \       "userUnhandled": "N"
-      \     }
-      \   }
-      \ }
-      \ }
+" let g:vimspector_adapters = #{
+"       \   test_debugpy: #{ extends: 'debugpy' }
+"       \ }
+"
+" let g:vimspector_configurations = {
+"       \ "Attach to port": {
+"       \   "adapter": "multi-session",
+"       \   "variables": {
+"       \     "host": "localhost"
+"       \   },
+"       \   "configuration": {
+"       \     "request": "attach",
+"       \   },
+"       \   "filetypes": [ "python" ],
+"       \   "breakpoints": {
+"       \     "exception": {
+"       \       "raised": "N",
+"       \       "uncaught": "Y",
+"       \       "userUnhandled": "N"
+"       \     }
+"       \   }
+"       \ }
+"       \ }
 
 " Codi
 let g:codi#interpreters = {
@@ -217,7 +218,7 @@ let g:syntastic_mode_map = { "mode": "passive",
             \ "passive_filetypes": [] }
 
 " Remove trailing whitespace
-" nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 
 " Gundo
 nnoremap <silent> <leader>u :GundoToggle<CR>
@@ -241,7 +242,7 @@ au BufRead,BufNewFile *.inc set filetype=cmake
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 
 " Nerdtree
-nnoremap <silent> § :NERDTreeToggle<CR>
+nnoremap <silent> ' :NERDTreeToggle<CR>
 nnoremap <leader> f :NERDTreeFind<CR>
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeDirArrows=1
@@ -249,7 +250,7 @@ let g:NERDTreeMinimalUI = 1
 let g:NERDTreeIgnore = ['\.pyc$', '__pycache__']
 
 " Tagbar
-nnoremap <silent> ' :TagbarToggle<CR>
+nnoremap <silent> § :TagbarToggle<CR>
 let g:tagbar_autofocus = 1
 let g:tagbar_autoclose = 1
 let g:tagbar_compact = 1
