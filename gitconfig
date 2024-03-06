@@ -1,11 +1,22 @@
 [core]
     editor = vim
-    pager = less -X
-	autocrlf = input
-	safecrlf = true
+    pager = delta
+	autocrlf = false
+    safecrlf = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    true-color = always
 
 [merge]
-    tool = vimdiff
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = true
 
 [color]
     diff = yes
@@ -26,22 +37,26 @@
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%Cred%h %C(yellow)%cr%Creset %s%Cred%d %Cblue(%an)\"
+    hist = log --pretty=format:\"%Cred%h %C(yellow)%cd%Creset %s%Cred%d %Cblue(%an)\"
     type = cat-file -t
     dump = cat-file -p
     ss = show --stat
     s = show
     f = fetch
     g = grep
+
 [user]
-	email = jukka.nousiainen@gmail.com
+	email = jukka.nousiainen@ericsson.com
 	name = Jukka Nousiainen
+
 [credential]
 	helper = store
+
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+
 [rebase]
 	autosquash = true

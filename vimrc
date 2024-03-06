@@ -51,14 +51,12 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'tpope/vim-fugitive'
 Plug 'flazz/vim-colorschemes'
 Plug 'majutsushi/tagbar'
-Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/DoxygenToolkit.vim'
 Plug 'vim-scripts/ScrollColors'
 Plug 'vim-scripts/cmake'
 Plug 'vim-scripts/vim-bookmarks'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/syntastic'
 Plug 'airblade/vim-rooter'
@@ -76,11 +74,24 @@ Plug 'dhruvasagar/vim-zoom'
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
 Plug 'vim-scripts/scratch-utility'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'Yggdroot/indentLine'
 Plug 'metakirby5/codi.vim'
 Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy', { 'do': { -> vimspectorpy#update() } }
+Plug 'tpope/vim-surround'
+Plug 'psf/black', { 'branch': 'stable' }
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
+
+" Black
+let g:ale_fixers = {'python': ['ruff']}
+let g:ale_python_black_options = ''
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   'python': ['black', 'ruff', 'pylint'],
+\}
+nnoremap <leader>l :Black<CR>
 
 " Vimspector
 let g:vimspectorpy#cmd_prefix = "VS"
@@ -166,12 +177,12 @@ autocmd FileType tagbar,nerdtree setlocal signcolumn=no
 " YankRing
 nnoremap <silent> <C-Y> :YRShow<CR>
 
-" Ctrlp
-let g:ctrlp_working_path_mode = 'ra'
-nnoremap <silent> <C-l> :CtrlPLine<CR>
-nnoremap <silent> <C-b> :CtrlPBuffer<CR>
-nnoremap <silent> <C-f> :CtrlP<CR>
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" FZF
+nnoremap <silent> <C-f> :Files<CR>
+noremap <silent> <C-g> :GFiles<CR>
+nnoremap <silent> <C-b> :Buffers<CR>
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Ripgrep
 if executable('rg')
