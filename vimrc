@@ -33,6 +33,7 @@ set showcmd
 set noswapfile
 set virtualedit=block
 set iskeyword+=-
+set clipboard=""
 filetype plugin on
 filetype indent on
 
@@ -82,6 +83,7 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-repeat'
 call plug#end()
 
 " Black
@@ -90,6 +92,7 @@ let g:ale_python_black_options = ''
 let g:ale_fix_on_save = 1
 let g:ale_linters = {
 \   'python': ['black', 'ruff', 'pylint'],
+\   'markdown': ['markdownlint', 'vale'],
 \}
 nnoremap <leader>l :Black<CR>
 
@@ -181,6 +184,7 @@ nnoremap <silent> <C-Y> :YRShow<CR>
 nnoremap <silent> <C-f> :Files<CR>
 noremap <silent> <C-g> :GFiles<CR>
 nnoremap <silent> <C-b> :Buffers<CR>
+nnoremap <silent> <C-h> :Rg<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
@@ -202,7 +206,6 @@ nnoremap <silent> <leader>x :cn<CR>
 " Pymode
 let g:pymode = 1
 let g:pymode_python = "python3"
-let g:pymode_options = 0
 let g:pymode_folding = 0
 let g:pymode_rope_lookup_project = 1
 let g:pymode_rope = 1
@@ -214,6 +217,26 @@ let g:pymode_lint_message = 1
 let g:pymode_lint_checker = "pylint,pep8,pyflakes,flake8"
 let g:pymode_lint_cwindow = 0
 let g:autopep8_indent_size=4
+let g:pymode_rope_goto_definition_bind = '<C-c>g'
+let g:pymode_rope_goto_definition_cmd = 'e'
+let g:pymode_rope_rename_bind = '<C-c>rr'
+let g:pymode_rope_organize_imports_bind = '<C-c>ro'
+let g:pymode_rope_extract_method_bind = '<C-c>rm'
+let g:pymode_rope_extract_variable_bind = '<C-c>rl'
+let g:pymode_rope_use_function_bind = '<C-c>ru'
+let g:pymode_syntax_all = 1
+
+" remove automatic line numbers and put everything else back
+let g:pymode_options = 0
+setlocal complete+=t
+setlocal formatoptions-=t
+"if v:version > 702 && !&relativenumber
+"    setlocal number
+"endif
+setlocal nowrap
+setlocal textwidth=79
+setlocal commentstring=#%s
+setlocal define=^\s*\\(def\\\\|class\\)
 
 " Syntastic
 let g:syntastic_shell = "bash"
@@ -225,7 +248,7 @@ let g:syntastic_sh_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_c_remove_include_errors = 1
 let g:syntastic_mode_map = { "mode": "passive",
-            \ "active_filetypes": ["python"],
+            \ "active_filetypes": ["shell"],
             \ "passive_filetypes": [] }
 
 " Remove trailing whitespace

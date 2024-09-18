@@ -10,13 +10,13 @@
 [delta]
     navigate = true    # use n and N to move between diff sections
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
-    side-by-side = true
+    true-color = always
 
 [merge]
     conflictstyle = diff3
 
 [diff]
-    colorMoved = default
+    colorMoved = true
 
 [color]
     diff = yes
@@ -37,7 +37,7 @@
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%Cred%h %C(yellow)%cd%Creset %s%Cred%d %Cblue(%an)\"
+    hist = log --pretty=format:\"%Cred%h %C(yellow)%cr%Creset %s%Cred%d %Cblue(%an)\"
     type = cat-file -t
     dump = cat-file -p
     ss = show --stat
@@ -60,3 +60,5 @@
 
 [rebase]
 	autosquash = true
+[pull]
+	ff = only
