@@ -188,6 +188,13 @@ nnoremap <silent> <C-h> :Rg<CR>
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'relative': v:true, 'yoffset': 1.0 } }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 
+" Ctrlp
+let g:ctrlp_working_path_mode = 'ra'
+nnoremap <silent> <C-l> :CtrlPLine<CR>
+nnoremap <silent> <C-b> :CtrlPBuffer<CR>
+nnoremap <silent> <C-f> :CtrlP<CR>
+let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+
 " Ripgrep
 if executable('rg')
   let g:gitgutter_grep = 'rg'

@@ -2,14 +2,29 @@ export ZSH=$HOME/.oh-my-zsh
 export LANG=en_US.UTF-8
 export TZ="/usr/share/zoneinfo/Europe/Helsinki"
 
-plugins=(common-aliases last-working-dir zsh-navigation-tools helm direnv virtualenv ripgrep fzf)
+plugins=(common-aliases last-working-dir zsh-navigation-tools helm direnv virtualenv fzf)
 
 autoload znt-history-widget
 zle -N znt-history-widget
 bindkey "^R" znt-history-widget
 znt_list_instant_select=1
-znt_list_border=0
-znt_list_bold=0
+znt_list_border=1
+znt_list_bold=1
+zle -N znt-cd-widget
+bindkey "^B" znt-cd-widget
+zle -N znt-kill-widget
+bindkey "^Y" znt-kill-widget
+
+export FZF_DEFAULT_OPTS="
+    --height=40%
+    --layout=reverse
+    --border
+    --info=inline
+    --color=dark,bg+:237,bg:236,hl:81,fg:252,fg+:252,hl+:81,info:109,prompt:109,spinner:150
+    --prompt='History> '
+    --margin=0,5
+"
+
 
 ZSH_CUSTOM=${HOME}/.dotfiles
 ZSH_THEME="junou"

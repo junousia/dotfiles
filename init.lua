@@ -1,5 +1,21 @@
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/plenary.nvim'
+
+-- Check if plenary is already installed
+if fn.empty(fn.glob(install_path)) > 0 then
+  -- If plenary is not installed, clone it from the repository
+  print("Installing plenary.nvim...")
+  fn.system({'git', 'clone', 'https://github.com/nvim-lua/plenary.nvim', install_path})
+  print("Plenary installed!")
+  -- Optionally, you can reload the configuration after installation
+  vim.cmd('packadd plenary.nvim')
+end
+
 -- Function to install packages asynchronously and show notifications
 local Job = require('plenary.job')
+
+-- Leader key
+vim.g.mapleader = ","
 
 local function install_packages(packages)
   for _, package in ipairs(packages) do
@@ -33,9 +49,6 @@ local function get_python_path()
     return '/usr/bin/env python3'
   end
 end
-
--- LSP setup
-local nvim_lsp = require('lspconfig')
 
 -- Ensure packer.nvim is installed
 local ensure_packer = function()
@@ -124,6 +137,13 @@ require('packer').startup(function(use)
   use 'milkypostman/vim-togglelist'
   use 'tpope/vim-markdown'
   use 'dhruvasagar/vim-zoom'
+  use({
+    "andythigpen/nvim-coverage",
+    requires = "nvim-lua/plenary.nvim",
+    config = function()
+    require("coverage").setup()
+  end,
+  })
   use 'ryanoasis/vim-devicons'
   use 'metakirby5/codi.vim'
   use 'tpope/vim-surround'
@@ -131,12 +151,74 @@ require('packer').startup(function(use)
   use {'junegunn/fzf', run = function() vim.fn['fzf#install']() end}
   use 'junegunn/fzf.vim'
   use 'Hubro/tree-sitter-robot'
+  use "lukas-reineke/lsp-format.nvim"
+  use {
+      "PedramNavid/dbtpal",
+      config = function()
+          local dbt = require("dbtpal")
+          dbt.setup({
+              -- Path to the dbt executable
+              path_to_dbt = "dbt",
+
+              -- Path to the dbt project, if blank, will auto-detect
+              -- using currently open buffer for all sql,yml, and md files
+              path_to_dbt_project = "",
+
+              -- Path to dbt profiles directory
+              path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+
+              -- Search for ref/source files in macros and models folders
+              extended_path_search = true,
+
+              -- Prevent modifying sql files in target/(compiled|run) folders
+              protect_compiled_files = true,
+          })
+
+          -- Setup key mappings
+
+          vim.keymap.set("n", "<leader>drf", dbt.run)
+          vim.keymap.set("n", "<leader>drp", dbt.run_all)
+          vim.keymap.set("n", "<leader>dtf", dbt.test)
+          vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
+
+          -- Enable Telescope Extension
+          require("telescope").load_extension("dbtpal")
+      end,
+      requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" } },
+  }
 
   -- Automatically set up your configuration after cloning packer.nvim
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
+
+local coverage = require("coverage").setup({
+	commands = true, -- create commands
+	highlights = {
+		-- customize highlight groups created by the plugin
+		covered = { fg = "#C3E88D" },   -- supports style, fg, bg, sp (see :h highlight-gui)
+		uncovered = { fg = "#F07178" },
+	},
+	signs = {
+		-- use your own highlight groups or text markers
+		covered = { hl = "CoverageCovered", text = "▎" },
+		uncovered = { hl = "CoverageUncovered", text = "▎" },
+	},
+	summary = {
+		-- customize the summary pop-up
+		min_coverage = 80.0,      -- minimum coverage threshold (used for highlighting)
+	},
+	lang = {
+		-- customize language specific settings
+	},
+})
+
+require("lsp-format").setup {}
+require("lspconfig").gopls.setup { on_attach = require("lsp-format").on_attach }
+
+-- LSP setup
+local nvim_lsp = require('lspconfig')
 
 -- Set nvim-notify as the default notification handler
 vim.notify = require("notify")
@@ -259,9 +341,6 @@ vim.cmd("filetype plugin on")
 vim.cmd("filetype indent on")
 vim.opt.fillchars = { eob = ' ' }
 
--- Leader key
-vim.g.mapleader = ","
-
 -- Additional Configuration
 vim.cmd([[
   set termguicolors
@@ -297,7 +376,7 @@ vim.cmd("au CursorHold * checktime")
 
 -- Treesitter
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "python", "robot" }, -- Add other languages you need
+  ensure_installed = { "python", "robot", "yaml", "make", "gitcommit" },
   highlight = {
     enable = true,
     additional_vim_regex_highlighting = true,
@@ -474,9 +553,11 @@ vim.api.nvim_create_autocmd("User", {
         null_ls.builtins.code_actions.gitsigns,
         null_ls.builtins.diagnostics.eslint,
         null_ls.builtins.diagnostics.mypy,
-        null_ls.builtins.formatting.prettier,
         null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.black,
+        null_ls.builtins.formatting.black.with({
+            extra_args = { "--line-length", "88" },
+        }),
+        null_ls.builtins.formatting.ruff,
         null_ls.builtins.diagnostics.flake8.with({
             extra_args = { "--max-line-length=120" }
         }),
