@@ -52,13 +52,6 @@ function frg {
     fi
   }
 
-source /app/modules/5/init/zsh.new
-
-_dkr_autocomplete() {
-    reply=("am-package-manager" "release-auto" "release-auto-assembly" "argo" "argo-dev")
-}
-compctl -K _dkr_autocomplete dkr
-
 if [ -e ~/.local_profile ]
 then
     source ~/.local_profile

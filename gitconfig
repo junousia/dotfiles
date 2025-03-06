@@ -24,7 +24,6 @@
 
 [diff]
     colorMoved = true
-    tool = vimdiff
 
 [color]
     diff = yes

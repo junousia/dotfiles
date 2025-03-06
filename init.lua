@@ -1,13 +1,11 @@
 local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/plenary.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/plenary.nvim'
 
 -- Check if plenary is already installed
 if fn.empty(fn.glob(install_path)) > 0 then
-  -- If plenary is not installed, clone it from the repository
   print("Installing plenary.nvim...")
   fn.system({'git', 'clone', 'https://github.com/nvim-lua/plenary.nvim', install_path})
   print("Plenary installed!")
-  -- Optionally, you can reload the configuration after installation
   vim.cmd('packadd plenary.nvim')
 end
 
@@ -51,9 +49,8 @@ local function get_python_path()
 end
 
 -- Ensure packer.nvim is installed
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local function ensure_packer()
+  local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
   if fn.empty(fn.glob(install_path)) > 0 then
     fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
     vim.cmd [[packadd packer.nvim]]
@@ -80,7 +77,7 @@ packer.init {
 }
 
 -- Packer setup
-require('packer').startup(function(use)
+packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   -- Add your plugins here
   use 'rcarriga/nvim-notify'
@@ -137,13 +134,13 @@ require('packer').startup(function(use)
   use 'milkypostman/vim-togglelist'
   use 'tpope/vim-markdown'
   use 'dhruvasagar/vim-zoom'
-  use({
+  use {
     "andythigpen/nvim-coverage",
     requires = "nvim-lua/plenary.nvim",
     config = function()
-    require("coverage").setup()
-  end,
-  })
+      require("coverage").setup()
+    end,
+  }
   use 'ryanoasis/vim-devicons'
   use 'metakirby5/codi.vim'
   use 'tpope/vim-surround'
@@ -153,99 +150,87 @@ require('packer').startup(function(use)
   use 'Hubro/tree-sitter-robot'
   use "lukas-reineke/lsp-format.nvim"
   use {
-      "PedramNavid/dbtpal",
-      config = function()
-          local dbt = require("dbtpal")
-          dbt.setup({
-              -- Path to the dbt executable
-              path_to_dbt = "dbt",
+    "PedramNavid/dbtpal",
+    config = function()
+      local dbt = require("dbtpal")
+      dbt.setup({
+        path_to_dbt = "dbt",
+        path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
+        extended_path_search = true,
+        protect_compiled_files = true,
+      })
 
-              -- Path to the dbt project, if blank, will auto-detect
-              -- using currently open buffer for all sql,yml, and md files
-              path_to_dbt_project = "",
-
-              -- Path to dbt profiles directory
-              path_to_dbt_profiles_dir = vim.fn.expand("~/.dbt"),
-
-              -- Search for ref/source files in macros and models folders
-              extended_path_search = true,
-
-              -- Prevent modifying sql files in target/(compiled|run) folders
-              protect_compiled_files = true,
-          })
-
-          -- Setup key mappings
-
-          vim.keymap.set("n", "<leader>drf", dbt.run)
-          vim.keymap.set("n", "<leader>drp", dbt.run_all)
-          vim.keymap.set("n", "<leader>dtf", dbt.test)
-          vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
-
-          -- Enable Telescope Extension
-          require("telescope").load_extension("dbtpal")
-      end,
-      requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" } },
+      vim.keymap.set("n", "<leader>drf", dbt.run)
+      vim.keymap.set("n", "<leader>drp", dbt.run_all)
+      vim.keymap.set("n", "<leader>dtf", dbt.test)
+      vim.keymap.set("n", "<leader>dm", require("dbtpal.telescope").dbt_picker)
+      require("telescope").load_extension("dbtpal")
+    end,
+    requires = { { "nvim-lua/plenary.nvim" }, { "nvim-telescope/telescope.nvim" } },
   }
 
-  -- Automatically set up your configuration after cloning packer.nvim
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
 
-local coverage = require("coverage").setup({
-	commands = true, -- create commands
-	highlights = {
-		-- customize highlight groups created by the plugin
-		covered = { fg = "#C3E88D" },   -- supports style, fg, bg, sp (see :h highlight-gui)
-		uncovered = { fg = "#F07178" },
-	},
-	signs = {
-		-- use your own highlight groups or text markers
-		covered = { hl = "CoverageCovered", text = "▎" },
-		uncovered = { hl = "CoverageUncovered", text = "▎" },
-	},
-	summary = {
-		-- customize the summary pop-up
-		min_coverage = 80.0,      -- minimum coverage threshold (used for highlighting)
-	},
-	lang = {
-		-- customize language specific settings
-	},
-})
-
-require("lsp-format").setup {}
-require("lspconfig").gopls.setup { on_attach = require("lsp-format").on_attach }
+require("coverage").setup {
+  commands = true,
+  highlights = {
+    covered = { fg = "#C3E88D" },
+    uncovered = { fg = "#F07178" },
+  },
+  signs = {
+    covered = { hl = "CoverageCovered", text = "▎" },
+    uncovered = { hl = "CoverageUncovered", text = "▎" },
+  },
+  summary = {
+    min_coverage = 80.0,
+  },
+}
 
 -- LSP setup
 local nvim_lsp = require('lspconfig')
-
--- Set nvim-notify as the default notification handler
 vim.notify = require("notify")
 
-require'lspconfig'.robotframework_ls.setup{}
+nvim_lsp.robotframework_ls.setup{}
 
-require'lspconfig'.volar.setup{
-    filetypes = { 'html', 'jinja2' },
-    on_attach = function(client, bufnr)
-        -- Additional configuration
-    end,
+nvim_lsp.volar.setup{
+  filetypes = { 'html', 'jinja2' },
+  on_attach = function(client, bufnr)
+    -- Additional configuration
+  end,
 }
 
+local api = require("nvim-tree.api")
+
+local function on_attach(bufnr)
+  local function opts(desc)
+    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  -- Change tree root to the selected node ("CD")
+  vim.keymap.set("n", "<leader>t", api.tree.change_root_to_node, opts("Change Directory (CD)"))
+  -- Change tree root to the parent directory (the opposite of CD)
+  vim.keymap.set("n", "<leader>u", api.tree.change_root_to_parent, opts("Go Up Directory"))
+
+  -- Map Enter to open a file or directory
+  vim.keymap.set("n", "<CR>", api.node.open.edit, opts("Open"))
+
+  -- Optional: you can also map 'o' and 'l' for opening,
+  -- and 'h' for navigating to the parent (closing a directory).
+  vim.keymap.set("n", "o", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", "l", api.node.open.edit, opts("Open"))
+  vim.keymap.set("n", "h", api.node.navigate.parent, opts("Close Directory"))
+end
+
 require("nvim-tree").setup({
+  on_attach = on_attach,
   view = {
-      width = 30,
-      mappings = {
-          list = {
-              { key = "<leader>t", action = "CD" },
-          },
-      },
+    width = 30,
   },
   sort = {
     sorter = "case_sensitive",
-  },
-  view = {
-    width = 30,
   },
   renderer = {
     group_empty = true,
@@ -259,6 +244,7 @@ require("nvim-tree").setup({
     },
   },
 })
+
 
 require('lualine').setup {
   options = {
@@ -278,11 +264,7 @@ require('lualine').setup {
       {
         function()
           local venv = os.getenv("VIRTUAL_ENV")
-          if venv then
-            return " " .. vim.fn.fnamemodify(venv, ":t")
-          else
-            return ''
-          end
+          return venv and " " .. vim.fn.fnamemodify(venv, ":t") or ''
         end,
         color = { fg = '#fabd2f', gui = 'bold' },
       },
@@ -352,20 +334,15 @@ vim.cmd([[
 ]])
 
 -- Mappings
--- vim.api.nvim_set_keymap('n', 'c', ':noh<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '+', '5<C-W>>', {noremap = true})
-vim.api.nvim_set_keymap('n', '-', '5<C-W><', {noremap = true})
--- vim.api.nvim_set_keymap('n', ' ', ':bnext<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', ' ', ':bprevious<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '+', '5<C-W>>', { noremap = true })
+vim.api.nvim_set_keymap('n', '-', '5<C-W><', { noremap = true })
 vim.api.nvim_set_keymap('n', '\'', ':NvimTreeToggle<CR>', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '§', ':TagbarToggle<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', 'z', ':cp<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', 'x', ':cn<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', 'X', 'y/""<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<leader>l', ':Black<CR>', {noremap = true})
-vim.api.nvim_set_keymap('n', '<C-e>', ':GitGutterStageHunk<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>-', ':GitGutterNextHunk<CR>', {noremap = true})
--- vim.api.nvim_set_keymap('n', '<leader>/', ':GitGutterPrevHunk<CR>', {noremap = true})
+vim.api.nvim_set_keymap('n', '§', ':TagbarToggle<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'z', ':cp<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'x', ':cn<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', 'X', 'y/""<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<leader>l', ':Black<CR>', { noremap = true })
+vim.api.nvim_set_keymap('n', '<C-e>', ':GitGutterStageHunk<CR>', { noremap = true })
 vim.api.nvim_set_keymap('n', '<leader>sv', ':source $MYVIMRC<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<C-r>', ':GitGutterUndoHunk<CR>', { noremap = true, silent = true })
 
@@ -393,40 +370,30 @@ vim.api.nvim_set_keymap('n', '<leader>fl', ':Lines<CR>', { noremap = true, silen
 vim.api.nvim_set_keymap('n', '<leader>fc', ':Commits<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>fd', ':BCommits<CR>', { noremap = true, silent = true })
 
--- FZF configuration
 vim.g.fzf_layout = { window = { width = 0.9, height = 0.6, relative = true, yoffset = 1.0 } }
 vim.g.fzf_history_dir = vim.fn.expand('~/.local/share/fzf-history')
 
 -- LSP settings
 local lsp_installer = require("nvim-lsp-installer")
--- Configure vscode-markdown for markdown
 nvim_lsp.vscode_markdown = {
   cmd = { "node", "${HOME}/.local/node_modules/vscode-langservers-extracted/bin/vscode-md-languageserver", "--stdio" },
   filetypes = { "markdown" },
-  settings = {},
 }
 
--- Automatically install LSP servers
 lsp_installer.on_server_ready(function(server)
-    local opts = {}
-    server:setup(opts)
+    server:setup({})
 end)
 
--- Setup lspconfig.
-require'lspconfig'.pyright.setup{}
+nvim_lsp.pyright.setup{}
 
--- Optional: Configure key mappings for LSP
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
   local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-  -- Enable completion triggered by <c-x><c-o>
   buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
-  -- Mappings.
   local opts = { noremap=true, silent=true }
 
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
@@ -444,11 +411,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>q', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
 local servers = { 'pyright' }
 for _, lsp in ipairs(servers) do
-  require'lspconfig'[lsp].setup {
+  nvim_lsp[lsp].setup {
     on_attach = on_attach,
     flags = {
       debounce_text_changes = 150,
@@ -456,13 +421,11 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- Define custom signs for diagnostics with smaller, less intrusive symbols
-vim.fn.sign_define("DiagnosticSignError", { text = "○", texthl = "DiagnosticSignError", numhl = "" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "○", texthl = "DiagnosticSignWarn", numhl = "" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "∘", texthl = "DiagnosticSignInfo", numhl = "" })
-vim.fn.sign_define("DiagnosticSignHint", { text = "∘", texthl = "DiagnosticSignHint", numhl = "" })
+vim.fn.sign_define("DiagnosticSignError", { text = "○", texthl = "DiagnosticSignError" })
+vim.fn.sign_define("DiagnosticSignWarn", { text = "○", texthl = "DiagnosticSignWarn" })
+vim.fn.sign_define("DiagnosticSignInfo", { text = "∘", texthl = "DiagnosticSignInfo" })
+vim.fn.sign_define("DiagnosticSignHint", { text = "∘", texthl = "DiagnosticSignHint" })
 
--- Optional: Customize the highlight groups to ensure no background
 vim.cmd [[
   highlight DiagnosticSignError guibg=NONE
   highlight DiagnosticSignWarn guibg=NONE
@@ -470,7 +433,6 @@ vim.cmd [[
   highlight DiagnosticSignHint guibg=NONE
 ]]
 
--- Enable LSP diagnostics with floating tooltips
 vim.diagnostic.config({
   virtual_text = false,
   signs = true,
@@ -478,11 +440,10 @@ vim.diagnostic.config({
   underline = true,
   severity_sort = true,
   float = {
-    source = "always", -- Or "if_many"
+    source = "always",
   },
 })
 
--- Key mappings for diagnostic hover (tooltips)
 vim.api.nvim_set_keymap('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', { noremap = true, silent = true })
@@ -492,27 +453,26 @@ local dap = require('dap')
 local dapui = require('dapui')
 local dap_virtual_text = require('nvim-dap-virtual-text')
 
-
 dap.adapters.python = {
-  type = 'executable';
-  command = get_python_path();
-  args = { '-m', 'debugpy.adapter' };
+  type = 'executable',
+  command = get_python_path(),
+  args = { '-m', 'debugpy.adapter' }
 }
 
 dap.configurations.python = {
   {
-    type = 'python';
-    request = 'launch';
-    name = "Launch file";
+    type = 'python',
+    request = 'launch',
+    name = "Launch file",
     program = function()
       return vim.fn.input('Path to file: ', vim.fn.getcwd() .. '/', 'file')
-    end;
-    pythonPath = get_python_path;
+    end,
+    pythonPath = get_python_path,
     args = function()
       local input = vim.fn.input('Command-line arguments (space-separated): ')
       return vim.split(input, ' ')
-    end;
-  },
+    end
+  }
 }
 
 dapui.setup()
@@ -530,24 +490,27 @@ vim.api.nvim_set_keymap('n', '<leader>dr', ':lua require("dap").repl.open()<CR>'
 vim.api.nvim_set_keymap('n', '<leader>dl', ':lua require("dap").run_last()<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>du', ':lua require("dapui").toggle()<CR>', { noremap = true, silent = true })
 
--- Example: null-ls configuration for formatters and linters
--- ensure_installed({'black', 'flake8', 'ruff', 'pylint', 'debugpy'})
-
--- Load direnv before null-ls initializes
+-- Configure null-ls
 local null_ls = require("null-ls")
+
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.stylua,
+        null_ls.builtins.diagnostics.eslint,
+        null_ls.builtins.completion.spell,
+    },
+})
 local direnv_allow_cmd = "direnv allow"
 
--- Initialize null-ls after direnv.vim has loaded
 vim.api.nvim_create_autocmd("User", {
   pattern = "DirenvLoaded",
   callback = function()
-    local null_ls = require('null-ls')
     null_ls.setup({
       sources = {
         null_ls.builtins.diagnostics.pylint.with({
           diagnostics_postprocess = function(diagnostic)
             diagnostic.code = diagnostic.message_id
-          end,
+          end
         }),
         null_ls.builtins.code_actions.eslint,
         null_ls.builtins.code_actions.gitsigns,
@@ -555,16 +518,16 @@ vim.api.nvim_create_autocmd("User", {
         null_ls.builtins.diagnostics.mypy,
         null_ls.builtins.formatting.stylua,
         null_ls.builtins.formatting.black.with({
-            extra_args = { "--line-length", "88" },
+          extra_args = { "--line-length", "88" }
         }),
         null_ls.builtins.formatting.ruff,
         null_ls.builtins.diagnostics.flake8.with({
-            extra_args = { "--max-line-length=120" }
+          extra_args = { "--max-line-length=120" }
         }),
         null_ls.builtins.diagnostics.ruff,
-      },
+      }
     })
-  end,
+  end
 })
 
 -- Key mappings for LSP
@@ -576,16 +539,16 @@ vim.api.nvim_set_keymap('n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<C
 -- Enable virtual text for diagnostics
 vim.diagnostic.config({
   virtual_text = {
-    source = "always",  -- Show the source of the diagnostic
-    prefix = "∘",      -- Could use other symbols or even text like "E: "
+    source = "always",
+    prefix = "∘"
   },
   signs = true,
   underline = true,
   update_in_insert = false,
   severity_sort = true,
   float = {
-    source = "always", -- Or "if_many"
-  },
+    source = "always"
+  }
 })
 
 -- Create a command to install the packages
@@ -595,4 +558,3 @@ end, {})
 
 -- Optional key mapping to install the packages
 vim.api.nvim_set_keymap('n', '<leader>ip', ':InstallPythonPackages<CR>', { noremap = true, silent = true })
-
