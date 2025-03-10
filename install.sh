@@ -48,6 +48,14 @@ install_neovim() {
   mkdir -p "${HOME}/.config/nvim"
   create_symlink "${PWD}/init.lua" "${HOME}/.config/nvim/init.lua"
 
+  # Ensure Packer is installed
+  local packer_path="${HOME}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  if [ ! -d "$packer_path" ]; then
+      echo "${COLOR_YELLOW}Packer.nvim not found. Installing...${COLOR_RESET}"
+      git clone --depth 1 https://github.com/wbthomason/packer.nvim "$packer_path"
+      echo "${COLOR_GREEN}Packer.nvim installed successfully.${COLOR_RESET}"
+  fi
+
   nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
   echo "${COLOR_GREEN}Neovim configuration and plugins setup successfully.${COLOR_RESET}"
 }

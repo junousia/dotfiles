@@ -25,11 +25,10 @@ export FZF_DEFAULT_OPTS="
     --margin=0,5
 "
 
-
 ZSH_CUSTOM=${HOME}/.dotfiles
 ZSH_THEME="junou"
 
-export FZF_BASE=~/.vim/bundle/fzf
+export FZF_BASE=~/.local/share/nvim/site/pack/packer/start/fzf
 export ZSH_DISABLE_COMPFIX=true
 source ${HOME}/.oh-my-zsh/oh-my-zsh.sh
 
