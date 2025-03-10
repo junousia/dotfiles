@@ -64,8 +64,17 @@ install_neovim() {
 install_tmux() {
   echo "${COLOR_CYAN}Setting up TMUX configuration...${COLOR_RESET}"
 
+  # Install TPM
+  local tpm_path="${HOME}/.tmux/plugins/tpm"
+  if [ ! -d "$tpm_path" ]; then
+    echo "${COLOR_YELLOW}TPM not found. Installing...${COLOR_RESET}"
+    git clone https://github.com/tmux-plugins/tpm "$tpm_path"
+    echo "${COLOR_GREEN}TPM installed successfully.${COLOR_RESET}"
+  else
+    echo "${COLOR_YELLOW}TPM already installed.${COLOR_RESET}"
+  fi
+
   mkdir -p "${HOME}/.tmux/plugins"
-  create_symlink "${PWD}/tmux/tpm" "${HOME}/.tmux/plugins/tpm"
   create_symlink "${PWD}/tmux.conf" "${HOME}/.tmux.conf"
   ensure_tmux_conf
   "${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh"
