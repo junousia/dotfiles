@@ -91,7 +91,10 @@ packer.startup(function(use)
   use 'sainnhe/everforest'
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
   }
   use {
     "mfussenegger/nvim-dap",
@@ -173,6 +176,12 @@ packer.startup(function(use)
     require('packer').sync()
   end
 end)
+
+-- Use a protected call so we don't error out on first use
+local status_ok, packer = pcall(require, "coverage")
+if not status_ok then
+  return
+end
 
 require("coverage").setup {
   commands = true,
