@@ -15,11 +15,15 @@ git submodule update --init --recursive
 create_symlink() {
   local source=$1
   local target=$2
-  if [ -e "$target" ]; then
+
+  if [ -L "$target" ] || [ -e "$target" ]; then
     echo "${COLOR_YELLOW}Backing up existing ${target}${COLOR_RESET}"
     mv "$target" "${target}.bak"
+  elif [ -e "$(dirname "$target")" ]; then
+    mkdir -p "$(dirname "$target")"
   fi
-  ln -fs "$source" "$target"
+
+  ln -sfn "$source" "$target"
   echo "${COLOR_GREEN}Linked ${source} to ${target}${COLOR_RESET}"
 }
 
