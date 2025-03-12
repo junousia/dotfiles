@@ -1,39 +1,33 @@
 -- stylua: ignore
 
 return {
-    -- add gruvbox
-    -- { "rebelot/kanagawa.nvim" },
-    -- { "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+    { "olimorris/onedarkpro.nvim" },
+    { "rebelot/kanagawa.nvim" },
+    { "ellisonleao/gruvbox.nvim" },
+    { "folke/tokyonight.nvim" },
+    { "AlexvZyl/nordic.nvim" },
+    { "sho-87/kanagawa-paper.nvim" },
 
-    -- Configure LazyVim to load catppuccin
     {
         "LazyVim/LazyVim",
         opts = {
-            colorscheme = "catppuccin",
+            colorscheme = "kanagawa-paper",
         },
     },
-    -- Configure LazyVim to load gruvbox
-    -- {
-    --     "LazyVim/LazyVim",
-    --     opts = {
-    --         colorscheme = "kanagawa-dragon",
-    --     },
-    -- },
 
-    -- add pyright to lspconfig
     {
         "neovim/nvim-lspconfig",
         ---@class PluginLspOpts
         opts = {
             ---@type lspconfig.options
             servers = {
-                -- pyright will be automatically installed with mason and loaded with lspconfig
                 pyright = {},
+                ruff = {},
+                robotframework_ls = {},
             },
         },
     },
 
-    -- add more treesitter parsers
     {
         "nvim-treesitter/nvim-treesitter",
         opts = {
