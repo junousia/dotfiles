@@ -1,4 +1,4 @@
-FROM allaman/nvim-base:stable
+FROM ubuntu:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -6,7 +6,8 @@ ARG USERNAME=dotfiles
 ARG USER_HOME=/home/$USERNAME
 ARG DOTFILES_DIR="$USER_HOME/.dotfiles"
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get -y --no-install-recommends install software-properties-common
+RUN add-apt-repository ppa:neovim-ppa/unstable && apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     direnv \
     build-essential \
@@ -17,6 +18,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     stow \
     neovim \
     tmux \
+    ripgrep \
     && rm -rf /var/lib/apt/lists/*
 
 RUN useradd -m -s /bin/zsh $USERNAME \
