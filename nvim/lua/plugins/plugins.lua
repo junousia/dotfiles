@@ -17,9 +17,7 @@ return {
 
     {
         "neovim/nvim-lspconfig",
-        ---@class PluginLspOpts
         opts = {
-            ---@type lspconfig.options
             servers = {
                 pyright = {},
                 ruff = {},
@@ -34,16 +32,12 @@ return {
             ensure_installed = {
                 "bash",
                 "html",
-                "javascript",
                 "json",
                 "lua",
                 "markdown",
                 "markdown_inline",
                 "python",
-                "query",
                 "regex",
-                "tsx",
-                "typescript",
                 "vim",
                 "yaml",
                 "robot",
