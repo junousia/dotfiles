@@ -3,6 +3,7 @@ vim.g.lazyvim_python_ruff = "ruff"
 
 local opt = vim.opt
 
+opt.termguicolors = true
 opt.number = false
 opt.relativenumber = false
 opt.wrap = false

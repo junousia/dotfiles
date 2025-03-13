@@ -53,6 +53,7 @@ install_neovim() {
     create_symlink "${PWD}/nvim" "${HOME}/.config/nvim"
 
     nvim --headless "+Lazy! sync" +qa
+    nvim --headless -c 'TSUpdateSync' -c 'qa'
 
     echo "${COLOR_GREEN}Neovim configuration and plugins setup successfully.${COLOR_RESET}"
 }
