@@ -18,8 +18,18 @@ RUN add-apt-repository ppa:neovim-ppa/unstable && apt-get update && apt-get inst
     stow \
     neovim \
     tmux \
+    fd-find \
     ripgrep \
+    python3 \
+    python3-neovim \
+    luarocks \
+    fzf \
     && rm -rf /var/lib/apt/lists/*
+
+# Download hadolint and make it executable
+RUN curl -sSL https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 \
+    -o /usr/local/bin/hadolint \
+    && chmod +x /usr/local/bin/hadolint
 
 RUN useradd -m -s /bin/zsh $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
@@ -32,4 +42,8 @@ COPY --chown=$USERNAME:$USERNAME . "$DOTFILES_DIR"
 WORKDIR $DOTFILES_DIR
 RUN chmod +x install.sh && ./install.sh
 
-CMD ["/bin/zsh"]
+ENV LANG=LANG=C.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV LC_CTYPE=en_US.UTF-8
+
+CMD ["/bin/sh", "-c", "/bin/zsh"]

@@ -52,6 +52,8 @@ install_neovim() {
     mkdir -p "${HOME}/.config"
     create_symlink "${PWD}/nvim" "${HOME}/.config/nvim"
 
+    nvim --headless "+Lazy! sync" +qa
+
     echo "${COLOR_GREEN}Neovim configuration and plugins setup successfully.${COLOR_RESET}"
 }
 
