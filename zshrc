@@ -34,6 +34,9 @@ DISABLE_FZF_AUTO_COMPLETION="true"
 ZSH_CUSTOM=${HOME}/.dotfiles
 ZSH_THEME="junou"
 
+export TERM="xterm-256color"
+export COLORTERM="truecolor"
+
 export ZSH_DISABLE_COMPFIX=true
 source ${HOME}/.oh-my-zsh/oh-my-zsh.sh
 
