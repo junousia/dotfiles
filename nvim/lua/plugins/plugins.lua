@@ -2,9 +2,7 @@
 
 return {
     { "olimorris/onedarkpro.nvim" },
-    { "rebelot/kanagawa.nvim" },
     { "ellisonleao/gruvbox.nvim" },
-    { "folke/tokyonight.nvim" },
     { "AlexvZyl/nordic.nvim" },
     { "sho-87/kanagawa-paper.nvim" },
 
