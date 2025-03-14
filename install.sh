@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set euo -pipefail
+
 # Define colors
 COLOR_RESET="\033[0m"
 COLOR_GREEN="\033[32m"
@@ -51,9 +53,9 @@ install_neovim() {
 
     mkdir -p "${HOME}/.config"
     create_symlink "${PWD}/nvim" "${HOME}/.config/nvim"
-
-    nvim --headless "+Lazy! sync" +qa
-    nvim --headless -c 'TSUpdateSync' -c 'qa'
+    nvim --headless -c 'Lazy! sync' -c 'sleep 20' -c 'qa'
+    #nvim --headless "+TSUpdateSync" +qa
+    #nvim --headless "+MasonUpdate" +qa
 
     echo "${COLOR_GREEN}Neovim configuration and plugins setup successfully.${COLOR_RESET}"
 }

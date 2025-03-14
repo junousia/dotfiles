@@ -2,14 +2,7 @@ export ZSH=$HOME/.oh-my-zsh
 export LANG=en_US.UTF-8
 export TZ="/usr/share/zoneinfo/Europe/Helsinki"
 
-plugins=(last-working-dir direnv virtualenv)
-
-fzf-run() {
-  fzf
-}
-zle -N fzf-run
-bindkey -r '^R'
-bindkey '^R' fzf-run
+plugins=(last-working-dir direnv virtualenv fzf)
 
 znt_list_instant_select=1
 znt_list_border=1
@@ -28,8 +21,6 @@ export FZF_DEFAULT_OPTS="
     --prompt='History> '
     --margin=0,5
 "
-DISABLE_FZF_KEY_BINDINGS="true"
-DISABLE_FZF_AUTO_COMPLETION="true"
 
 ZSH_CUSTOM=${HOME}/.dotfiles
 ZSH_THEME="junou"
@@ -59,22 +50,6 @@ function frg {
     fi
   }
 
-fzf-history-widget() {
-  local selected
-  selected=$(fc -l 1 | sed -E 's/^\s*[0-9]+\s+//' | fzf --tac --no-sort)
-
-  if [[ $? -ne 0 || -z "$selected" ]]; then
-    zle reset-prompt
-    return
-  fi
-
-  BUFFER="$selected"
-  CURSOR=${#BUFFER}
-  zle redisplay
-}
-
-zle -N fzf-history-widget
-bindkey '^R' fzf-history-widget
 
 if [ -e ~/.local_profile ]
 then

@@ -26,8 +26,7 @@ RUN apk add --no-cache \
     bat \
     npm \
     lazygit \
-    gzip \
-    go
+    gzip
 
 # Download hadolint and make executable
 RUN curl -sSL https://github.com/hadolint/hadolint/releases/download/v2.12.0/hadolint-Linux-x86_64 \
