@@ -88,10 +88,6 @@ ensure_tmux_conf() {
         echo "${COLOR_CYAN}Updating ${tmux_conf} with TPM configuration...${COLOR_RESET}"
         cat <<EOL >>"$tmux_conf"
 
-# List of plugins
-set -g @plugin 'tmux-plugins/tpm'
-set -g @plugin 'tmux-plugins/tmux-sensible'
-
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
 EOL
