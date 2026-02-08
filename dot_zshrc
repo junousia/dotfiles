@@ -22,7 +22,6 @@ export FZF_DEFAULT_OPTS="
     --margin=0,5
 "
 
-ZSH_CUSTOM=${HOME}/.dotfiles
 ZSH_THEME="junou"
 
 export TERM="xterm-256color"
@@ -31,27 +30,18 @@ export COLORTERM="truecolor"
 export ZSH_DISABLE_COMPFIX=true
 source ${HOME}/.oh-my-zsh/oh-my-zsh.sh
 
+# Source modular configurations
+for file in ~/.zsh/*.zsh; do
+    source "$file"
+done
+
 unsetopt nomatch
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-alias vim=nvim
-
-function frg {
-    result=$(rg --ignore-case --color=always --line-number --no-heading "$@" |
-      fzf --ansi \
-          --color 'hl:-1:underline,hl+:-1:underline:reverse' \
-          --delimiter ':' \
-          --preview "bat --color=always {1} --theme='Solarized (light)' --highlight-line {2}" \
-          --preview-window 'up,60%,border-bottom,+{2}+3/3,~3')
-    file=${result%%:*}
-    linenumber=$(echo "${result}" | cut -d: -f2)
-    if [[ -n "$file" ]]; then
-            vim +"${linenumber}" "$file"
-    fi
-  }
-
 
 if [ -e ~/.local_profile ]
 then
     source ~/.local_profile
 fi
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"

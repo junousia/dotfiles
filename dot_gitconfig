@@ -13,11 +13,6 @@
     true-color = always
     side-by-side = true
     pager = less -X
-	autocrlf = input
-	safecrlf = true
-    side-by-side = true
-    true-color = always
-    side-by-side = true
 
 [merge]
 	conflictStyle = zdiff3
