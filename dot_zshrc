@@ -43,5 +43,3 @@ if [ -e ~/.local_profile ]
 then
     source ~/.local_profile
 fi
-
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv zsh)"
