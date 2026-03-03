@@ -13,7 +13,7 @@ return {
     },
   },
   {
-    "shisiw0rd/kanagawa-paper.nvim",
+    "thesimonho/kanagawa-paper.nvim",
     lazy = false,
     priority = 1000,
     opts = {
