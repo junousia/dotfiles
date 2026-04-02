@@ -1,21 +1,21 @@
 [core]
     editor = nvim
-	pager = delta
-	autocrlf = false
+    pager = delta
+    autocrlf = false
     safecrlf = true
 
 [interactive]
-	diffFilter = delta --color-only
+    diffFilter = delta --color-only
 
 [delta]
-	navigate = true
+    navigate = true
     light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
     true-color = always
     side-by-side = true
     pager = less -X
 
 [merge]
-	conflictStyle = zdiff3
+    conflictStyle = zdiff3
 
 [diff]
     colorMoved = true
@@ -41,7 +41,7 @@
     br = branch
     hist = log --pretty=format:\"%Cred%h %C(yellow)%cd%Creset %s%Cred%d %Cblue(%an)\"
     histf = log --follow --pretty=format:\"%Cred%h %C(yellow)%cd%Creset %s%Cred%d %Cblue(%an)\"
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     type = cat-file -t
     dump = cat-file -p
     ss = show --stat
@@ -50,11 +50,11 @@
     g = grep
 
 [user]
-	email = jukka.nousiainen@gmail.com
-	name = Jukka Nousiainen
+    email = jukka.nousiainen@gmail.com
+    name = Jukka Nousiainen
 
 [credential]
-	helper = store
+    helper = store
 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
@@ -63,7 +63,7 @@
 	required = true
 
 [rebase]
-	autosquash = true
+    autosquash = true
 
 [pull]
-	ff = only
+    ff = only

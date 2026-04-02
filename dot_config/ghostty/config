@@ -1,0 +1,10 @@
+# Ghostty configuration managed by chezmoi.
+#
+# Add host-specific overrides in a local file if needed rather than editing
+# this source directly on one machine.
+
+theme = GruvboxDarkHard
+font-size = 12
+mouse-hide-while-typing = true
+shell-integration = zsh
+copy-on-select = clipboard
