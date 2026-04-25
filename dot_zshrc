@@ -80,3 +80,6 @@ function frg {
 if [ -e "${HOME}/.local_profile" ]; then
     source "${HOME}/.local_profile"
 fi
+
+# opencode
+export PATH=/home/jukka/.opencode/bin:$PATH
