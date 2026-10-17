@@ -83,3 +83,8 @@ fi
 
 # opencode
 export PATH=/home/jukka/.opencode/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# OpenClaw Completion
+[ -f '/home/jukka/.openclaw/completions/openclaw.zsh' ] && source '/home/jukka/.openclaw/completions/openclaw.zsh'
