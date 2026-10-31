@@ -1,0 +1,7 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+
+SOURCE_DIR={{ .chezmoi.sourceDir | quote }}
+
+exec sh "$SOURCE_DIR/install.sh" tmux
+{{ end -}}
