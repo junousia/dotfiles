@@ -1,148 +1,102 @@
-#!/bin/bash
+#!/bin/sh
 
-set -euo pipefail
+set -eu
 
-SCRIPT_DIR="$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)"
-
-# Define colors
-COLOR_RESET="\033[0m"
-COLOR_GREEN="\033[32m"
-COLOR_YELLOW="\033[33m"
-COLOR_CYAN="\033[36m"
-COLOR_BOLD="\033[1m"
-
-# Ensure local bin exists for optional bootstrap installs
-mkdir -p "${HOME}/.local/bin"
-
-# Install chezmoi if missing
-if ! command -v chezmoi >/dev/null 2>&1; then
-    echo "${COLOR_CYAN}Installing chezmoi...${COLOR_RESET}"
-    sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "${HOME}/.local/bin"
-    export PATH="${HOME}/.local/bin:${PATH}"
-fi
-
-# Update git submodules
-git submodule update --init --recursive
-
-create_symlink() {
-    local source=$1
-    local target=$2
-    local backup_target
-
-    mkdir -p "$(dirname "$target")"
-
-    if [ -L "$target" ] && [ "$(readlink "$target")" = "$source" ]; then
-        echo "${COLOR_YELLOW}${target} already points to ${source}${COLOR_RESET}"
-        return
+require_command() {
+    if ! command -v "$1" >/dev/null 2>&1; then
+        printf 'Required command not found: %s\n' "$1" >&2
+        return 1
     fi
-
-    if [ -L "$target" ] || [ -e "$target" ]; then
-        backup_target="${target}.bak"
-        if [ -e "$backup_target" ] || [ -L "$backup_target" ]; then
-            backup_target="${target}.bak.$(date +%Y%m%d%H%M%S)"
-        fi
-        echo "${COLOR_YELLOW}Backing up existing ${target}${COLOR_RESET}"
-        mv "$target" "$backup_target"
-    fi
-
-    ln -sfn "$source" "$target"
-    echo "${COLOR_GREEN}Linked ${source} to ${target}${COLOR_RESET}"
 }
 
 install_oh_my_zsh() {
-    if [ ! -d "${HOME}/.oh-my-zsh" ]; then
-        echo "${COLOR_CYAN}Installing Oh My Zsh...${COLOR_RESET}"
-        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-        echo "${COLOR_GREEN}Oh My Zsh installed successfully.${COLOR_RESET}"
+    if [ -d "${HOME}/.oh-my-zsh" ]; then
+        printf 'Oh My Zsh is already installed.\n'
+        return
+    fi
+
+    require_command curl
+    printf 'Installing Oh My Zsh...\n'
+    RUNZSH=no CHSH=no KEEP_ZSHRC=yes \
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" \
+        -- --unattended
+}
+
+sync_neovim() {
+    if ! command -v nvim >/dev/null 2>&1; then
+        printf 'Skipping Neovim plugin sync: nvim is not installed.\n'
+        return
+    fi
+
+    nvim_version=$(nvim --version | sed -n '1s/^NVIM v//p')
+    nvim_major=${nvim_version%%.*}
+    nvim_minor=${nvim_version#*.}
+    nvim_minor=${nvim_minor%%.*}
+    case "$nvim_major:$nvim_minor" in
+        *[!0-9:]*|:*)
+            printf 'Skipping Neovim plugin sync: could not parse nvim version.\n'
+            return
+            ;;
+    esac
+    if [ "$nvim_major" -eq 0 ] && [ "$nvim_minor" -lt 11 ]; then
+        printf 'Skipping Neovim plugin sync: 0.11 or newer is required (found %s).\n' "$nvim_version"
+        return
+    fi
+
+    printf 'Syncing Neovim plugins...\n'
+    nvim --headless '+Lazy! sync' +qa
+}
+
+install_tmux_plugins() {
+    if ! command -v tmux >/dev/null 2>&1; then
+        printf 'Skipping tmux plugin setup: tmux is not installed.\n'
+        return
+    fi
+
+    require_command git
+    plugin_dir="${HOME}/.tmux/plugins/tpm"
+    if [ ! -d "$plugin_dir" ]; then
+        printf 'Installing tmux plugin manager...\n'
+        mkdir -p "$(dirname "$plugin_dir")"
+        git clone https://github.com/tmux-plugins/tpm "$plugin_dir"
+    fi
+
+    if [ -x "$plugin_dir/scripts/install_plugins.sh" ]; then
+        "$plugin_dir/scripts/install_plugins.sh"
     else
-        echo "${COLOR_YELLOW}Oh My Zsh already installed.${COLOR_RESET}"
+        printf 'TPM install script not found: %s\n' "$plugin_dir" >&2
+        return 1
     fi
-
-    create_symlink "${SCRIPT_DIR}/dot_zshrc" "${HOME}/.zshrc"
-    create_symlink "${SCRIPT_DIR}/dot_oh-my-zsh/custom/themes/junou.zsh-theme" "${HOME}/.oh-my-zsh/custom/themes/junou.zsh-theme"
-}
-
-install_neovim() {
-    echo "${COLOR_CYAN}Setting up Neovim configuration...${COLOR_RESET}"
-
-    local nvim_bin="${HOME}/local/bin/nvim"
-    if [ -x "$nvim_bin" ]; then
-        export PATH="${HOME}/local/bin:${PATH}"
-    fi
-
-    create_symlink "${SCRIPT_DIR}/dot_config/nvim" "${HOME}/.config/nvim"
-    nvim --headless -c 'Lazy! sync' -c 'sleep 20' -c 'qa'
-
-    echo "${COLOR_GREEN}Neovim configuration and plugins setup successfully.${COLOR_RESET}"
-}
-
-install_tmux() {
-    echo "${COLOR_CYAN}Setting up TMUX configuration...${COLOR_RESET}"
-
-    local tpm_path="${HOME}/.tmux/plugins/tpm"
-    if [ ! -d "$tpm_path" ]; then
-        echo "${COLOR_YELLOW}TPM not found. Installing...${COLOR_RESET}"
-        git clone https://github.com/tmux-plugins/tpm "$tpm_path"
-        echo "${COLOR_GREEN}TPM installed successfully.${COLOR_RESET}"
-    else
-        echo "${COLOR_YELLOW}TPM already installed.${COLOR_RESET}"
-    fi
-
-    mkdir -p "${HOME}/.tmux/plugins"
-    create_symlink "${SCRIPT_DIR}/dot_tmux.conf" "${HOME}/.tmux.conf"
-    "${HOME}/.tmux/plugins/tpm/scripts/install_plugins.sh"
-    echo "${COLOR_GREEN}TMUX configuration and plugins setup successfully.${COLOR_RESET}"
-}
-
-install_gitconfig() {
-    echo "${COLOR_CYAN}Setting up git configuration...${COLOR_RESET}"
-    create_symlink "${SCRIPT_DIR}/dot_gitconfig" "${HOME}/.gitconfig"
-    echo "${COLOR_GREEN}Git configuration setup successfully.${COLOR_RESET}"
-}
-
-install_ghostty() {
-    echo "${COLOR_CYAN}Setting up Ghostty configuration...${COLOR_RESET}"
-    create_symlink "${SCRIPT_DIR}/dot_config/ghostty" "${HOME}/.config/ghostty"
-    echo "${COLOR_GREEN}Ghostty configuration setup successfully.${COLOR_RESET}"
-}
-
-install_all() {
-    echo "${COLOR_BOLD}Starting setup...${COLOR_RESET}"
-    install_oh_my_zsh
-    install_neovim
-    install_tmux
-    install_gitconfig
-    install_ghostty
-    echo "${COLOR_BOLD}${COLOR_GREEN}Setup complete.${COLOR_RESET}"
 }
 
 usage() {
     cat <<EOF
-Usage: $(basename "$0") [all|oh-my-zsh|neovim|tmux|gitconfig|ghostty]
+Usage: $(basename "$0") [all|oh-my-zsh|neovim|tmux]
+
+Install optional tools and their plugins. Dotfiles themselves are managed by chezmoi.
 EOF
 }
 
 case "${1:-all}" in
     all)
-        install_all
+        install_oh_my_zsh
+        sync_neovim
+        install_tmux_plugins
         ;;
     oh-my-zsh)
         install_oh_my_zsh
         ;;
     neovim)
-        install_neovim
+        sync_neovim
         ;;
     tmux)
-        install_tmux
+        install_tmux_plugins
         ;;
-    gitconfig)
-        install_gitconfig
-        ;;
-    ghostty)
-        install_ghostty
+    -h|--help)
+        usage
         ;;
     *)
         usage >&2
-        exit 1
+        exit 2
         ;;
 esac

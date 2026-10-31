@@ -1,7 +1,7 @@
 [core]
     editor = nvim
     pager = delta
-    autocrlf = false
+    autocrlf = {{ if eq .chezmoi.os "windows" }}true{{ else }}false{{ end }}
     safecrlf = true
 
 [interactive]
@@ -9,7 +9,7 @@
 
 [delta]
     navigate = true
-    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    light = false
     true-color = always
     side-by-side = true
     pager = less -X
@@ -32,7 +32,7 @@
     showuntrackedfiles = no
 
 [push]
-	default = current
+    default = current
 
 [alias]
     co = checkout
@@ -54,13 +54,13 @@
     name = Jukka Nousiainen
 
 [credential]
-    helper = store
+    helper = {{ if eq .chezmoi.os "windows" }}manager{{ else }}store{{ end }}
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
 
 [rebase]
     autosquash = true

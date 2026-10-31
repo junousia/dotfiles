@@ -1,0 +1,23 @@
+Dockerfile
+README.md
+install.sh
+.gitmodules
+.github/
+.gitignore
+LICENSE
+
+{{ if ne .chezmoi.os "windows" }}
+Documents/
+Documents/**
+{{ end }}
+
+{{ if eq .chezmoi.os "windows" }}
+.zshrc
+.zsh/
+.zsh/**
+.oh-my-zsh/
+.oh-my-zsh/**
+.tmux.conf
+.config/ghostty/
+.config/ghostty/**
+{{ end }}

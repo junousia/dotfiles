@@ -7,13 +7,13 @@ ARG DOTFILES_DIR="$USER_HOME/.dotfiles"
 # Install required packages with explicit version pinning
 RUN apk add --no-cache \
     ca-certificates \
+    chezmoi \
     direnv \
     build-base \
     git \
     zsh \
     curl \
     sudo \
-    stow \
     neovim \
     tmux \
     fd \
@@ -42,7 +42,7 @@ USER $USERNAME
 COPY --chown=$USERNAME:$USERNAME . "$DOTFILES_DIR"
 
 WORKDIR $DOTFILES_DIR
-RUN chmod +x install.sh && ./install.sh
+RUN chezmoi --source="$DOTFILES_DIR" apply --force
 
 ENV LANG=C.UTF-8
 ENV LC_ALL=en_US.UTF-8
