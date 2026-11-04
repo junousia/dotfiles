@@ -17,3 +17,4 @@ direnv
 fd
 lazygit
 tree-sitter
+gcc
