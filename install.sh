@@ -69,9 +69,27 @@ install_tmux_plugins() {
     fi
 }
 
+install_nix_packages() {
+    if ! command -v nix >/dev/null 2>&1; then
+        printf 'Skipping nix packages: nix is not installed.\n'
+        return
+    fi
+
+    list="$(dirname "$0")/nix-packages.txt"
+    installed=$(nix profile list 2>/dev/null || true)
+    grep -vE '^[[:space:]]*(#|$)' "$list" | while read -r pkg; do
+        if printf '%s\n' "$installed" | grep -qE "(nixpkgs#|\\.)${pkg}([[:space:]]|\$)"; then
+            printf 'nix: %s is already installed.\n' "$pkg"
+        else
+            printf 'nix: installing %s...\n' "$pkg"
+            nix profile install "nixpkgs#${pkg}"
+        fi
+    done
+}
+
 usage() {
     cat <<EOF
-Usage: $(basename "$0") [all|oh-my-zsh|neovim|tmux]
+Usage: $(basename "$0") [all|oh-my-zsh|nix|neovim|tmux]
 
 Install optional tools and their plugins. Dotfiles themselves are managed by chezmoi.
 EOF
@@ -80,11 +98,15 @@ EOF
 case "${1:-all}" in
     all)
         install_oh_my_zsh
+        install_nix_packages
         sync_neovim
         install_tmux_plugins
         ;;
     oh-my-zsh)
         install_oh_my_zsh
+        ;;
+    nix)
+        install_nix_packages
         ;;
     neovim)
         sync_neovim

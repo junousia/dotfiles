@@ -1,0 +1,8 @@
+{{ if ne .chezmoi.os "windows" -}}
+#!/bin/sh
+# Re-runs whenever nix-packages.txt changes: {{ include "nix-packages.txt" | sha256sum }}
+
+SOURCE_DIR={{ .chezmoi.sourceDir | quote }}
+
+exec sh "$SOURCE_DIR/install.sh" nix
+{{ end -}}

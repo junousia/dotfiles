@@ -1,0 +1,2 @@
+# Packages installed into the default nix profile, one nixpkgs attribute per line.
+neovim
