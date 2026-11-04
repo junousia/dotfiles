@@ -1,5 +1,6 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/bin/sh
+# Re-runs whenever dot_tmux.conf changes (plugin list): {{ include "dot_tmux.conf" | sha256sum }}
 
 SOURCE_DIR={{ .chezmoi.sourceDir | quote }}
 
