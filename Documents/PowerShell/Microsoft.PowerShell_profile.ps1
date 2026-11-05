@@ -11,6 +11,12 @@ function cze { chezmoi edit @args }
 function czcd { Set-Location (chezmoi source-path) }
 function czedit { chezmoi edit --apply @args }
 
+# Start or attach to the default tmux session on a remote Linux host.
+# Usage: sshtmux user@host (SSH options can go before the destination).
+function sshtmux {
+    & ssh -t @args 'tmux new-session -A -s main'
+}
+
 if (Get-Command nvim -ErrorAction SilentlyContinue) {
     Set-Alias vim nvim
 }

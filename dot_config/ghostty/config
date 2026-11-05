@@ -6,5 +6,5 @@
 theme = GruvboxDarkHard
 font-size = 12
 mouse-hide-while-typing = true
-shell-integration = zsh
+shell-integration = detect
 copy-on-select = clipboard

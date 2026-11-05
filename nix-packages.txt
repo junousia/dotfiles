@@ -13,6 +13,9 @@ bat
 delta
 direnv
 
+# Optional interactive shell; this does not change the login shell.
+fish
+
 # LazyVim recommended (tree-sitter CLI for Treesitter parsers)
 fd
 lazygit
