@@ -1,6 +1,8 @@
 {{ if ne .chezmoi.os "windows" -}}
 #!/bin/sh
-# Re-runs whenever nix-packages.txt changes: {{ include "nix-packages.txt" | sha256sum }}
+# Re-runs whenever the Nix package set or lock changes:
+# flake.nix: {{ include "flake.nix" | sha256sum }}
+# flake.lock: {{ include "flake.lock" | sha256sum }}
 
 SOURCE_DIR={{ .chezmoi.sourceDir | quote }}
 

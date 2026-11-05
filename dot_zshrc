@@ -47,6 +47,7 @@ fi
 
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 alias vim=nvim
+export PATH="${XDG_STATE_HOME:-$HOME/.local/state}/nix/profiles/chezmoi-tools/bin:/nix/var/nix/profiles/default/bin:$PATH"
 
 if command -v chezmoi >/dev/null 2>&1; then
     alias cz='chezmoi'

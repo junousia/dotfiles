@@ -70,21 +70,23 @@ install_tmux_plugins() {
 }
 
 install_nix_packages() {
-    if ! command -v nix >/dev/null 2>&1; then
+    if command -v nix >/dev/null 2>&1; then
+        nix_cmd=$(command -v nix)
+    elif [ -x /nix/var/nix/profiles/default/bin/nix ]; then
+        nix_cmd=/nix/var/nix/profiles/default/bin/nix
+    else
         printf 'Skipping nix packages: nix is not installed.\n'
         return
     fi
 
-    list="$(dirname "$0")/nix-packages.txt"
-    installed=$(nix profile list 2>/dev/null || true)
-    grep -vE '^[[:space:]]*(#|$)' "$list" | while read -r pkg; do
-        if printf '%s\n' "$installed" | grep -qE "(nixpkgs#|\\.)${pkg}([[:space:]]|\$)"; then
-            printf 'nix: %s is already installed.\n' "$pkg"
-        else
-            printf 'nix: installing %s...\n' "$pkg"
-            nix profile install "nixpkgs#${pkg}"
-        fi
-    done
+    source_dir=$(CDPATH= cd "$(dirname "$0")" && pwd -P)
+    profile="${XDG_STATE_HOME:-$HOME/.local/state}/nix/profiles/chezmoi-tools"
+    mkdir -p "$(dirname "$profile")"
+
+    printf 'nix: building and activating the locked CLI tool environment...\n'
+    "$nix_cmd" --extra-experimental-features 'nix-command flakes' \
+        build --no-link --no-update-lock-file --profile "$profile" \
+        "path:${source_dir}#default"
 }
 
 usage() {
