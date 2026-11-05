@@ -91,6 +91,28 @@ The shell config adds a few helper commands when `chezmoi` is installed:
 
 You can add machine-specific configuration by creating a `~/.local_profile` file. It will be sourced by `.zshrc` if it exists.
 
+## Fish alternative
+
+The Fish config is a separate, plugin-free interactive setup. It uses the same
+minimal prompt as the zsh theme: magenta username, blue current directory, a
+`»` prompt, and a red right-side exit status when a command fails. Fish's built-in
+autosuggestions, syntax highlighting, and completions are left at their defaults.
+When fzf is installed, its Fish integration enables the usual Ctrl-R history,
+Ctrl-T file, and Alt-C directory pickers.
+
+Run `sh "$(chezmoi source-path)/install.sh" nix` to install the declared Nix
+profile, including Fish, then run `fish` to try it. This does not change your
+login shell. Add Fish-only machine settings to
+`~/.config/fish/config.local.fish`; zsh-specific files such as `~/.local_profile`
+are not sourced by Fish. Ghostty detects Fish automatically when it launches
+Fish as the shell; starting Fish inside an existing zsh session does not switch
+Ghostty's shell integration.
+
+On Windows, `sshtmux user@host` opens an SSH session and starts or attaches to
+the remote `main` tmux session. SSH options can be passed as usual, for example
+`sshtmux -p 2222 user@host`. Use ordinary `ssh` when you do not want tmux to
+start.
+
 ## Notes
 
 - `chezmoi apply` is the only way this repo manages dotfiles; do not copy or symlink tracked files manually.
