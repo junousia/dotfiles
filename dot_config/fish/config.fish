@@ -1,7 +1,16 @@
 # Keep this shell aligned with the current terminal and the zsh environment.
 set -gx COLORTERM truecolor
 set -gx VIRTUAL_ENV_DISABLE_PROMPT 1
-fish_add_path --global --prepend "$HOME/.nix-profile/bin" "$HOME/.opencode/bin" "$HOME/.local/bin"
+set -l nix_state_home "$XDG_STATE_HOME"
+if test -z "$nix_state_home"
+    set nix_state_home "$HOME/.local/state"
+end
+fish_add_path --global --prepend \
+    "/nix/var/nix/profiles/default/bin" \
+    "$nix_state_home/nix/profiles/chezmoi-tools/bin" \
+    "$HOME/.nix-profile/bin" \
+    "$HOME/.opencode/bin" \
+    "$HOME/.local/bin"
 
 if command -q direnv
     direnv hook fish | source

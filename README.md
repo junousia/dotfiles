@@ -61,7 +61,7 @@ chezmoi diff
 
 ## Optional tools and plugins
 
-The dotfiles are applied and updated by chezmoi. `install.sh` only installs optional tools' supporting components; it does not create or replace dotfile symlinks. Run it from the chezmoi source directory when needed:
+The dotfiles are applied and updated by chezmoi. `install.sh` installs the locked Nix tool environment and optional tools' supporting components; it does not create or replace dotfile symlinks. Run it from the chezmoi source directory when needed:
 
 ```sh
 sh "$(chezmoi source-path)/install.sh" oh-my-zsh
@@ -70,6 +70,17 @@ sh "$(chezmoi source-path)/install.sh" tmux
 ```
 
 The first `chezmoi apply` also runs the included one-time setup hooks. Hooks skip Neovim or tmux plugin setup when the corresponding program is not installed. Install the program later, then run the matching `install.sh` command above.
+
+The Nix CLI tools are defined in `flake.nix` and pinned by `flake.lock` as one
+package environment. Run `sh "$(chezmoi source-path)/install.sh" nix` to install
+or update that environment in a dedicated Nix profile at
+`${XDG_STATE_HOME:-~/.local/state}/nix/profiles/chezmoi-tools`. The installer
+builds the complete package set before switching the profile; zsh and Fish add
+its binaries to PATH. Existing packages in your default Nix profile are preserved.
+To update the pinned
+Nixpkgs revision, run `nix --extra-experimental-features 'nix-command flakes' flake update`
+from the chezmoi source directory, review the lock-file change, then run the
+installer again.
 
 Windows excludes the POSIX setup hooks, zsh, tmux, and Ghostty files. It applies
 the PowerShell 7 profile under `Documents\PowerShell` and sets
