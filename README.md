@@ -115,7 +115,9 @@ Run `sh "$(chezmoi source-path)/install.sh" nix` to install the declared Nix
 profile, including Fish, then run `fish` to try it. This does not change your
 login shell. Add Fish-only machine settings to
 `~/.config/fish/config.local.fish`; zsh-specific files such as `~/.local_profile`
-are not sourced by Fish. Ghostty detects Fish automatically when it launches
+are not sourced by Fish. The managed uv hook sources `~/.local/bin/env.fish`
+only when that optional installer-generated file is readable.
+Ghostty detects Fish automatically when it launches
 Fish as the shell; starting Fish inside an existing zsh session does not switch
 Ghostty's shell integration.
 
