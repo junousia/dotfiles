@@ -86,6 +86,20 @@ Windows excludes the POSIX setup hooks, zsh, tmux, and Ghostty files. It applies
 the PowerShell 7 profile under `Documents\PowerShell` and sets
 `XDG_CONFIG_HOME` so Neovim reads the shared config from `~/.config/nvim`.
 
+## Tmux persistence
+
+tmux-resurrect saves sessions, windows, pane layouts, and working directories.
+tmux-continuum saves automatically every 15 minutes and restores the last snapshot
+when the tmux server starts. Reloading the config enables saving; automatic
+restoration happens on server startup.
+
+With the configured `Ctrl-a` prefix, press `Ctrl-a`, then `Ctrl-s` to save now,
+or `Ctrl-a`, then `Ctrl-r` to restore manually. Supported programs may be
+relaunched; running process memory and SSH connections are not resumed.
+
+`chezmoi apply` installs the plugins through TPM when the config changes. In an
+existing tmux server, reload with `Ctrl-a`, then `r` after installation.
+
 ## Chezmoi Helpers
 
 The shell config adds a few helper commands when `chezmoi` is installed:
