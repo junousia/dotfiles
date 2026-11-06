@@ -19,6 +19,7 @@
           default = pkgs.buildEnv {
             name = "chezmoi-cli-tools";
             paths = with pkgs; [
+              bash
               git
               git-lfs
               tmux
